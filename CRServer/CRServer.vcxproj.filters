@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="frame">
+      <UniqueIdentifier>{3333cc0f-9947-4ac0-8fdf-58df13f622f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="helper">
+      <UniqueIdentifier>{41b9a28d-7359-45ff-ae73-2d8cabc92f3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tasks">
+      <UniqueIdentifier>{f75f5846-754c-4563-a017-2c5c8c61c2b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{629865f9-37a9-4f17-a746-85a253809375}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="modules">
+      <UniqueIdentifier>{4408dede-2f38-4e10-a23e-0a63cdc0cbcc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="accounts">
+      <UniqueIdentifier>{6631df72-ee07-49b9-ba0b-1588256c2a53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="rmsghandler">
+      <UniqueIdentifier>{3b8044df-f7c3-4b23-99b2-643e23702b28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="crcommon">
+      <UniqueIdentifier>{7d95d46e-8f37-439b-9bef-398214e8214a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CRServer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="frame\CRServerRoot.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="frame\CRServerApp.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="frame\CRSrvEventHandler.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="frame\CRSrvSettings.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="helper\HMIniHelper.cpp">
+      <Filter>helper</Filter>
+    </ClCompile>
+    <ClCompile Include="helper\HMMisc.cpp">
+      <Filter>helper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\HMTaskEngine.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\hmcmn_event_depot.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\HMTSHelper.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="frame\CRModuleDepot.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\CRModuleCmdDispatch.cpp">
+      <Filter>modules</Filter>
+    </ClCompile>
+    <ClCompile Include="tasks\CRTaskClientAccept.cpp">
+      <Filter>tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="tasks\CRTaskClientDisConnect.cpp">
+      <Filter>tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="frame\CRClientStub.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="frame\CRClientStubDepot.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="frame\CRAccountDepot.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="frame\CRAccountBase.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="accounts\CRAccountLogoff.cpp">
+      <Filter>accounts</Filter>
+    </ClCompile>
+    <ClCompile Include="accounts\CRAccountAdmin.cpp">
+      <Filter>accounts</Filter>
+    </ClCompile>
+    <ClCompile Include="accounts\CRAccountUser.cpp">
+      <Filter>accounts</Filter>
+    </ClCompile>
+    <ClCompile Include="rmsghandler\CRRMsgHandler4Login.cpp">
+      <Filter>rmsghandler</Filter>
+    </ClCompile>
+    <ClCompile Include="tasks\CRTaskRMsgDispatch.cpp">
+      <Filter>tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\CRModuleAccountMgr.cpp">
+      <Filter>modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CRCommon\CRRMsg.cpp">
+      <Filter>crcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CRCommon\CRRMsgBase.cpp">
+      <Filter>crcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CRCommon\CRRMsgHandlerBase.cpp">
+      <Filter>crcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CRCommon\CRRMsgHandlerDepot.cpp">
+      <Filter>crcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CRCommon\CRRMsgParser.cpp">
+      <Filter>crcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CRCommon\CRRMsgJsonHelper.cpp">
+      <Filter>crcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="rmsghandler\CRRMsgHandler4Logoff.cpp">
+      <Filter>rmsghandler</Filter>
+    </ClCompile>
+    <ClCompile Include="rmsghandler\CRRMsgHandler4AccountReg.cpp">
+      <Filter>rmsghandler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CRCommon\CRErrCode.cpp">
+      <Filter>crcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CRCommon\CRErrCodeDepot.cpp">
+      <Filter>crcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CRCommon\CRRCmdDefs.cpp">
+      <Filter>crcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CRCommon\CRRMsgMaker.cpp">
+      <Filter>crcommon</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="frame\CRServerRoot.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="frame\CRServerApp.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="frame\CRSrvEventHandler.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="frame\CRSrvSettings.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="helper\HMIniHelper.h">
+      <Filter>helper</Filter>
+    </ClInclude>
+    <ClInclude Include="helper\HMMisc.h">
+      <Filter>helper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\HMTaskEngine.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\hmcmn_event_depot.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\hmcmn_event_ex.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\HMTSHelper.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="frame\CRSrvEvtDefs.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="frame\CRModuleBase.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="frame\CRModuleDepot.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="modules\CRModuleCmdDispatch.h">
+      <Filter>modules</Filter>
+    </ClInclude>
+    <ClInclude Include="modules\CRModuleIDDefs.h">
+      <Filter>modules</Filter>
+    </ClInclude>
+    <ClInclude Include="tasks\CRTaskClientAccept.h">
+      <Filter>tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="tasks\CRTaskClientDisConnect.h">
+      <Filter>tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="frame\CRClientStub.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="frame\CRClientStubDepot.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="frame\CRAccountDepot.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="frame\CRAccountBase.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="accounts\CRAccountLogoff.h">
+      <Filter>accounts</Filter>
+    </ClInclude>
+    <ClInclude Include="accounts\CRAccountAdmin.h">
+      <Filter>accounts</Filter>
+    </ClInclude>
+    <ClInclude Include="accounts\CRAccountUser.h">
+      <Filter>accounts</Filter>
+    </ClInclude>
+    <ClInclude Include="rmsghandler\CRRMsgHandler4Login.h">
+      <Filter>rmsghandler</Filter>
+    </ClInclude>
+    <ClInclude Include="tasks\CRTaskRMsgDispatch.h">
+      <Filter>tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="modules\CRModuleAccountMgr.h">
+      <Filter>modules</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CRCommon\CRRMsg.h">
+      <Filter>crcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CRCommon\CRRMsgBase.h">
+      <Filter>crcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CRCommon\CRRMsgHandlerBase.h">
+      <Filter>crcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CRCommon\CRRMsgHandlerDepot.h">
+      <Filter>crcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CRCommon\CRRMsgParser.h">
+      <Filter>crcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CRCommon\CRTypes.h">
+      <Filter>crcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CRCommon\CRRMsgJsonHelper.h">
+      <Filter>crcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="rmsghandler\CRRMsgHandler4Logoff.h">
+      <Filter>rmsghandler</Filter>
+    </ClInclude>
+    <ClInclude Include="rmsghandler\CRRMsgHandler4AccountReg.h">
+      <Filter>rmsghandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CRCommon\CRErrCode.h">
+      <Filter>crcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CRCommon\CRErrCodeDepot.h">
+      <Filter>crcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CRCommon\CRRCmdDefs.h">
+      <Filter>crcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="accounts\CRAccountDefs.h">
+      <Filter>accounts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CRCommon\CRRMsgMaker.h">
+      <Filter>crcommon</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

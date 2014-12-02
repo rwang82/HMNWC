@@ -1,0 +1,32 @@
+//////////////////////////////
+// ◊¢≤·’Àªß«Î«Û
+{
+    "cmd":{
+        "title":"req_account_reg",
+        "type":5,
+        "sn":34252,
+        "os":100,
+        "ver":"0.1"
+    },
+    "params":{
+        "username":"rom.wang",
+        "password":"123456",
+        "sort":1, // account sort,   user / admin
+        "phone":"15874872565",
+        "email":"r4o5m6e8o@163.com"
+    }
+}
+{
+    "cmd":{
+        "title":"ack_account_reg",
+        "type":6,
+        "sn":34252,
+        "os":100,
+        "ver":"0.1"
+    },
+    "params":{
+        "username":"rom.wang",
+        "result":0,
+        "reason":1
+    }
+}

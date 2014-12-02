@@ -1,0 +1,33 @@
+//////////////////////////////
+// 获取账号发布产品列表
+{
+    "cmd":{
+        "title":"req_account_product_list",
+        "type":9,
+        "sn":34252,
+        "os":100,
+        "ver":"0.1"
+    },
+    "params":{
+        "username":"rom.wang"
+    }
+}
+{
+    "cmd":{
+        "title":"ack_account_product_list",
+        "type":10,
+        "sn":34252,
+        "os":100,
+        "ver":"0.1"
+    },
+    "params":{
+        "username":"rom.wang",
+        "result":1,
+        "reason":1, // if "result" is 0, reason section specify the reason.
+        "product_list":{
+            "product_aaa":{},
+            "product_bbb":{},
+            "product_adfa":{}
+        }
+    }
+}

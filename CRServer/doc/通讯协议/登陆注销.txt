@@ -1,0 +1,57 @@
+//////////////////////////////
+// µÇÂ½ÇëÇó
+{
+    "cmd":{
+        "title":"req_login",
+        "type":1,
+        "sn":34252,
+        "os":100,
+        "ver":"0.1"
+    },
+    "params":{
+        "username":"rom.wang",
+        "password":"123456"
+    }
+}
+{
+    "cmd":{
+        "title":"ack_login",
+        "type":2,
+        "sn":34252,
+        "os":100,
+        "ver":"0.1"
+    },
+    "params":{
+        "username":"rom.wang",
+        "result":0,
+        "reason":1
+    }
+}
+//////////////////////////////
+// µÇÂ½×¢Ïú
+{
+    "cmd":{
+        "title":"req_logoff",
+        "type":3,
+        "sn":34253,
+        "os":100,
+        "ver":"0.1"
+    },
+    "params":{
+        "username":"rom.wang"
+    }
+}
+{
+    "cmd":{
+        "title":"ack_logoff",
+        "type":4,
+        "sn":34253,
+        "os":100,
+        "ver":"0.1"
+    },
+    "params":{
+        "username":"rom.wang",
+        "result":0,
+        "reason":1,
+    }
+}

@@ -1,0 +1,10 @@
+#ifndef __CRACCOUNTDEFS_H__
+#define __CRACCOUNTDEFS_H__
+
+enum ENUMACCOUNTTYPE {
+	EACCOUNT_USER = 1,
+	EACCOUNT_ADMIN
+};
+
+
+#endif //__CRACCOUNTDEFS_H__

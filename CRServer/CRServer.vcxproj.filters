@@ -147,6 +147,12 @@
     <ClCompile Include="..\CRCommon\CRRMsgMaker.cpp">
       <Filter>crcommon</Filter>
     </ClCompile>
+    <ClCompile Include="frame\CRLoginRecord.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="accounts\CRAccountCreator.cpp">
+      <Filter>accounts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -274,6 +280,12 @@
     </ClInclude>
     <ClInclude Include="..\CRCommon\CRRMsgMaker.h">
       <Filter>crcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="frame\CRLoginRecord.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="accounts\CRAccountCreator.h">
+      <Filter>accounts</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,6 +1,7 @@
 #ifndef __CRRMSGHANDLER4ACCOUNTREG_H__
 #define __CRRMSGHANDLER4ACCOUNTREG_H__
 #include "CRRMsgHandlerBase.h"
+#include "CRAccountBase.h"
 
 class CRRMsgHandler4AccountReg : public CRRMsgHandlerBase {
 public:
@@ -12,14 +13,9 @@ private:
 	virtual void accept( const CRRMsgMetaData& rmsgMetaData, const CRRMsgBinary* pRMsgBinary );
 
 private:
-	bool _parseParams( const CRRMsgJson* pRMsgJson
-		, tstring_type& tstrAccountName
-		, tstring_type& tstrPassword
-		, int& nSortType
-		, tstring_type& tstrPhoneNum
-		, tstring_type& tstrEMail );
-	void _sendSuccessAck( const CRRMsgMetaData& rmsgMetaData, const tstring_type& tstrAccountName );
-	void _sendFailedAck( const CRRMsgMetaData& rmsgMetaData, const tstring_type& tstrAccountName, int nErrCode );
+    bool _parseParams( const Json::Value& jsonRoot, CRAccountRegParam& paramAccountReg );
+	void _sendSuccessAck( const CRRMsgMetaData& rmsgMetaData );
+	void _sendFailedAck( const CRRMsgMetaData& rmsgMetaData, int nErrCode );
 };
 
 #endif //__CRRMSGHANDLER4ACCOUNTREG_H__

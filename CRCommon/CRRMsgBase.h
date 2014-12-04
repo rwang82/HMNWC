@@ -1,14 +1,6 @@
 #ifndef __CRRMSGBASE_H__
 #define __CRRMSGBASE_H__
-//
-enum ENUMOSTYPE {
-	EOS_UNKNOWN = 0,
-	EOS_WINDOWS = 100,
-	EOS_MAC = 200,
-	EOS_ANDROID = 300,
-	EOS_IOS = 400,
-	EOS_WINPHONE = 500
-};
+#include "CRTypes.h"
 //
 class CRRMsgHandlerBase;
 struct CRRMsgMetaData;

@@ -2,14 +2,7 @@
 #define __CRRMSGHANDLER4LOGOFF_H__
 #include "CRRMsgHandlerBase.h"
 #include "CRRMsgBase.h"
-//
-struct CRLogoffParam {
-	CRLogoffParam();
-	~CRLogoffParam();
-	tstring_type m_tstrUserName;
-	const CRRMsgMetaData* m_pRMsgMetaData;
-	ENUMOSTYPE m_eOSType;
-};
+#include "CRAccountBase.h"
 //
 class CRRMsgHandler4Logoff : public CRRMsgHandlerBase {
 public:

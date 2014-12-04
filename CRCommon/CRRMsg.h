@@ -6,6 +6,7 @@
 
 //
 struct CRRMsgMetaData {
+	CRRMsgMetaData();
 	CRRMsgMetaData( SOCKET sConnect, const sockaddr_in& sAddr );
 	~CRRMsgMetaData();
     SOCKET m_sConnect;

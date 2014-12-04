@@ -100,6 +100,7 @@
     <ClCompile Include="..\CRCommon\CRRMsgMaker.cpp" />
     <ClCompile Include="..\CRCommon\CRRMsgParser.cpp" />
     <ClCompile Include="accounts\CRAccountAdmin.cpp" />
+    <ClCompile Include="accounts\CRAccountCreator.cpp" />
     <ClCompile Include="accounts\CRAccountLogoff.cpp" />
     <ClCompile Include="accounts\CRAccountUser.cpp" />
     <ClCompile Include="CRServer.cpp" />
@@ -107,6 +108,7 @@
     <ClCompile Include="frame\CRAccountBase.cpp" />
     <ClCompile Include="frame\CRClientStub.cpp" />
     <ClCompile Include="frame\CRClientStubDepot.cpp" />
+    <ClCompile Include="frame\CRLoginRecord.cpp" />
     <ClCompile Include="frame\CRModuleDepot.cpp" />
     <ClCompile Include="frame\CRServerApp.cpp" />
     <ClCompile Include="frame\CRServerRoot.cpp" />
@@ -140,6 +142,7 @@
     <ClInclude Include="..\CRCommon\CRRMsgParser.h" />
     <ClInclude Include="..\CRCommon\CRTypes.h" />
     <ClInclude Include="accounts\CRAccountAdmin.h" />
+    <ClInclude Include="accounts\CRAccountCreator.h" />
     <ClInclude Include="accounts\CRAccountDefs.h" />
     <ClInclude Include="accounts\CRAccountLogoff.h" />
     <ClInclude Include="accounts\CRAccountUser.h" />
@@ -147,6 +150,7 @@
     <ClInclude Include="frame\CRAccountBase.h" />
     <ClInclude Include="frame\CRClientStub.h" />
     <ClInclude Include="frame\CRClientStubDepot.h" />
+    <ClInclude Include="frame\CRLoginRecord.h" />
     <ClInclude Include="frame\CRModuleBase.h" />
     <ClInclude Include="frame\CRModuleDepot.h" />
     <ClInclude Include="frame\CRServerApp.h" />

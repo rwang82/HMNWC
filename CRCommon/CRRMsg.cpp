@@ -2,6 +2,11 @@
 #include "CRRMsg.h"
 #include "CRRMsgHandlerBase.h"
 
+CRRMsgMetaData::CRRMsgMetaData()
+: m_sConnect( NULL ) {
+	memset( &m_sAddr, 0, sizeof(m_sAddr) );
+}
+
 CRRMsgMetaData::CRRMsgMetaData( SOCKET sConnect, const sockaddr_in& sAddr )
 : m_sConnect( sConnect )
 , m_sAddr( sAddr ) {

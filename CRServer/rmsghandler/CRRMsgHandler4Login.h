@@ -2,20 +2,12 @@
 #define __CRRMSGHANDLER4LOGIN_H__
 #include "CRRMsgHandlerBase.h"
 #include "CRRMsgBase.h"
+#include "CRAccountBase.h"
 //
 extern const int CRLOGIN_ERR_UNKNOWN;
 extern const int CRLOGIN_ERR_NONE;
 extern const int CRLOGIN_ERR_LOGINED;
 extern const int CRLOGIN_ERR_INVALIDPARAMS;
-//
-struct CRLoginParam {
-	CRLoginParam();
-	~CRLoginParam();
-	tstring_type m_tstrUserName;
-	tstring_type m_tstrPassword;
-	const CRRMsgMetaData* m_pRMsgMetaData;
-	ENUMOSTYPE m_eOSType;
-};
 //
 class CRRMsgHandler4Login : public CRRMsgHandlerBase {
 public:

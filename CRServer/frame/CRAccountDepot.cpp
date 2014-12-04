@@ -26,10 +26,10 @@ bool CRAccountDepot::addAccount( CRAccountBase* pAccountNew ) {
 		return false;
 	CMemFuncPack mfpkSafeExit( &m_tsAccess, &HMTSHelper::safeExitFunc );
 
-	if ( _hasAccount( pAccountNew->m_tstrAccountName ) )
+	if ( _hasAccount( pAccountNew->m_regInfo.m_tstrUserName ) )
 		return false;
 	//
-	m_mapName2AccountObj[ pAccountNew->m_tstrAccountName ] = pAccountNew;
+	m_mapName2AccountObj[ pAccountNew->m_regInfo.m_tstrUserName ] = pAccountNew;
 	return true;
 }
 

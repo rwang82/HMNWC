@@ -4,16 +4,12 @@
 
 class CRAccountUser : public CRAccountBase{
 public:
-	CRAccountUser(const tstring_type& tstrAccountName, 
-		const tstring_type& tstrPassword, 
-		const tstring_type& tstrPhoneNum = _T(""), 
-		const tstring_type& tstrEMail = _T(""));
+	CRAccountUser(const CRAccountRegParam& paramAccountReg);
 	virtual ~CRAccountUser();
 	
 	// interface of CRAccountBase.
 public:
 	virtual int getSortType(); 
-	
 
 };
 

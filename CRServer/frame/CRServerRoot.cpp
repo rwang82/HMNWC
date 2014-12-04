@@ -10,7 +10,6 @@
 #include "CRModuleCmdDispatch.h"
 #include "CRModuleAccountMgr.h"
 #include "CRRCmdDefs.h"
-#include "CRAccountDepot.h"
 #include "CRRMsgHandler4Login.h"
 #include "CRRMsgHandler4Logoff.h"
 #include "CRRMsgHandler4AccountReg.h"
@@ -34,8 +33,7 @@ CRServerRoot::CRServerRoot()
 , m_pRMsgHandlerDepot( NULL )
 , m_pNWPServer( NULL )
 , m_pSEHandler( NULL )
-, m_pCRSrvSettings( NULL )
-, m_pAccountDepot( NULL ) {
+, m_pCRSrvSettings( NULL ) {
 	_init();
 }
 
@@ -53,7 +51,6 @@ void CRServerRoot::_init() {
 	m_pEventDepot = new hmcmn::hmcmn_event_depot();
 	m_pModuleDepot = new CRModuleDepot();
 	m_pClientStubDepot = new CRClientStubDepot();
-	m_pAccountDepot = new CRAccountDepot();
 
 	//////////////////////////////////////////////////////////
 	// depends some.
@@ -123,10 +120,6 @@ void CRServerRoot::_unInit( ) {
 
 	//////////////////////////////////////////////////////////
 	// no depends.
-	if ( m_pAccountDepot ) {
-	    delete m_pAccountDepot;
-		m_pAccountDepot = NULL;
-	}
 	if (m_pCRSrvSettings) {
 		delete m_pCRSrvSettings;
 		m_pCRSrvSettings = NULL;

@@ -1,11 +1,10 @@
 #include "stdafx.h"
 #include "CRAccountAdmin.h"
+#include "CRErrCode.h"
+#include "CRTypes.h"
 
-CRAccountAdmin::CRAccountAdmin(const tstring_type& tstrAccountName, 
-		const tstring_type& tstrPassword, 
-		const tstring_type& tstrPhoneNum, 
-		const tstring_type& tstrEMail)
-: CRAccountBase( tstrAccountName, tstrPassword, tstrPhoneNum, tstrEMail ) {
+CRAccountAdmin::CRAccountAdmin(const CRAccountRegParam& paramAccountReg)
+: CRAccountBase( paramAccountReg ) {
 
 }
 
@@ -14,5 +13,5 @@ CRAccountAdmin::~CRAccountAdmin() {
 }
 
 int CRAccountAdmin::getSortType() {
-    return 2;
+    return EACCOUNT_SORT_ADMIN;
 } 

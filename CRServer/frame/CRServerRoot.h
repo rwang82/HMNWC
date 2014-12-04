@@ -12,7 +12,6 @@ class CRSrvSettings;
 class CRRMsgHandlerDepot;
 class CRModuleDepot;
 class CRClientStubDepot;
-class CRAccountDepot;
 //
 class CRServerRoot {
 public:
@@ -27,7 +26,6 @@ private:
 	void _initCmdHandlers();
 public:
 	hmcmn::hmcmn_event_depot* m_pEventDepot;
-	CRAccountDepot* m_pAccountDepot;
 	CRRMsgHandlerDepot* m_pRMsgHandlerDepot;
 	CRClientStubDepot* m_pClientStubDepot;
 	CRModuleDepot* m_pModuleDepot;

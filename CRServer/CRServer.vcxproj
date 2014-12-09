@@ -54,6 +54,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>..\common;.\frame;.\helper;.\;..\HMNWP\inc;.\rmsghandler;.\tasks;.\modules;.\accounts;..\CRCommon;</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -75,6 +76,7 @@
       <AdditionalIncludeDirectories>..\common;.\frame;.\helper;.\;..\HMNWP\inc;.\rmsghandler;.\tasks;.\modules;.\accounts;..\CRCommon;</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -112,6 +114,7 @@
     <ClCompile Include="frame\CRModuleDepot.cpp" />
     <ClCompile Include="frame\CRServerApp.cpp" />
     <ClCompile Include="frame\CRServerRoot.cpp" />
+    <ClCompile Include="frame\CRSrvDBProxy.cpp" />
     <ClCompile Include="frame\CRSrvEventHandler.cpp" />
     <ClCompile Include="frame\CRSrvSettings.cpp" />
     <ClCompile Include="helper\HMIniHelper.cpp" />
@@ -155,6 +158,7 @@
     <ClInclude Include="frame\CRModuleDepot.h" />
     <ClInclude Include="frame\CRServerApp.h" />
     <ClInclude Include="frame\CRServerRoot.h" />
+    <ClInclude Include="frame\CRSrvDBProxy.h" />
     <ClInclude Include="frame\CRSrvEventHandler.h" />
     <ClInclude Include="frame\CRSrvEvtDefs.h" />
     <ClInclude Include="frame\CRSrvSettings.h" />

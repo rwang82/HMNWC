@@ -19,6 +19,8 @@
 
 #ifdef _DEBUG
 #pragma comment (lib, "json_vc71_libmtd.lib")
+#pragma comment (lib, "libmysql.lib")
 #else
 #pragma comment (lib, "json_vc71_libmt.lib")
+#pragma comment (lib, "libmysql.lib")
 #endif //

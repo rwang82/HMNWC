@@ -21,8 +21,10 @@ enum ENUMCRSRVEVENTTYPE {
 	// pParam4 : the length of buffer in pParam3.
 	ECRSRVEVT_CLIENT_REQUEST,
 	///////////////////////////////////
-	//
-	//
+	// ECRSRVEVT_ACCOUNT_ADD
+	// pParam1 :
+	// pParam2 :
+	ECRSRVEVT_ACCOUNT_ADD,
 };
 
 

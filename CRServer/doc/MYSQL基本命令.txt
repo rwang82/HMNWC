@@ -1,0 +1,230 @@
+MySQL 基本命令 (2012-06-14 17:32:37)转载▼
+标签： 命令 新表 字段名 例如 表结构	分类： 技术积累
+一、启动与退出
+1、进入MySQL：
+     启动MySQL Command Line Client（MySQL的DOS界面），直接输入安装时的密码即可。此时的提示符是：mysql>
+
+2、退出MySQL：
+     quit或exit
+
+3、修改密码　　
+     格式：mysqladmin -u用户名 -p旧密码 password 新密码 　
+     例1：给root加个密码ab12。首先在DOS下进入目录mysqlbin，然后键入以下命令 　　
+　　       mysqladmin -uroot -password ab12 　　
+　　       注：因为开始时root没有密码，所以-p旧密码一项就可以省略了。 　　
+      例2：再将root的密码改为djg345
+　　        mysqladmin -uroot -pab12 password djg345
+
+
+二、导入与导出
+1、导出整个数据库
+     命令：mysqldump -u 用户名 -p --default-character-set=utf8 数据库名 > 导出的文件名(数据库默认编码是urf-8)
+     例如：mysqldump -u root -p 1234 dbname > test.sql
+
+2、导出一个表
+     命令：mysqldump -u 用户名 -p 数据库名 表名> 导出的文件名
+     例如：mysqldump -u root -p 1234 tbname > test.sql
+
+3、导出一个数据库结构
+     例如：mysqldump -u root -p -d –add-drop-table dbname > test.sql
+               -d 没有数据
+               –add-drop-table 在每个create语句之前增加一个drop table
+
+4、导入数据库
+   A:常用source 命令(进入mysql数据库控制台)
+      例如：$ mysql -u root -p
+                mysql>use 数据库
+                然后使用source命令，后面参数为脚本文件(如这里用到的.sql)
+                mysql>source wcnc_db.sql
+
+   B:使用mysqldump命令
+      例如：mysqldump -u username -p dbname < filename.sql
+
+   C:使用mysql命令
+      例如：mysql -u username -p dbname < filename.sql
+
+5、将txt数据导入到特定表当中
+     命令：load data local infile "数据文件名“ into table 表名;
+     例如：
+              数据库名：user，表名：userinfo
+               表字段：id、name、age、sex
+               数据文件名为：userinfo.txt
+                   1 张三 24 男
+                   2 李斯 22 男
+                   3 韩美美 25 女
+                   ……
+              导入数据命令：
+                  $ mysql -uroot -ptest
+                  mysql > use user;
+                  mysql > load data local infile "userinfo.txt" into table userinfo;
+              注：数据文件与mysql进入是在一个目录下，否则要写全路径
+
+
+三、复制表与表结构
+1、复制表结构及数据到新表
+      命令：CREATE TABLE 新表 SELECT * FROM 旧表 
+      [注:]这种方法会将oldtable中所有的内容都拷贝过来，当然我们可以用 delete from newtable; 来删除。 
+            不过这种方法的一个最不好的地方就是新表中没有了旧表的primary key、Extra（auto_increment）等属性。需要自己用&quot;alter&quot;添加，而且容易搞错。 
+
+2、只复制表结构到新表 
+      命令：CREATE TABLE 新表 SELECT * FROM 旧表 WHERE 1=2 
+              或
+              CREATE TABLE 新表 LIKE 旧表 
+
+3、复制旧表的数据到新表(假设两个表结构一样) 
+      命令：INSERT INTO 新表 SELECT * FROM 旧表 
+
+4、复制旧表的数据到新表(假设两个表结构不一样) 
+      命令：INSERT INTO 新表(字段1,字段2,.......) SELECT 字段1,字段2,...... FROM 旧表 
+
+5、可以将表1结构复制到表2 
+      命令：SELECT * INTO 表2 FROM 表1 WHERE 1=2 
+
+6、可以将表1内容全部复制到表2 
+      命令：SELECT * INTO 表2 FROM 表1 
+
+7、 显示创建表语句
+     命令：show create table 旧表;
+     这样会将旧表的创建命令列出。我们只需要将该命令拷贝出来，更改table的名字，就可以建立一个完全一样的表 
+
+8、mysqldump 
+      命令：用mysqldump将表dump出来，改名字后再导回去或者直接在命令行中运行
+
+
+四、库操作
+1、创建数据库
+     命令：create database <数据库名> [default charset 字符集]
+     例如：建立一个名为 xxxx 的数据库，默认建表的字符集为utf8
+                mysql> create database xxxx default charset utf8; 
+
+2、显示所有的数据库
+     命令：show databases （注意：最后有个s）
+     例如：mysql> show databases;
+
+3、删除数据库
+      命令：drop database <数据库名>
+      例如：删除名为 xxxx 的数据库
+                 mysql> drop database xxxx;
+
+4、连接数据库
+     命令： use <数据库名>
+     例如：如果 xxxx 数据库存在，尝试存取它：
+               mysql> use xxxx;
+               屏幕提示：Database changed
+
+5、查看当前使用的数据库
+      命令:mysql> select database();
+
+6、当前数据库包含的表信息
+      命令：mysql> show tables; （注意：最后有个s）
+
+
+五、表操作，操作之前应连接某个数据库
+1、建表
+     命令：create table <表名> ( <字段名1> <类型1> [,..<字段名n> <类型n>]);
+     例如:mysql > create table MyClass(
+                       > id int(4) not null primary key auto_increment,
+                       > name char(20) not null,
+                       > sex int(4) not null default '0',
+                       > degree double(16,2)
+                       > )ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
+
+2、获取表结构
+     命令： desc 表名，或者show columns from 表名
+     例如：mysql > DESCRIBE MyClass;
+               mysql > desc MyClass; 
+               mysql > show columns from MyClass;
+
+3、删除表
+     命令：drop table <表名>
+     例如：删除表名为 MyClass 的表
+               mysql> drop table MyClass;
+
+4、插入数据
+     命令：insert into <表名> [( <字段名1>[,..<字段名n > ])] values ( 值1 )[, ( 值n )]
+     例如：往表 MyClass中插入二条记录, 这二条记录表示：编号为1的名为Tom的成绩为96.45, 编号为2 的名为Joan 的成绩为82.99，编号为3 的名为Wang 的成绩为96.5.
+                mysql > insert into MyClass values(1,'Tom',96.45),(2,'Joan',82.99), (2,'Wang', 96.59);
+
+5、查询表中的数据
+     1）查询所有行
+     命令： select <字段1，字段2，...> from < 表名 > where < 表达式 >        [distinct：去除重复字段]
+     例如：查看表 MyClass 中所有数据
+            mysql > select * from MyClass;
+
+    2）查询前几行数据
+     例如：查看表 MyClass 中前2行数据
+               mysql > select * from MyClass order by id limit 0,2;
+               或者：
+               mysql > select * from MyClass limit 0,2;
+
+6、删除表中数据
+     1）命令：delete from 表名 where 表达式
+     例如：删除表 MyClass中编号为1 的记录
+                mysql> delete from MyClass where id=1;
+    
+    2）命令：truncate table 表名
+    例如：删除表 MyClass 中的记录
+               mysql > truncate table MyClass;
+
+    [注：]delete 删除的表内容再插入数据时，自增字段从删除的那个开始。
+             truncate 删除的表内容，相当于删除表后再建一个一样的表，自增字段从1开始。
+
+7、修改表中数据
+     命令：update 表名 set 字段=新值,… where 条件
+     例如：mysql > update MyClass set name='Mary' where id=1;
+
+8、在表中增加字段：
+     命令：alter table 表名 add字段 类型 其他; 
+     例如：在表MyClass中添加了一个字段passtest，类型为int(4)，默认值为0 
+               mysql > alter table MyClass add passtest int(4) default '0';
+
+9、重置表自增字段：
+     命令：
+
+9、更改表名：
+     命令：rename table 原表名 to 新表名; 
+     例如：在表MyClass名字更改为YouClass 
+               mysql> rename table MyClass to YouClass;
+
+10、更新字段内容
+       命令：update 表名 set 字段名 = 新内容
+                  update 表名 set 字段名 = replace(字段名,'旧内容','新内容');
+       例如：文章前面加入4个空格
+                 update article set content=concat('　　',content);
+
+六、字段类型
+1．INT[(M)] 型： 正常大小整数类型 
+2．DOUBLE[(M,D)] [ZEROFILL] 型： 正常大小(双精密)浮点数字类型 
+3．DATE 日期类型：支持的范围是1000-01-01到9999-12-31。MySQL以YYYY-MM-DD格式来显示DATE值，但是允许你使用字符串或数字把值赋给DATE列 
+4．CHAR(M) 型：定长字符串类型，当存储时，总是是用空格填满右边到指定的长度 
+5．BLOB TEXT类型，最大长度为65535(2^16-1)个字符。 
+6．VARCHAR型：变长字符串类型
+7.导入数据库表 
+   1）创建.sql文件 
+　2）先产生一个库如auction.c:mysqlbin>mysqladmin -u root -p creat auction，会提示输入密码，然后成功创建。 
+　3）导入auction.sql文件 
+　　 c:mysqlbin>mysql -u root -p auction < auction.sql。 
+　　 通过以上操作，就可以创建了一个数据库auction以及其中的一个表auction。 
+
+8．修改数据库
+     1）在mysql的表中增加字段： 
+　   　 alter table dbname add column userid int(11) not null primary key auto_increment; 
+　　    这样，就在表dbname中添加了一个字段userid，类型为int(11)。 
+
+9．mysql数据库的授权
+     命令：mysql>grant select,insert,delete,create,drop on *.* (或test.*/user.*/..) to 用户名@localhost identified by '密码'； 
+   例如：新建一个用户帐号以便可以访问数据库，需要进行如下操作： 
+　　     mysql> grant usage 
+　　             -> ON test.* 
+　　             -> TO testuser@localhost; 
+　　     Query OK, 0 rows affected (0.15 sec) 
+
+　　     此后就创建了一个新用户叫：testuser，这个用户只能从localhost连接到数据库并可以连接到test 数据库。下一步，我们必须指定testuser这个用户可以执行哪些操作： 
+　　     mysql> GRANT select, insert, delete,update 
+　　             -> ON test.* 
+　　             -> TO testuser@localhost; 
+　　     Query OK, 0 rows affected (0.00 sec) 
+
+　　 此操作使testuser能够在每一个test数据库中的表执行SELECT，INSERT和DELETE以及UPDATE查询操作。现在我们结束操作并退出MySQL客户程序： 
+　　     mysql> exit 
+　　     Bye!

@@ -90,7 +90,7 @@ bool CRRMsgHandler4AccountReg::_parseParams( const Json::Value& jsonRoot, CRAcco
 	const Json::Value& valSort = valParams[ "sort" ];
 	if ( !valSort.isInt() )
 		return false;
-    paramAccountReg.m_nSortType = valSort.asInt();
+    paramAccountReg.m_eSortType = (ENUMACCOUNTSORT)valSort.asInt();
 	// get tstrPhoneNum
 	const Json::Value& valPhone = valParams[ "phone" ];
 	if ( !valPhone.isString() )

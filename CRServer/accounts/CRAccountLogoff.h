@@ -11,7 +11,12 @@ public:
 public:
 	virtual int getSortType(); 
 	virtual bool doLogin( const CRLoginParam& loginParam, int& nErrCode );
-	virtual void doLogoff( const CRLogoffParam& logoffParam, int& nErrCode );
+	virtual bool doLogoff( const CRLogoffParam& logoffParam, int& nErrCode );
+
+	// interface of CRPersistenceObj.
+public:
+	virtual bool save2DB( CRDBImplBase* pDBImpl, int& nErrCode ) const;
+	virtual bool loadFromDB( void* pParamKey, CRDBImplBase* pDBImpl, int& nErrCode );
 };
 
 #endif //__CRACCOUNTLOGOFF_H__

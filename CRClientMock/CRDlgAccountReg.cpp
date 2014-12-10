@@ -66,7 +66,7 @@ void CRDlgAccountReg::OnBnClickedAccountReg()
 	m_editSort.GetWindowText( strSort );
 	if ( strSort.GetLength() == 0 )
 		return;
-	paramAccountReg.m_nSortType = _ttoi((const TCHAR*)strSort);
+	paramAccountReg.m_eSortType = (ENUMACCOUNTSORT)_ttoi((const TCHAR*)strSort);
 	//
 
 	fpkShowMsg.Cancel();

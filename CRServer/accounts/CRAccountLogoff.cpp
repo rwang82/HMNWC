@@ -22,9 +22,19 @@ bool CRAccountLogoff::doLogin( const CRLoginParam& loginParam, int& nErrCode ) {
 	return false;
 }
 
-void CRAccountLogoff::doLogoff( const CRLogoffParam& logoffParam, int& nErrCode ) {
+bool CRAccountLogoff::doLogoff( const CRLogoffParam& logoffParam, int& nErrCode ) {
     assert( false );
 	nErrCode = CRERR_SRV_ACCOUNT_INVALID;
-	return;
+	return false;
 }
 
+bool CRAccountLogoff::save2DB( CRDBImplBase* pDBImpl, int& nErrCode ) const{
+	// maybe need to save later.
+	//	pDBImpl->accept( this );
+	return false;
+}
+
+bool CRAccountLogoff::loadFromDB( void* pParamKey, CRDBImplBase* pDBImpl, int& nErrCode ) {
+	// maybe need to load later.
+	return false;
+}

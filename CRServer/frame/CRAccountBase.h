@@ -2,6 +2,7 @@
 #define __CRACCOUNTBASE_H__
 #include "CRLoginRecord.h"
 #include "CRTypes.h"
+#include "CRPersistenceObj.h"
 //
 struct CRLoginParam {
 	CRLoginParam();
@@ -21,24 +22,28 @@ struct CRLogoffParam {
 };
 //
 struct CRAccountRegParam{
+	CRAccountRegParam();
+	~CRAccountRegParam();
     tstring_type m_tstrUserName;
 	tstring_type m_tstrPassword;
 	tstring_type m_tstrPhoneNum;
 	tstring_type m_tstrEMail;
-	int m_nSortType;
+	tstring_type m_tstrNickName;
+	int m_eSortType;
 };
 //
-class CRAccountBase {
+class CRAccountBase : public CRPersistenceObj{
 public:
 	typedef std::basic_string< TCHAR > tstring_type;
 public:
+	CRAccountBase();
 	CRAccountBase( const CRAccountRegParam& paramAccountReg );
 	virtual ~CRAccountBase();
 
 public:
 	virtual int getSortType() = 0; 
 	virtual bool doLogin( const CRLoginParam& loginParam, int& nErrCode );
-	virtual void doLogoff( const CRLogoffParam& logoffParam, int& nErrCode );
+	virtual bool doLogoff( const CRLogoffParam& logoffParam, int& nErrCode );
 	virtual void onDisconnect( SOCKET sConnect );
 public:
 	CRAccountRegParam m_regInfo;

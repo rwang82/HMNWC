@@ -3,6 +3,7 @@
 #include "CRClientMock.h"
 #include "CRClientEvtDefs.h"
 #include "CRTaskAccountReg.h"
+#include "CRTypes.h"
 #include "json/json.h"
 #include <functional>
 //
@@ -11,20 +12,20 @@ using namespace std::placeholders;
 AccountRegParam::AccountRegParam()
 : m_tstrUserName( _T("") )
 , m_tstrPassword( _T("") )
-, m_nSortType( 0 )
+, m_eSortType( EACCOUNT_SORT_UNKNOWN )
 {}
 
-AccountRegParam::AccountRegParam( const tstring_type& tstrUserName, const tstring_type& tstrPassword, int nSortType )
+AccountRegParam::AccountRegParam( const tstring_type& tstrUserName, const tstring_type& tstrPassword, ENUMACCOUNTSORT eSortType )
 : m_tstrUserName( tstrUserName )
 , m_tstrPassword( tstrPassword )
-, m_nSortType( nSortType ) {
+, m_eSortType( eSortType ) {
 
 }
 
 AccountRegParam::AccountRegParam( const AccountRegParam& val )
 : m_tstrUserName( val.m_tstrUserName )
 , m_tstrPassword( val.m_tstrPassword )
-, m_nSortType( val.m_nSortType ) {
+, m_eSortType( val.m_eSortType ) {
 
 }
 

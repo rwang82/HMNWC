@@ -8,6 +8,7 @@
 #include "CRErrCode.h"
 #include "CRSrvEvtDefs.h"
 #include "MemFuncPack.h"
+#include "FuncPack.h"
 
 CRModuleAccountMgr::CRModuleAccountMgr()
 //:  m_pFuncObjClientAccept( new hmcmn::hmcmn_event_depot::arg2event_handler_type( std::bind( &CRModuleAccountMgr::_onEvtClientAccept, this, _1, _2 ) ) )
@@ -35,7 +36,7 @@ bool CRModuleAccountMgr::doLogin( const CRLoginParam& loginParam, int& nErrCode 
 	if ( !m_tsAccess.safeEnterFunc() )
 		return false;
 	CMemFuncPack mfpkSafeExit( &m_tsAccess, &HMTSHelper::safeExitFunc );
-	CRAccountBase* pAccount = (CRAccountBase*)m_accountDepot.getAccount( loginParam.m_tstrUserName );
+	CRAccountBase* pAccount = (CRAccountBase*)m_accountDepot.getAccount( loginParam.m_tstrUserName, nErrCode );
 	if ( !pAccount ) {
 		nErrCode = CRERR_SRV_ACCOUNTNAME_ISNOT_EXIST;
 	    return false;
@@ -51,13 +52,14 @@ bool CRModuleAccountMgr::doLogoff( const CRLogoffParam& logoffParam, int& nErrCo
 	if ( !m_tsAccess.safeEnterFunc() )
 		return false;
 	CMemFuncPack mfpkSafeExit( &m_tsAccess, &HMTSHelper::safeExitFunc );
-	CRAccountBase* pAccount = (CRAccountBase*)m_accountDepot.getAccount( logoffParam.m_tstrUserName );
+	CRAccountBase* pAccount = (CRAccountBase*)m_accountDepot.getAccount( logoffParam.m_tstrUserName, nErrCode );
 	if ( !pAccount ) {
 		nErrCode = CRERR_SRV_ACCOUNTNAME_ISNOT_EXIST;
 	    return false;
 	}
 
-	pAccount->doLogoff( logoffParam, nErrCode );
+	if ( !pAccount->doLogoff( logoffParam, nErrCode ) )
+		return false;
 	//
 	_eraseAccountFromSocketMap( logoffParam.m_pRMsgMetaData->m_sConnect );
 	return true;
@@ -68,16 +70,27 @@ bool CRModuleAccountMgr::doRegAccount( const CRAccountRegParam& accountRegParam,
 		return false;
 	CMemFuncPack mfpkSafeExit( &m_tsAccess, &HMTSHelper::safeExitFunc );
 	CRAccountBase* pAccountNew = NULL;
+	bool bOK = false;
+	nErrCode = CRERR_SRV_NONE;
 	//
-	if ( m_accountDepot.hasAccount( accountRegParam.m_tstrUserName ) ) {
+	if ( m_accountDepot.hasAccount( accountRegParam.m_tstrUserName, nErrCode ) ) {
 	    nErrCode = CRERR_SRV_ACCOUNTNAME_EXIST;
 		return false;
+	} else {
+	    if ( nErrCode != CRERR_SRV_NONE )
+			return false;
 	}
 	//
 	pAccountNew = CRAccountCreator::create( accountRegParam, nErrCode );
 	if ( !pAccountNew )
 		return false;
-	return m_accountDepot.addAccount( pAccountNew );
+	CFuncPack fpkDelAccount( ::gfnDelObj< CRAccountBase >, pAccountNew );
+	//
+	bOK = m_accountDepot.addAccount( pAccountNew, nErrCode );
+	if ( bOK ) {
+	    fpkDelAccount.Cancel();
+	}
+	return bOK;
 }
 
 void CRModuleAccountMgr::onEvtClientAccept( void* pParam1, void* pParam2 ) {

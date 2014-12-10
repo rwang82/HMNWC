@@ -13,6 +13,7 @@
 #include "CRRMsgHandler4Login.h"
 #include "CRRMsgHandler4Logoff.h"
 #include "CRRMsgHandler4AccountReg.h"
+#include "CRSrvDBProxy.h"
 #include "hmcmn_event_depot.h"
 #include "HMMisc.h"
 #include "tchar.h"
@@ -33,7 +34,8 @@ CRServerRoot::CRServerRoot()
 , m_pRMsgHandlerDepot( NULL )
 , m_pNWPServer( NULL )
 , m_pSEHandler( NULL )
-, m_pCRSrvSettings( NULL ) {
+, m_pCRSrvSettings( NULL )
+, m_pSrvDBProxy( NULL ) {
 	_init();
 }
 
@@ -51,6 +53,7 @@ void CRServerRoot::_init() {
 	m_pEventDepot = new hmcmn::hmcmn_event_depot();
 	m_pModuleDepot = new CRModuleDepot();
 	m_pClientStubDepot = new CRClientStubDepot();
+	m_pSrvDBProxy = new CRSrvDBProxy();
 
 	//////////////////////////////////////////////////////////
 	// depends some.
@@ -135,6 +138,10 @@ void CRServerRoot::_unInit( ) {
 	if ( m_pClientStubDepot ) {
 	    delete m_pClientStubDepot;
 		m_pClientStubDepot = NULL;
+	}
+	if ( m_pSrvDBProxy ) {
+	    delete m_pSrvDBProxy;
+		m_pSrvDBProxy = NULL;
 	}
 }
 

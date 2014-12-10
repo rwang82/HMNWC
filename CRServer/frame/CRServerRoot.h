@@ -12,6 +12,7 @@ class CRSrvSettings;
 class CRRMsgHandlerDepot;
 class CRModuleDepot;
 class CRClientStubDepot;
+class CRSrvDBProxy;
 //
 class CRServerRoot {
 public:
@@ -30,6 +31,7 @@ public:
 	CRClientStubDepot* m_pClientStubDepot;
 	CRModuleDepot* m_pModuleDepot;
 	hmnwp::HMNWPServer* m_pNWPServer;
+	CRSrvDBProxy* m_pSrvDBProxy;
 
 private:
 	CRSrvEventHandler* m_pSEHandler;

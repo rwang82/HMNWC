@@ -37,6 +37,9 @@
     <Filter Include="crcommon">
       <UniqueIdentifier>{7d95d46e-8f37-439b-9bef-398214e8214a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="db">
+      <UniqueIdentifier>{b60a2f7d-88e8-427a-bacc-43a23081782e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CRServer.cpp">
@@ -155,6 +158,15 @@
     </ClCompile>
     <ClCompile Include="frame\CRSrvDBProxy.cpp">
       <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="db\CRDBImplBase.cpp">
+      <Filter>db</Filter>
+    </ClCompile>
+    <ClCompile Include="db\CRDBImplMYSQL.cpp">
+      <Filter>db</Filter>
+    </ClCompile>
+    <ClCompile Include="db\CRPersistenceObj.cpp">
+      <Filter>db</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -292,6 +304,15 @@
     </ClInclude>
     <ClInclude Include="frame\CRSrvDBProxy.h">
       <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="db\CRDBImplBase.h">
+      <Filter>db</Filter>
+    </ClInclude>
+    <ClInclude Include="db\CRDBImplMYSQL.h">
+      <Filter>db</Filter>
+    </ClInclude>
+    <ClInclude Include="db\CRPersistenceObj.h">
+      <Filter>db</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -3,15 +3,16 @@
 #include "CRModuleBase.h"
 #include "hmcmn_event_depot.h"
 #include "CRClientTypes.h"
+#include "CRTypes.h"
 //
 struct AccountRegParam{
 	AccountRegParam();
-	AccountRegParam( const tstring_type& tstrUserName, const tstring_type& tstrPassword, int nSortType );
+	AccountRegParam( const tstring_type& tstrUserName, const tstring_type& tstrPassword, ENUMACCOUNTSORT eSortType );
 	AccountRegParam( const AccountRegParam& val );
 	~AccountRegParam();
     tstring_type m_tstrUserName;
 	tstring_type m_tstrPassword;
-	int m_nSortType;
+	ENUMACCOUNTSORT m_eSortType;
 };
 //
 class CRModuleAccountReg : public CRModuleBase {

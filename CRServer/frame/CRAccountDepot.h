@@ -13,13 +13,14 @@ public:
 	~CRAccountDepot();
 
 public:
-	bool hasAccount( const tstring_type& tstrAccountName );
-	bool addAccount( CRAccountBase* pAccountNew );
-	CRAccountBase* getAccount( const tstring_type& tstrAccountName ) const;
+	bool hasAccount( const tstring_type& tstrAccountName, int& nErrCode );
+	bool addAccount( CRAccountBase* pAccountNew, int& nErrCode );
+	CRAccountBase* getAccount( const tstring_type& tstrAccountName, int& nErrCode );
 
 private:
-	bool _hasAccount( const tstring_type& tstrAccount ) const;
+	bool _hasAccount( const tstring_type& tstrAccountName, int& nErrCode );
 	void _clearAllAccount();
+	bool _loadAccountFromDB( const tstring_type& tstrAccountName, int& nErrCode );
 
 private:
 	HMTSHelper m_tsAccess;

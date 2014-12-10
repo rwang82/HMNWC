@@ -25,7 +25,7 @@ bool CRTaskAccountReg::_fillParams( Json::Value& valParams ) {
 	// fill valParams.
 	valParams[ "username" ] = T2A( m_pParamAccountReg->m_tstrUserName.c_str() );
 	valParams[ "password" ] = T2A( m_pParamAccountReg->m_tstrPassword.c_str() );
-	valParams[ "sort" ] = m_pParamAccountReg->m_nSortType;
+	valParams[ "sort" ] = (int)m_pParamAccountReg->m_eSortType;
 	valParams[ "phone" ] = "";
 	valParams[ "email" ] = "";
 

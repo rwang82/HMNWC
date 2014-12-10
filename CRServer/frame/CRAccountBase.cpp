@@ -38,13 +38,17 @@ CRAccountBase::~CRAccountBase() {
 }
 
 bool CRAccountBase::doLogin( const CRLoginParam& loginParam, int& nErrCode ) {
-    //
+    CRLoginInfo loginInfo;
+	//
 	if ( loginParam.m_tstrPassword.compare( m_regInfo.m_tstrPassword ) != 0 ) {
 	    nErrCode = CRERR_SRV_ACCOUNT_PASSWORD_INCORRECT;
 		return false;
 	}
 	//
-	if ( m_loginRecord.hasLogin( loginParam.m_eOSType ) ) {
+	if ( m_loginRecord.getLoginInfo( loginParam.m_eOSType, loginInfo ) ) {
+		if ( loginInfo.m_rmsgMetaData.m_sConnect == loginParam.m_pRMsgMetaData->m_sConnect ) {
+		    return true;
+		}
 	    nErrCode = CRERR_SRV_ACCOUNT_LOGINED_INSAMEOS;
 		return false;
 	}

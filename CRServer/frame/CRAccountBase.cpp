@@ -17,13 +17,6 @@ CRAccountRegParam::~CRAccountRegParam() {
     
 }
 
- //   tstring_type m_tstrUserName;
-	//tstring_type m_tstrPassword;
-	//tstring_type m_tstrPhoneNum;
-	//tstring_type m_tstrEMail;
-	//tstring_type m_tstrNickName;
-	//int m_eSortType;
-
 CRAccountBase::CRAccountBase() {
 
 }
@@ -49,6 +42,7 @@ bool CRAccountBase::doLogin( const CRLoginParam& loginParam, int& nErrCode ) {
 		if ( loginInfo.m_rmsgMetaData.m_sConnect == loginParam.m_pRMsgMetaData->m_sConnect ) {
 		    return true;
 		}
+		// make be need more code here, to kick off the older login.
 	    nErrCode = CRERR_SRV_ACCOUNT_LOGINED_INSAMEOS;
 		return false;
 	}

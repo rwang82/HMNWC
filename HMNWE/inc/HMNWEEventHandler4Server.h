@@ -16,7 +16,7 @@ public:
 	void onDisConnect( HMNWEClientProxy* pNWECP );
 	void onRecv( HMNWEClientProxy* pNWECP, OVERLAPPED* pOL, DWORD dwTrans );
 
-public:
+private:
 	virtual void _onAccept( HMNWEClientProxy* pNWECP, DWORD dwTrans ) = 0;
 	virtual void _onDisConnect( HMNWEClientProxy* pNWECP ) = 0;
 	virtual void _onRecv( HMNWEClientProxy* pNWECP, OVERLAPPED* pOL, DWORD dwTrans ) = 0;

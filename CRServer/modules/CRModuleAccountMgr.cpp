@@ -94,7 +94,7 @@ bool CRModuleAccountMgr::doRegAccount( const CRAccountRegParam& accountRegParam,
 }
 
 void CRModuleAccountMgr::onEvtClientAccept( void* pParam1, void* pParam2 ) {
-
+	int a = 0;
 }
 
 void CRModuleAccountMgr::onEvtClientDisConnect( void* pParam1, void* pParam2 ) {

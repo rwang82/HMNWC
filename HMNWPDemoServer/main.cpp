@@ -10,7 +10,7 @@ HMNWPEventHandler4ServerDemo g_NWPEventHandler;
 hmnwp::HMNWPServer g_NWPServer(&g_NWPEventHandler);
 int _tmain(int argc, _TCHAR* argv[])
 {
-	if (!g_NWPServer.listen(4321)) {
+	if (!g_NWPServer.listen(7654)) {
 		//if (!g_NWPServer.listen(8765)) {
 		printf("g_NWPServer.listen failed!");
 		return 0;

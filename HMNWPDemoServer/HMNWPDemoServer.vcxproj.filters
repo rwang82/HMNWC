@@ -27,6 +27,9 @@
     <ClCompile Include="HMNWPEventHandler4ServerDemo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\common\HMCharConv.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\common\HMSocketInit.h">
@@ -34,6 +37,9 @@
     </ClInclude>
     <ClInclude Include="HMNWPEventHandler4ServerDemo.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\HMCharConv.h">
+      <Filter>common</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

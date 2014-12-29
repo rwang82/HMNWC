@@ -82,11 +82,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\common\HMCharConv.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="..\common\HMSocketInit.cpp" />
     <ClCompile Include="HMNWPEventHandler4ServerDemo.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\common\HMCharConv.h" />
     <ClInclude Include="..\common\HMSocketInit.h" />
     <ClInclude Include="HMNWPEventHandler4ServerDemo.h" />
   </ItemGroup>

@@ -23,8 +23,9 @@ CRRMsgRaw::CRRMsgRaw( SOCKET sConnect, const sockaddr_in& sAddr, const unsigned 
 , m_uLenRawBuf( uLenRawBuf ) {
 	//
 	if ( m_uLenRawBuf ) {
-	    m_pRawBuf = new unsigned char[ m_uLenRawBuf ];
+	    m_pRawBuf = new unsigned char[ m_uLenRawBuf + 1]; // +1 for maybe pRawBuf is send by java. itn't use /0 as ending.
 		memcpy_s( m_pRawBuf, m_uLenRawBuf, pRawBuf, uLenRawBuf );
+		m_pRawBuf[ m_uLenRawBuf ] = 0;
 	}
 
 }

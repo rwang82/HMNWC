@@ -2,8 +2,8 @@
 // µÇÂ½ÇëÇó
 {
     "cmd":{
-        "title":"req_login",
         "type":1,
+        "title":"req_login",
         "sn":34252,
         "os":100,
         "ver":"0.1"
@@ -15,8 +15,8 @@
 }
 {
     "cmd":{
-        "title":"ack_login",
         "type":2,
+        "title":"ack_login",
         "sn":34252,
         "os":100,
         "ver":"0.1"
@@ -31,8 +31,8 @@
 // µÇÂ½×¢Ïú
 {
     "cmd":{
-        "title":"req_logoff",
         "type":3,
+        "title":"req_logoff",
         "sn":34253,
         "os":100,
         "ver":"0.1"
@@ -43,8 +43,8 @@
 }
 {
     "cmd":{
-        "title":"ack_logoff",
         "type":4,
+        "title":"ack_logoff",
         "sn":34253,
         "os":100,
         "ver":"0.1"

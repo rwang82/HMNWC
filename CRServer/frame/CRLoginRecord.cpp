@@ -78,6 +78,9 @@ bool CRLoginRecord::getLoginInfo( ENUMOSTYPE eOSType, CRLoginInfo& loginInfo ) c
     os2record_map_type::const_iterator citRecord;
 
 	citRecord = m_mapOS2Record.find( eOSType );
+	if ( citRecord == m_mapOS2Record.end() ) {
+	    return false;
+	}
 	loginInfo = *(citRecord->second);
 	return true;
 }

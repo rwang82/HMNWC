@@ -113,7 +113,7 @@ void CRModuleAccountMgr::onEvtClientDisConnect( void* pParam1, void* pParam2 ) {
 }
 
 void CRModuleAccountMgr::_addAccount2SocketMap( SOCKET sConnect, CRAccountBase* pAccount ) {
-    assert( m_mapSocket2Account.find( sConnect ) == m_mapSocket2Account.end() );
+    // assert( m_mapSocket2Account.find( sConnect ) == m_mapSocket2Account.end() );
 	m_mapSocket2Account[ sConnect ] = pAccount;
 }
 

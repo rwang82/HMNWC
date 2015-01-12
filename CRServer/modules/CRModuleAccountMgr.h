@@ -22,6 +22,9 @@ public:
 	bool doLogoff( const CRLogoffParam& logoffParam, int& nErrCode );
 	bool doRegAccount( const CRAccountRegParam& accountRegParam, int& nErrCode );
 
+public:
+	const CRAccountBase* getAccount( SOCKET sConnect ) const;
+
 	// event handler.
 public:
 	void onEvtClientAccept( void* pParam1, void* pParam2 );

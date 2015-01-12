@@ -32,6 +32,20 @@ CRModuleAccountMgr::~CRModuleAccountMgr() {
 	//}
 }
 
+const CRAccountBase* CRModuleAccountMgr::getAccount( SOCKET sConnect ) const {
+    if ( !m_tsAccess.safeEnterFunc() )
+		return NULL;
+	CMemFuncPack mfpkSafeExit( &m_tsAccess, &HMTSHelper::safeExitFunc );
+	socket2account_map_type::const_iterator citSocket2Account;
+
+	citSocket2Account = m_mapSocket2Account.find( sConnect );
+	if ( citSocket2Account == m_mapSocket2Account.end() ){
+	    return NULL;
+	}
+
+	return citSocket2Account->second;
+}
+
 bool CRModuleAccountMgr::doLogin( const CRLoginParam& loginParam, int& nErrCode ) {
 	if ( !m_tsAccess.safeEnterFunc() )
 		return false;

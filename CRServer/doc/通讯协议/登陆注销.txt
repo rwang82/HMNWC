@@ -22,9 +22,13 @@
         "ver":"0.1"
     },
     "params":{
-        "username":"rom.wang",
         "result":0,
-        "reason":1
+        "reason":1,
+        "username":"rom.wang",
+        "phone":"15874872565",
+        "email":"r4o5m6e8o@163.com",
+        "nickname":"plusplus",
+        "sort":100
     }
 }
 //////////////////////////////

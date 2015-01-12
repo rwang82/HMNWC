@@ -107,18 +107,30 @@ bool CRRMsgHandler4Login::_fillLoginParam( const CRRMsgMetaData& rmsgMetaData, c
 	return true;
 }
 
+
 void CRRMsgHandler4Login::_sendSuccessAck( const CRLoginParam& loginParam, const CRRMsgMetaData& rmsgMetaData, const CRRMsgJson* pRMsgJson ) {
 	USES_CONVERSION;
 	Json::Value ackJsonRoot;
 	Json::Value& valParams = ackJsonRoot[ "params" ];
 	Json::FastWriter jsonWriter;
 	std::string strRMsgAck;
+	const CRAccountBase* pAccountObj = NULL;
+	CRModuleAccountMgr* pAccountMgr = (CRModuleAccountMgr*)g_CRSrvRoot.m_pModuleDepot->getModule( ECRMODULE_ID_ACCOUNTMGR );
 
+	pAccountObj = pAccountMgr->getAccount( rmsgMetaData.m_sConnect );
 	// fill cmd.
 	CRRMsgJsonHelper::fillCmd( ackJsonRoot, CRCMDTYPE_ACK_LOGIN, pRMsgJson->m_nCmdSN, pRMsgJson->m_eOSType );
     // fill params.
-	valParams[ "username" ] = T2A( loginParam.m_tstrUserName.c_str() );
 	valParams[ "result" ] = CRLOGIN_RESULT_SUCCESS;
+	valParams[ "username" ] = T2A( loginParam.m_tstrUserName.c_str() );
+	if ( pAccountObj ) {
+        valParams[ "phone" ] = T2A( pAccountObj->m_regInfo.m_tstrPhoneNum.c_str() );
+		valParams[ "email" ] = T2A( pAccountObj->m_regInfo.m_tstrEMail.c_str() );
+		valParams[ "nickname" ] = T2A( pAccountObj->m_regInfo.m_tstrNickName.c_str() );
+		valParams[ "sort" ] = (int)pAccountObj->m_regInfo.m_eSortType;
+	} else {
+	    assert( false );
+	}
 	//
 	strRMsgAck = jsonWriter.write( ackJsonRoot );
 	//

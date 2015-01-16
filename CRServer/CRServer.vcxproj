@@ -53,7 +53,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\common;.\frame;.\helper;.\;..\HMNWP\inc;.\rmsghandler;.\tasks;.\modules;.\accounts;..\CRCommon;.\db</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\common;.\frame;.\helper;.\data;.\;..\HMNWP\inc;.\rmsghandler;.\tasks;.\modules;.\accounts;..\CRCommon;.\db</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -73,7 +73,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\common;.\frame;.\helper;.\;..\HMNWP\inc;.\rmsghandler;.\tasks;.\modules;.\accounts;..\CRCommon;.\db</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\common;.\frame;.\helper;.\data;.\;..\HMNWP\inc;.\rmsghandler;.\tasks;.\modules;.\accounts;..\CRCommon;.\db</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -106,6 +106,7 @@
     <ClCompile Include="accounts\CRAccountLogoff.cpp" />
     <ClCompile Include="accounts\CRAccountUser.cpp" />
     <ClCompile Include="CRServer.cpp" />
+    <ClCompile Include="data\CRProduct.cpp" />
     <ClCompile Include="db\CRDBImplBase.cpp" />
     <ClCompile Include="db\CRDBImplMYSQL.cpp" />
     <ClCompile Include="db\CRPersistenceObj.cpp" />
@@ -127,6 +128,7 @@
     <ClCompile Include="rmsghandler\CRRMsgHandler4AccountReg.cpp" />
     <ClCompile Include="rmsghandler\CRRMsgHandler4Login.cpp" />
     <ClCompile Include="rmsghandler\CRRMsgHandler4Logoff.cpp" />
+    <ClCompile Include="rmsghandler\CRRMsgHandler4ProductPublish.cpp" />
     <ClCompile Include="tasks\CRTaskClientAccept.cpp" />
     <ClCompile Include="tasks\CRTaskClientDisConnect.cpp" />
     <ClCompile Include="tasks\CRTaskRMsgDispatch.cpp" />
@@ -152,6 +154,7 @@
     <ClInclude Include="accounts\CRAccountDefs.h" />
     <ClInclude Include="accounts\CRAccountLogoff.h" />
     <ClInclude Include="accounts\CRAccountUser.h" />
+    <ClInclude Include="data\CRProduct.h" />
     <ClInclude Include="db\CRDBImplBase.h" />
     <ClInclude Include="db\CRDBImplMYSQL.h" />
     <ClInclude Include="db\CRPersistenceObj.h" />
@@ -176,6 +179,7 @@
     <ClInclude Include="rmsghandler\CRRMsgHandler4AccountReg.h" />
     <ClInclude Include="rmsghandler\CRRMsgHandler4Login.h" />
     <ClInclude Include="rmsghandler\CRRMsgHandler4Logoff.h" />
+    <ClInclude Include="rmsghandler\CRRMsgHandler4ProductPublish.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="tasks\CRTaskClientAccept.h" />
     <ClInclude Include="tasks\CRTaskClientDisConnect.h" />

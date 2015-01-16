@@ -13,6 +13,7 @@
 #include "CRRMsgHandler4Login.h"
 #include "CRRMsgHandler4Logoff.h"
 #include "CRRMsgHandler4AccountReg.h"
+#include "CRRMsgHandler4ProductPublish.h"
 #include "CRSrvDBProxy.h"
 #include "hmcmn_event_depot.h"
 #include "HMMisc.h"
@@ -96,7 +97,8 @@ void CRServerRoot::_initCmdHandlers() {
 	CMDHANDLER_ADD( CRCMDTYPE_REQ_LOGIN, CRRMsgHandler4Login );
 	CMDHANDLER_ADD( CRCMDTYPE_REQ_LOGOFF, CRRMsgHandler4Logoff );
 	CMDHANDLER_ADD( CRCMDTYPE_REQ_ACCOUNT_REG, CRRMsgHandler4AccountReg );
-}
+	CMDHANDLER_ADD( CRCMDTYPE_REQ_PRODUCT_PUBLISH, CRRMsgHandler4ProductPublish );
+} 
 
 void CRServerRoot::_unInit( ) {
 	// close socket.

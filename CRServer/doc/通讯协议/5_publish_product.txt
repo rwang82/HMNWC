@@ -1,0 +1,43 @@
+//////////////////////////////
+// request product publish.
+{
+    "cmd":{
+        "type":11,
+        "sn":34252,
+        "os":100,
+        "ver":"0.1"
+    },
+    "params":{
+        "username":"rom.wang",
+        "product":{
+            "title":"good_wine",
+            "price":"12.5", // notice, it's a string type. 
+            "describe":"good wine, fear a far way?",
+            "images":[
+                "xxxx-xxxxxx-xxxx-xxx", // it's a guid.
+                "xxxx-xxxxxx-xxxx-xxx"
+            ],
+            "keywords":[
+                "wine",
+                "drink"
+            ]
+        },
+        "request_code":258
+    }
+}
+//////////////////////////////
+// acknowledge product publish.
+{
+    "cmd":{
+        "type":12,
+        "sn":34252,
+        "os":100,
+        "ver":"0.1"
+    },
+    "params":{
+        "result":0,
+        "reason":1,
+        "request_code":258
+    }
+}
+

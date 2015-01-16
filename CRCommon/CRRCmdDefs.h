@@ -11,6 +11,8 @@ extern const int CRCMDTYPE_REQ_LOGOFF;
 extern const int CRCMDTYPE_ACK_LOGOFF;
 extern const int CRCMDTYPE_REQ_ACCOUNT_REG;
 extern const int CRCMDTYPE_ACK_ACCOUNT_REG;
+extern const int CRCMDTYPE_REQ_PRODUCT_PUBLISH;
+extern const int CRCMDTYPE_ACK_PRODUCT_PUBLISH;
 
 
 

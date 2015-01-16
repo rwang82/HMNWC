@@ -2,8 +2,10 @@
 #define __CRSRVTYPES_H__
 #include "tchar.h"
 #include <string>
+#include <deque>
 
 typedef std::basic_string< TCHAR > tstring_type;
+typedef std::deque< tstring_type > tstr_container_type;
 
 enum ENUMOSTYPE {
 	EOS_UNKNOWN = 0,

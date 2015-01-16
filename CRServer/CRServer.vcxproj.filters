@@ -40,6 +40,9 @@
     <Filter Include="db">
       <UniqueIdentifier>{b60a2f7d-88e8-427a-bacc-43a23081782e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="data">
+      <UniqueIdentifier>{d24b48f9-48f6-4ea8-babc-aff6cd462818}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CRServer.cpp">
@@ -167,6 +170,12 @@
     </ClCompile>
     <ClCompile Include="db\CRPersistenceObj.cpp">
       <Filter>db</Filter>
+    </ClCompile>
+    <ClCompile Include="rmsghandler\CRRMsgHandler4ProductPublish.cpp">
+      <Filter>rmsghandler</Filter>
+    </ClCompile>
+    <ClCompile Include="data\CRProduct.cpp">
+      <Filter>data</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -313,6 +322,12 @@
     </ClInclude>
     <ClInclude Include="db\CRPersistenceObj.h">
       <Filter>db</Filter>
+    </ClInclude>
+    <ClInclude Include="rmsghandler\CRRMsgHandler4ProductPublish.h">
+      <Filter>rmsghandler</Filter>
+    </ClInclude>
+    <ClInclude Include="data\CRProduct.h">
+      <Filter>data</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

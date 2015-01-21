@@ -10,6 +10,7 @@
     "params":{
         "username":"rom.wang",
         "product":{
+            "uuid":"xxxx-xxxxxx-xxxx-xxx",
             "title":"good_wine",
             "price":"12.5", // notice, it's a string type. 
             "describe":"good wine, fear a far way?",
@@ -21,8 +22,7 @@
                 "wine",
                 "drink"
             ]
-        },
-        "request_code":258
+        }
     }
 }
 //////////////////////////////
@@ -37,7 +37,7 @@
     "params":{
         "result":0,
         "reason":1,
-        "request_code":258
+        "product_uuid":"xxxx-xxxxxx-xxxx-xxx"
     }
 }
 

@@ -6,4 +6,5 @@
 bool getProcessFilePath( std::basic_string< TCHAR >& tstrProcessFilePath );
 bool getProcessDirPath( std::basic_string< TCHAR >& tstrProcessDirPath );
 
+
 #endif //__HMMISC_H__

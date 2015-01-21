@@ -177,6 +177,18 @@
     <ClCompile Include="data\CRProduct.cpp">
       <Filter>data</Filter>
     </ClCompile>
+    <ClCompile Include="..\CRCommon\CRMisc.cpp">
+      <Filter>crcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="frame\CRProductDepot.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\HMCharConv.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\CRModuleProductMgr.cpp">
+      <Filter>modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -328,6 +340,18 @@
     </ClInclude>
     <ClInclude Include="data\CRProduct.h">
       <Filter>data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CRCommon\CRMisc.h">
+      <Filter>crcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="frame\CRProductDepot.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\HMCharConv.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="modules\CRModuleProductMgr.h">
+      <Filter>modules</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

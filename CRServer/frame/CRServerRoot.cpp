@@ -9,6 +9,7 @@
 #include "CRModuleIDDefs.h"
 #include "CRModuleCmdDispatch.h"
 #include "CRModuleAccountMgr.h"
+#include "CRModuleProductMgr.h"
 #include "CRRCmdDefs.h"
 #include "CRRMsgHandler4Login.h"
 #include "CRRMsgHandler4Logoff.h"
@@ -84,7 +85,7 @@ void CRServerRoot::_init() {
 void CRServerRoot::_initModules() {
 	MODULE_ADD( ECRMODULE_ID_CMDDISPATCH, CRModuleCmdDispatch );
     MODULE_ADD( ECRMODULE_ID_ACCOUNTMGR, CRModuleAccountMgr );
-
+	MODULE_ADD( ECRMODULE_ID_PRODUCTMGR, CRModuleProductMgr );
 }
 
 void CRServerRoot::_unInitModules() {

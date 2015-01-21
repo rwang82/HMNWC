@@ -12,6 +12,7 @@
 //
 class CRAccountUser;
 class CRAccountAdmin;
+class CRProduct;
 //
 class CRDBImplBase {
 public:
@@ -25,11 +26,12 @@ public:
 public:
 	virtual bool doSave( const CRAccountUser* pAccount, int& nErrCode ) = 0;
 	virtual bool doSave( const CRAccountAdmin* pAccount, int& nErrCode ) = 0;
+	virtual bool doSave( const CRProduct* pProduct, int& nErrCode ) = 0;
 	
 	//
 	virtual bool doLoad( void* pParamKey, CRAccountUser& destObj, int& nErrCode ) = 0;
 	virtual bool doLoad( void* pParamKey, CRAccountAdmin& destObj, int& nErrCode ) = 0;
-
+	virtual bool doLoad( void* pParamKey, CRProduct& destObj, int& nErrCode ) = 0;
 };
 
 

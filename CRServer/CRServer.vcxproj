@@ -88,11 +88,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\common\HMCharConv.cpp" />
     <ClCompile Include="..\common\hmcmn_event_depot.cpp" />
     <ClCompile Include="..\common\HMTaskEngine.cpp" />
     <ClCompile Include="..\common\HMTSHelper.cpp" />
     <ClCompile Include="..\CRCommon\CRErrCode.cpp" />
     <ClCompile Include="..\CRCommon\CRErrCodeDepot.cpp" />
+    <ClCompile Include="..\CRCommon\CRMisc.cpp" />
     <ClCompile Include="..\CRCommon\CRRMsg.cpp" />
     <ClCompile Include="..\CRCommon\CRRMsgBase.cpp" />
     <ClCompile Include="..\CRCommon\CRRCmdDefs.cpp" />
@@ -116,6 +118,7 @@
     <ClCompile Include="frame\CRClientStubDepot.cpp" />
     <ClCompile Include="frame\CRLoginRecord.cpp" />
     <ClCompile Include="frame\CRModuleDepot.cpp" />
+    <ClCompile Include="frame\CRProductDepot.cpp" />
     <ClCompile Include="frame\CRServerApp.cpp" />
     <ClCompile Include="frame\CRServerRoot.cpp" />
     <ClCompile Include="frame\CRSrvDBProxy.cpp" />
@@ -125,6 +128,7 @@
     <ClCompile Include="helper\HMMisc.cpp" />
     <ClCompile Include="modules\CRModuleAccountMgr.cpp" />
     <ClCompile Include="modules\CRModuleCmdDispatch.cpp" />
+    <ClCompile Include="modules\CRModuleProductMgr.cpp" />
     <ClCompile Include="rmsghandler\CRRMsgHandler4AccountReg.cpp" />
     <ClCompile Include="rmsghandler\CRRMsgHandler4Login.cpp" />
     <ClCompile Include="rmsghandler\CRRMsgHandler4Logoff.cpp" />
@@ -134,12 +138,14 @@
     <ClCompile Include="tasks\CRTaskRMsgDispatch.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\common\HMCharConv.h" />
     <ClInclude Include="..\common\hmcmn_event_depot.h" />
     <ClInclude Include="..\common\hmcmn_event_ex.h" />
     <ClInclude Include="..\common\HMTaskEngine.h" />
     <ClInclude Include="..\common\HMTSHelper.h" />
     <ClInclude Include="..\CRCommon\CRErrCode.h" />
     <ClInclude Include="..\CRCommon\CRErrCodeDepot.h" />
+    <ClInclude Include="..\CRCommon\CRMisc.h" />
     <ClInclude Include="..\CRCommon\CRRMsg.h" />
     <ClInclude Include="..\CRCommon\CRRMsgBase.h" />
     <ClInclude Include="..\CRCommon\CRRCmdDefs.h" />
@@ -165,6 +171,7 @@
     <ClInclude Include="frame\CRLoginRecord.h" />
     <ClInclude Include="frame\CRModuleBase.h" />
     <ClInclude Include="frame\CRModuleDepot.h" />
+    <ClInclude Include="frame\CRProductDepot.h" />
     <ClInclude Include="frame\CRServerApp.h" />
     <ClInclude Include="frame\CRServerRoot.h" />
     <ClInclude Include="frame\CRSrvDBProxy.h" />
@@ -176,6 +183,7 @@
     <ClInclude Include="modules\CRModuleAccountMgr.h" />
     <ClInclude Include="modules\CRModuleCmdDispatch.h" />
     <ClInclude Include="modules\CRModuleIDDefs.h" />
+    <ClInclude Include="modules\CRModuleProductMgr.h" />
     <ClInclude Include="rmsghandler\CRRMsgHandler4AccountReg.h" />
     <ClInclude Include="rmsghandler\CRRMsgHandler4Login.h" />
     <ClInclude Include="rmsghandler\CRRMsgHandler4Logoff.h" />

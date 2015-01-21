@@ -12,10 +12,12 @@ public:
 public:
 	virtual bool doSave( const CRAccountUser* pAccount, int& nErrCode );
 	virtual bool doSave( const CRAccountAdmin* pAccount, int& nErrCode );
-	
+	virtual bool doSave( const CRProduct* pProduct, int& nErrCode );
+
 	//
 	virtual bool doLoad( void* pParamKey, CRAccountUser& destObj, int& nErrCode );
 	virtual bool doLoad( void* pParamKey, CRAccountAdmin& destObj, int& nErrCode );
+	virtual bool doLoad( void* pParamKey, CRProduct& destObj, int& nErrCode );
 
 private:
 	bool _connect2DB();

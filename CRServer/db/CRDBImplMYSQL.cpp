@@ -2,6 +2,8 @@
 #include "CRDBImplMYSQL.h"
 #include "CRAccountUser.h"
 #include "CRAccountAdmin.h"
+#include "CRProduct.h"
+#include "CRMisc.h"
 #include "CRErrCode.h"
 #include <string>
 #include <atlconv.h>
@@ -111,6 +113,38 @@ bool CRDBImplMYSQL::doSave( const CRAccountAdmin* pAccount, int& nErrCode ) {
 	return 0 == mysql_query( &m_inst, strSQLMsg.c_str() );
 }
 
+bool CRDBImplMYSQL::doSave( const CRProduct* pProduct, int& nErrCode ) {
+    if ( !_isReady() )
+		return false;
+	USES_CONVERSION;
+	
+	std::string strSQLMsg;
+	char szBufTmp[ 50 ];
+	std::string strTmp;
+
+	strSQLMsg = "insert into products values(";
+	strSQLMsg += "\"";
+	strSQLMsg += T2A( pProduct->m_tstrUUID.c_str() );
+	strSQLMsg += "\",\"";
+	strSQLMsg += T2A( pProduct->m_tstrTitle.c_str() );
+	strSQLMsg += "\",\"";
+	strSQLMsg += T2A( pProduct->m_tstrPrice.c_str() );
+	strSQLMsg += "\",\"";
+	strSQLMsg += T2A( pProduct->m_tstrDescribe.c_str() );
+	strSQLMsg += "\",\"";
+	strContainer2JsonStrWithQuotes( pProduct->m_containerImages, strTmp );
+	strSQLMsg += strTmp.c_str();
+	strSQLMsg += "\",\"";
+	strContainer2JsonStrWithQuotes( pProduct->m_containerKeywords, strTmp );
+	strSQLMsg += strTmp.c_str();
+	strSQLMsg += "\",";
+	_itoa_s( (int)CRPRODUCT_STATUS_PENDING, szBufTmp, 10 );
+	strSQLMsg += szBufTmp;
+	strSQLMsg +=")";
+	//
+	return 0 == mysql_query( &m_inst, strSQLMsg.c_str() );
+}
+
 bool CRDBImplMYSQL::doLoad( void* pParamKey, CRAccountUser& destObj, int& nErrCode ) {
 	//  select * from accountuser where username='wyf'
 	if ( !_isReady() )
@@ -213,6 +247,12 @@ bool CRDBImplMYSQL::doLoad( void* pParamKey, CRAccountAdmin& destObj, int& nErrC
 	return true;
 }
 
+bool CRDBImplMYSQL::doLoad( void* pParamKey, CRProduct& destObj, int& nErrCode ) {
+
+	// need more code here.
+
+	return false;
+}
 
 
 

@@ -12,6 +12,7 @@
 #include "CRModuleDepot.h"
 #include "CRModuleIdDefs.h"
 #include "CRModuleAccountMgr.h"
+#include "HMCharConv.h"
 #include <atlconv.h>
 
 CRRMsgHandler4AccountReg::CRRMsgHandler4AccountReg() {
@@ -72,6 +73,8 @@ void CRRMsgHandler4AccountReg::_sendFailedAck( const CRRMsgMetaData& rmsgMetaDat
 
 bool CRRMsgHandler4AccountReg::_parseParams( const Json::Value& jsonRoot, CRAccountRegParam& paramAccountReg ) {
 	USES_CONVERSION;
+	std::string strTmp;
+	tstring_type tstrTmp;
 
 	const Json::Value& valParams = jsonRoot[ "params" ];
 	if ( !valParams.isObject() )
@@ -80,7 +83,10 @@ bool CRRMsgHandler4AccountReg::_parseParams( const Json::Value& jsonRoot, CRAcco
 	const Json::Value& valUserName = valParams[ "username" ];
 	if ( !valUserName.isString() )
 		return false;
-	paramAccountReg.m_tstrUserName = A2T( valUserName.asString().c_str() );
+	strTmp = valUserName.asString();
+	if ( !UTF8ToTCHAR( (const unsigned char*)strTmp.c_str(), strTmp.length() + 1, tstrTmp ) )
+		return false;
+	paramAccountReg.m_tstrUserName = tstrTmp;
 	// get tstrPassword
 	const Json::Value& valPassword = valParams[ "password" ];
 	if ( !valPassword.isString() )
@@ -96,11 +102,22 @@ bool CRRMsgHandler4AccountReg::_parseParams( const Json::Value& jsonRoot, CRAcco
 	if ( !valPhone.isString() )
 		return false;
 	paramAccountReg.m_tstrPhoneNum = A2T( valPhone.asString().c_str() );
+	// get tstrNickName
+	const Json::Value& valNickName = valParams[ "nickname" ];
+	if ( !valNickName.isString() )
+		return false;
+	strTmp = valNickName.asString();
+	if ( !UTF8ToTCHAR( (const unsigned char*)strTmp.c_str(), strTmp.length() + 1, tstrTmp ) )
+		return false;
+	paramAccountReg.m_tstrNickName = tstrTmp;
 	// get tstrEMail
 	const Json::Value& valEMail = valParams[ "email" ];
 	if ( !valEMail.isString() )
 		return false;
-	paramAccountReg.m_tstrEMail = A2T( valEMail.asString().c_str() );
+	strTmp = valEMail.asString();
+	if ( !UTF8ToTCHAR( (const unsigned char*)strTmp.c_str(), strTmp.length() + 1, tstrTmp ) )
+		return false;
+	paramAccountReg.m_tstrEMail = tstrTmp;
 
 	return true;
 }

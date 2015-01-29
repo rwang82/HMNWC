@@ -8,6 +8,7 @@
 #include "CRRMsgJsonHelper.h"
 #include "CRRCmdDefs.h"
 #include "HMNWPServer.h"
+#include "HMCharConv.h"
 #include "json/json.h"
 #include <atlconv.h>
 //
@@ -116,17 +117,35 @@ void CRRMsgHandler4Login::_sendSuccessAck( const CRLoginParam& loginParam, const
 	std::string strRMsgAck;
 	const CRAccountBase* pAccountObj = NULL;
 	CRModuleAccountMgr* pAccountMgr = (CRModuleAccountMgr*)g_CRSrvRoot.m_pModuleDepot->getModule( ECRMODULE_ID_ACCOUNTMGR );
+	std::string strTmp;
+	tstring_type tstrTmp;
 
 	pAccountObj = pAccountMgr->getAccount( rmsgMetaData.m_sConnect );
 	// fill cmd.
 	CRRMsgJsonHelper::fillCmd( ackJsonRoot, CRCMDTYPE_ACK_LOGIN, pRMsgJson->m_nCmdSN, pRMsgJson->m_eOSType );
     // fill params.
 	valParams[ "result" ] = CRLOGIN_RESULT_SUCCESS;
-	valParams[ "username" ] = T2A( loginParam.m_tstrUserName.c_str() );
+	if ( !TCHARToUTF8( loginParam.m_tstrUserName, strTmp ) ) {
+	    assert( false );
+		return;
+	}
+	valParams[ "username" ] = strTmp;
 	if ( pAccountObj ) {
+		//
         valParams[ "phone" ] = T2A( pAccountObj->m_regInfo.m_tstrPhoneNum.c_str() );
-		valParams[ "email" ] = T2A( pAccountObj->m_regInfo.m_tstrEMail.c_str() );
-		valParams[ "nickname" ] = T2A( pAccountObj->m_regInfo.m_tstrNickName.c_str() );
+		//
+		if ( !TCHARToUTF8( pAccountObj->m_regInfo.m_tstrEMail, strTmp ) ) {
+			assert( false );
+			return;
+		}
+		valParams[ "email" ] = strTmp;
+		//
+		if ( !TCHARToUTF8( pAccountObj->m_regInfo.m_tstrNickName, strTmp ) ) {
+			assert( false );
+			return;
+		}
+		valParams[ "nickname" ] = strTmp;
+		//
 		valParams[ "sort" ] = (int)pAccountObj->m_regInfo.m_eSortType;
 	} else {
 	    assert( false );

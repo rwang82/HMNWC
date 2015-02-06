@@ -3,6 +3,10 @@
 #include <assert.h>
 
 
+bool UTF8ToTCHAR( const std::string strUtf8, std::basic_string< TCHAR >& tstrDest ) {
+    return UTF8ToTCHAR( (const unsigned char*)strUtf8.c_str(), strUtf8.length() + 1, tstrDest );
+}
+
 bool UTF8ToTCHAR( const unsigned char* szUtf8Buf, unsigned int uLenUtf8Buf, std::basic_string< TCHAR >& tstrDest ) {
     std::basic_string< wchar_t > wstrUtf16;
 

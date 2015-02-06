@@ -3,7 +3,8 @@
 #include "CRTypes.h"
 //
 class CRDBImplBase;
-class CRPersistenceObj;
+class CRSaveable;
+class CRLoadable;
 //
 class CRSrvDBProxy {
 public:
@@ -11,8 +12,8 @@ public:
 	~CRSrvDBProxy();
 
 public:
-	bool save2DB( const CRPersistenceObj* pPersistenceObj, int& nErrCode );
-	bool loadFromDB( void* pParamKey, CRPersistenceObj* pPersistenceObj, int& nErrCode );
+	bool save2DB( const CRSaveable* pSaveableObj, int& nErrCode );
+	bool loadFromDB( void* pParamKey, CRLoadable* pLoadableObj, int& nErrCode );
 
 private:
 	CRDBImplBase* m_pDBImpl;

@@ -3,7 +3,7 @@
 #include "CRErrCode.h"
 #include "CRTypes.h"
 
-CRAccountLogoff::CRAccountLogoff(const CRAccountRegParam& paramAccountReg)
+CRAccountLogoff::CRAccountLogoff(const CRAccountData& paramAccountReg)
 : CRAccountBase( paramAccountReg ){
 
 }

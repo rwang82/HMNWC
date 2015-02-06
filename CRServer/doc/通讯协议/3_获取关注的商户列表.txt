@@ -2,7 +2,6 @@
 // 获取账户关注的商户列表
 {
     "cmd":{
-        "title":"req_account_attention_list",
         "type":7,
         "sn":34252,
         "os":100,
@@ -14,7 +13,6 @@
 }
 {
     "cmd":{
-        "title":"ack_account_attention_list",
         "type":8,
         "sn":34252,
         "os":100,

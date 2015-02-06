@@ -4,7 +4,7 @@
 
 class CRAccountLogoff : public CRAccountBase {
 public:
-	CRAccountLogoff(const CRAccountRegParam& paramAccountReg);
+	CRAccountLogoff(const CRAccountData& paramAccountReg);
 	virtual ~CRAccountLogoff();
 	
 	// interface of CRAccountBase.

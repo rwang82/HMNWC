@@ -15,18 +15,18 @@ CRSrvDBProxy::~CRSrvDBProxy() {
 	}
 }
 
-bool CRSrvDBProxy::save2DB( const CRPersistenceObj* pPersistenceObj, int& nErrCode ) {
-	if ( !m_pDBImpl || !pPersistenceObj ) {
+bool CRSrvDBProxy::save2DB( const CRSaveable* pSaveableObj, int& nErrCode ) {
+	if ( !m_pDBImpl || !pSaveableObj ) {
 	    nErrCode = CRERR_SRV_PARAM_INVALID;
 		return false;
 	}
-    return pPersistenceObj->save2DB( m_pDBImpl, nErrCode );
+    return pSaveableObj->save2DB( m_pDBImpl, nErrCode );
 }
 
-bool CRSrvDBProxy::loadFromDB( void* pParamKey, CRPersistenceObj* pPersistenceObj, int& nErrCode ) {
-    if ( !m_pDBImpl || !pPersistenceObj ) {
+bool CRSrvDBProxy::loadFromDB( void* pParamKey, CRLoadable* pLoadableObj, int& nErrCode ) {
+    if ( !m_pDBImpl || !pLoadableObj ) {
 	    nErrCode = CRERR_SRV_PARAM_INVALID;
 		return false;
 	}
-	return pPersistenceObj->loadFromDB( pParamKey, m_pDBImpl, nErrCode );
+	return pLoadableObj->loadFromDB( pParamKey, m_pDBImpl, nErrCode );
 }

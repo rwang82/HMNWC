@@ -3,7 +3,6 @@
 {
     "cmd":{
         "type":1,
-        "title":"req_login",
         "sn":34252,
         "os":100,
         "ver":"0.1"
@@ -16,7 +15,6 @@
 {
     "cmd":{
         "type":2,
-        "title":"ack_login",
         "sn":34252,
         "os":100,
         "ver":"0.1"
@@ -28,7 +26,10 @@
         "phone":"15874872565",
         "email":"r4o5m6e8o@163.com",
         "nickname":"plusplus",
-        "sort":100
+        "sort":100,
+        "attetioned":20,
+        "attetion":10,
+        "published":5
     }
 }
 //////////////////////////////
@@ -36,7 +37,6 @@
 {
     "cmd":{
         "type":3,
-        "title":"req_logoff",
         "sn":34253,
         "os":100,
         "ver":"0.1"
@@ -48,7 +48,6 @@
 {
     "cmd":{
         "type":4,
-        "title":"ack_logoff",
         "sn":34253,
         "os":100,
         "ver":"0.1"

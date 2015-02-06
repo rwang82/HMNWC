@@ -1,0 +1,52 @@
+//////////////////////////////
+// request of fetch account information.
+{
+    "cmd":{
+        "type":17,
+        "sn":34252,
+        "os":100,
+        "ver":"0.1"
+    },
+    "params":{
+        "username_list":[
+            "rom.wang",
+            "wyf"
+        ]
+    }
+}
+//////////////////////////////
+// acknowledge of fetch account information.
+{
+    "cmd":{
+        "type":18,
+        "sn":34252,
+        "os":100,
+        "ver":"0.1"
+    },
+    "params":{
+        "result":0,
+        "reason":1,
+        "account_info_list":[
+            {
+                "username":"rom.wang",
+                "phone":"15874872565",
+                "email":"r4o5m6e8o@163.com",
+                "nickname":"plusplus",
+                "sort":100,
+                "attetioned":20,
+                "attetion":10,
+                "published":5
+            },
+            {
+                "username":"wyf",
+                "phone":"15874872565",
+                "email":"rwang82@gmail.com",
+                "nickname":"wyf_store",
+                "sort":100,
+                "attetioned":2,
+                "attetion":1,
+                "published":5
+            }
+        ]
+    }
+}

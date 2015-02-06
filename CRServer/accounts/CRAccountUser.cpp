@@ -3,7 +3,7 @@
 #include "CRTypes.h"
 #include "CRDBImplBase.h"
 
-CRAccountUser::CRAccountUser(const CRAccountRegParam& paramAccountReg)
+CRAccountUser::CRAccountUser(const CRAccountData& paramAccountReg)
 : CRAccountBase( paramAccountReg ) {
 
 }

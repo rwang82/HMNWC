@@ -11,7 +11,7 @@ public:
 	~CRAccountCreator(){};
 
 public:
-	static CRAccountBase* create( const CRAccountRegParam& paramAccountReg, int& nErrCode );
+	static CRAccountBase* create( const CRAccountData& paramAccountReg, int& nErrCode );
 	static CRAccountBase* loadFromDB( const tstring_type& tstrAccountName, int& nErrCode );
 };
 

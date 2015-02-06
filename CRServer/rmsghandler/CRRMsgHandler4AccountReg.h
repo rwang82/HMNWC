@@ -13,7 +13,7 @@ private:
 	virtual void accept( const CRRMsgMetaData& rmsgMetaData, const CRRMsgBinary* pRMsgBinary );
 
 private:
-    bool _parseParams( const Json::Value& jsonRoot, CRAccountRegParam& paramAccountReg );
+    bool _parseParams( const Json::Value& jsonRoot, CRAccountData& paramAccountReg );
 	void _sendSuccessAck( const CRRMsgMetaData& rmsgMetaData );
 	void _sendFailedAck( const CRRMsgMetaData& rmsgMetaData, int nErrCode );
 };

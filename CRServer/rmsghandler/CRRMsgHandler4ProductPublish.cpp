@@ -87,7 +87,7 @@ bool CRRMsgHandler4ProductPublish::_parseParams( const Json::Value& jsonRoot, CR
 	if ( !valUserName.isString() )
 		return false;
 	strUtf8Tmp = valUserName.asString();
-	if ( !UTF8ToTCHAR( (const unsigned char*)strUtf8Tmp.c_str(), strUtf8Tmp.length(), paramPublishProduct.m_tstrUserName ) )
+	if ( !UTF8ToTCHAR( (const unsigned char*)strUtf8Tmp.c_str(), strUtf8Tmp.length(), product.m_tstrPublisher ) )
 	    return false;
 	// 
 	const Json::Value& valProduct = valParams[ "product" ];

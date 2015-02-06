@@ -7,12 +7,15 @@
 #include "HMTSHelper.h"
 #include "hmcmn_event_depot.h"
 #include <map>
+#include <list>
 //
 struct CRRMsgMetaData;
 //
 class CRModuleAccountMgr : public CRModuleBase{
 public:
 	typedef std::map< SOCKET, CRAccountBase* > socket2account_map_type;
+	typedef std::list< CRAccountData > accountdata_container_type;
+
 public:
 	CRModuleAccountMgr();
 	~CRModuleAccountMgr();
@@ -20,11 +23,12 @@ public:
 public:
 	bool doLogin( const CRLoginParam& loginParam, int& nErrCode );
 	bool doLogoff( const CRLogoffParam& logoffParam, int& nErrCode );
-	bool doRegAccount( const CRAccountRegParam& accountRegParam, int& nErrCode );
+	bool doRegAccount( const CRAccountData& accountRegParam, int& nErrCode );
 
 public:
 	const CRAccountBase* getAccount( SOCKET sConnect ) const;
-
+	const CRAccountBase* getAccount( const tstring_type& tstrAccountName, int& nErrCode );
+    void getAccountsData( tstr_container_type containerAccountName, accountdata_container_type& containerAccountData );
 	// event handler.
 public:
 	void onEvtClientAccept( void* pParam1, void* pParam2 );

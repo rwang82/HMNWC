@@ -21,23 +21,28 @@ struct CRLogoffParam {
 	ENUMOSTYPE m_eOSType;
 };
 //
-struct CRAccountRegParam{
-	CRAccountRegParam();
-	~CRAccountRegParam();
+struct CRAccountData{
+	CRAccountData( const CRAccountData& val );
+	CRAccountData();
+	~CRAccountData();
+	CRAccountData& operator=( const CRAccountData& val );
     tstring_type m_tstrUserName;
 	tstring_type m_tstrPassword;
 	tstring_type m_tstrPhoneNum;
 	tstring_type m_tstrEMail;
 	tstring_type m_tstrNickName;
+	int m_nCountAttetioned;
+	int m_nCountAttetion;
+	int m_nCountPublished;
 	int m_eSortType;
 };
 //
-class CRAccountBase : public CRPersistenceObj{
+class CRAccountBase : public CRSaveable, public CRLoadable{
 public:
 	typedef std::basic_string< TCHAR > tstring_type;
 public:
 	CRAccountBase();
-	CRAccountBase( const CRAccountRegParam& paramAccountReg );
+	CRAccountBase( const CRAccountData& paramAccountReg );
 	virtual ~CRAccountBase();
 
 public:
@@ -46,7 +51,7 @@ public:
 	virtual bool doLogoff( const CRLogoffParam& logoffParam, int& nErrCode );
 	virtual void onDisconnect( SOCKET sConnect );
 public:
-	CRAccountRegParam m_regInfo;
+	CRAccountData m_data;
 
 protected:
 	CRLoginRecord m_loginRecord;

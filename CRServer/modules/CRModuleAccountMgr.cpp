@@ -46,6 +46,10 @@ const CRAccountBase* CRModuleAccountMgr::getAccount( SOCKET sConnect ) const {
 	return citSocket2Account->second;
 }
 
+const CRAccountBase* CRModuleAccountMgr::getAccount( const tstring_type& tstrAccountName, int& nErrCode ) {
+	return m_accountDepot.getAccount( tstrAccountName, nErrCode );
+}
+
 bool CRModuleAccountMgr::doLogin( const CRLoginParam& loginParam, int& nErrCode ) {
 	if ( !m_tsAccess.safeEnterFunc() )
 		return false;
@@ -59,6 +63,9 @@ bool CRModuleAccountMgr::doLogin( const CRLoginParam& loginParam, int& nErrCode 
 	if ( bSuccess ) {
 	    _addAccount2SocketMap( loginParam.m_pRMsgMetaData->m_sConnect, pAccount );
 	}
+	mfpkSafeExit.Do();
+	//
+	need more code here, to update account info from DB.
 	return bSuccess;
 }
 
@@ -79,7 +86,7 @@ bool CRModuleAccountMgr::doLogoff( const CRLogoffParam& logoffParam, int& nErrCo
 	return true;
 }
 
-bool CRModuleAccountMgr::doRegAccount( const CRAccountRegParam& accountRegParam, int& nErrCode ) {
+bool CRModuleAccountMgr::doRegAccount( const CRAccountData& accountRegParam, int& nErrCode ) {
 	if ( !m_tsAccess.safeEnterFunc() )
 		return false;
 	CMemFuncPack mfpkSafeExit( &m_tsAccess, &HMTSHelper::safeExitFunc );
@@ -164,6 +171,12 @@ bool CRModuleAccountMgr::_hasAccountInSocketMap( CRAccountBase* pAccount ) const
 	}
 
 	return false;
+}
+
+
+void CRModuleAccountMgr::getAccountsData( tstr_container_type containerAccountName, accountdata_container_type& containerAccountData ) {
+	int nErrCode = CRERR_SRV_NONE;
+	m_accountDepot.getAccountsData( containerAccountName, containerAccountData, nErrCode );
 }
 
 CRAccountBase* CRModuleAccountMgr::_getAccountInSocketMap( SOCKET sConnect ) {

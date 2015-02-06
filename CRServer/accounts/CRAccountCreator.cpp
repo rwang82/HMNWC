@@ -9,7 +9,7 @@
 #include "FuncPack.h"
 #include <atlconv.h>
 
-CRAccountBase* CRAccountCreator::create( const CRAccountRegParam& paramAccountReg, int& nErrCode ) {
+CRAccountBase* CRAccountCreator::create( const CRAccountData& paramAccountReg, int& nErrCode ) {
 	switch ( paramAccountReg.m_eSortType )
 	{
 	case EACCOUNT_SORT_USER:

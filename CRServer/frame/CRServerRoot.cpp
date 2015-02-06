@@ -15,6 +15,8 @@
 #include "CRRMsgHandler4Logoff.h"
 #include "CRRMsgHandler4AccountReg.h"
 #include "CRRMsgHandler4ProductPublish.h"
+#include "CRRMsgHandler4AddAttetion.h"
+#include "CRRMsgHandler4FetchAccountInfo.h"
 #include "CRSrvDBProxy.h"
 #include "hmcmn_event_depot.h"
 #include "HMMisc.h"
@@ -99,6 +101,8 @@ void CRServerRoot::_initCmdHandlers() {
 	CMDHANDLER_ADD( CRCMDTYPE_REQ_LOGOFF, CRRMsgHandler4Logoff );
 	CMDHANDLER_ADD( CRCMDTYPE_REQ_ACCOUNT_REG, CRRMsgHandler4AccountReg );
 	CMDHANDLER_ADD( CRCMDTYPE_REQ_PRODUCT_PUBLISH, CRRMsgHandler4ProductPublish );
+	CMDHANDLER_ADD( CRCMDTYPE_REQ_ADD_ATTETION, CRRMsgHandler4AddAttetion );
+    CMDHANDLER_ADD( CRCMDTYPE_REQ_FETCH_ACCOUNT_INFO, CRRMsgHandler4FetchAccountInfo );
 } 
 
 void CRServerRoot::_unInit( ) {

@@ -5,7 +5,7 @@
 class CRAccountAdmin : public CRAccountBase{
 public:
 	CRAccountAdmin(){};
-	CRAccountAdmin(const CRAccountRegParam& paramAccountReg);
+	CRAccountAdmin(const CRAccountData& paramAccountReg);
 	virtual ~CRAccountAdmin();
 	
 	// interface of CRAccountBase.

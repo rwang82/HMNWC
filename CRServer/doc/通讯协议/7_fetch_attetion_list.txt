@@ -1,0 +1,33 @@
+//////////////////////////////
+// request fetch attetion list.
+{
+    "cmd":{
+        "type":15,
+        "sn":34252,
+        "os":100,
+        "ver":"0.1"
+    },
+    "params":{
+        "username":"rom.wang",
+        "index_start":0,
+        "count":20
+    }
+}
+//////////////////////////////
+// acknowledge fetch attetion list.
+{
+    "cmd":{
+        "type":16,
+        "sn":34252,
+        "os":100,
+        "ver":"0.1"
+    },
+    "params":{
+        "result":0,
+        "reason":1,
+        "attetions":[
+            "wyf",
+            "qhm"
+        ]
+    }
+}

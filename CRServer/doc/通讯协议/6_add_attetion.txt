@@ -1,0 +1,29 @@
+//////////////////////////////
+// add attetion 
+{
+    "cmd":{
+        "type":13,
+        "sn":34252,
+        "os":100,
+        "ver":"0.1"
+    },
+    "params":{
+        "username":"rom.wang",
+        "attetion":"xdl"
+    }
+}
+//////////////////////////////
+// acknowledge add attetion.
+{
+    "cmd":{
+        "type":14,
+        "sn":34252,
+        "os":100,
+        "ver":"0.1"
+    },
+    "params":{
+        "result":0,
+        "reason":1,
+        "attetion":"xdl"
+    }
+}

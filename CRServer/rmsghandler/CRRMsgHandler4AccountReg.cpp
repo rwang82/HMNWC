@@ -26,7 +26,7 @@ CRRMsgHandler4AccountReg::~CRRMsgHandler4AccountReg() {
 void CRRMsgHandler4AccountReg::accept( const CRRMsgMetaData& rmsgMetaData, const CRRMsgJson* pRMsgJson ) {
     assert( pRMsgJson );
 	CRModuleAccountMgr* pModuleAccountMgr = NULL;
-	CRAccountRegParam paramAccountReg;
+	CRAccountData paramAccountReg;
 	int nErrCode = CRERR_SRV_NONE;
 
 	pModuleAccountMgr = (CRModuleAccountMgr*)g_CRSrvRoot.m_pModuleDepot->getModule( ECRMODULE_ID_ACCOUNTMGR );
@@ -71,7 +71,7 @@ void CRRMsgHandler4AccountReg::_sendFailedAck( const CRRMsgMetaData& rmsgMetaDat
 	g_CRSrvRoot.m_pNWPServer->send( rmsgMetaData.m_sConnect, (const unsigned char*)strRMsg.c_str(), strRMsg.length() + 1 );
 }
 
-bool CRRMsgHandler4AccountReg::_parseParams( const Json::Value& jsonRoot, CRAccountRegParam& paramAccountReg ) {
+bool CRRMsgHandler4AccountReg::_parseParams( const Json::Value& jsonRoot, CRAccountData& paramAccountReg ) {
 	USES_CONVERSION;
 	std::string strTmp;
 	tstring_type tstrTmp;

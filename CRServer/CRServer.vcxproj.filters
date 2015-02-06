@@ -189,6 +189,21 @@
     <ClCompile Include="modules\CRModuleProductMgr.cpp">
       <Filter>modules</Filter>
     </ClCompile>
+    <ClCompile Include="rmsghandler\CRRMsgHandler4AddAttetion.cpp">
+      <Filter>rmsghandler</Filter>
+    </ClCompile>
+    <ClCompile Include="data\CRAddAttetion.cpp">
+      <Filter>data</Filter>
+    </ClCompile>
+    <ClCompile Include="rmsghandler\CRRMsgHandler4FetchAccountInfo.cpp">
+      <Filter>rmsghandler</Filter>
+    </ClCompile>
+    <ClCompile Include="data\CRAccountList.cpp">
+      <Filter>data</Filter>
+    </ClCompile>
+    <ClCompile Include="helper\CRSrvMisc.cpp">
+      <Filter>helper</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -352,6 +367,21 @@
     </ClInclude>
     <ClInclude Include="modules\CRModuleProductMgr.h">
       <Filter>modules</Filter>
+    </ClInclude>
+    <ClInclude Include="rmsghandler\CRRMsgHandler4AddAttetion.h">
+      <Filter>rmsghandler</Filter>
+    </ClInclude>
+    <ClInclude Include="data\CRAddAttetion.h">
+      <Filter>data</Filter>
+    </ClInclude>
+    <ClInclude Include="rmsghandler\CRRMsgHandler4FetchAccountInfo.h">
+      <Filter>rmsghandler</Filter>
+    </ClInclude>
+    <ClInclude Include="data\CRAccountList.h">
+      <Filter>data</Filter>
+    </ClInclude>
+    <ClInclude Include="helper\CRSrvMisc.h">
+      <Filter>helper</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

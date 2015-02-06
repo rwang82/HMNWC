@@ -8,7 +8,7 @@ enum ENUMCRPRODUCTSTATUS {
 	CRPRODUCT_STATUS_PUBLISHED = 1
 };
 
-class CRProduct : public CRPersistenceObj{
+class CRProduct : public CRSaveable, public CRLoadable{
 public:
 	CRProduct();
 	CRProduct( const CRProduct& val );
@@ -18,6 +18,7 @@ public:
 	virtual bool loadFromDB( void* pParamKey, CRDBImplBase* pDBImpl, int& nErrCode );
 
 public:
+	tstring_type m_tstrPublisher; // the username of publisher
 	tstring_type m_tstrUUID;
     tstring_type m_tstrTitle;
 	tstring_type m_tstrPrice;

@@ -4,7 +4,7 @@
 #include "CRTypes.h"
 #include "CRDBImplBase.h"
 
-CRAccountAdmin::CRAccountAdmin(const CRAccountRegParam& paramAccountReg)
+CRAccountAdmin::CRAccountAdmin(const CRAccountData& paramAccountReg)
 : CRAccountBase( paramAccountReg ) {
 
 }

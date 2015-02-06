@@ -7,7 +7,6 @@
 class CRProductPublishParam {
 public:
 	const CRRMsgMetaData* m_pRMsgMetaData;
-	tstring_type m_tstrUserName;
 	CRProduct m_product;
 };
 

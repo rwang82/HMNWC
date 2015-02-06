@@ -5,7 +5,7 @@
 class CRAccountUser : public CRAccountBase{
 public:
 	CRAccountUser(){};
-	CRAccountUser(const CRAccountRegParam& paramAccountReg);
+	CRAccountUser(const CRAccountData& paramAccountReg);
 	virtual ~CRAccountUser();
 
 	// interface of CRAccountBase.

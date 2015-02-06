@@ -2,7 +2,6 @@
 // 获取账号发布产品列表
 {
     "cmd":{
-        "title":"req_account_product_list",
         "type":9,
         "sn":34252,
         "os":100,
@@ -14,7 +13,6 @@
 }
 {
     "cmd":{
-        "title":"ack_account_product_list",
         "type":10,
         "sn":34252,
         "os":100,

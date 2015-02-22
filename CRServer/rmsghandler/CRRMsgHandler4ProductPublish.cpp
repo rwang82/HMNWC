@@ -121,6 +121,20 @@ bool CRRMsgHandler4ProductPublish::_parseParams( const Json::Value& jsonRoot, CR
 	strUtf8Tmp = valDescribe.asString();
     if ( !UTF8ToTCHAR( (const unsigned char*)strUtf8Tmp.c_str(), strUtf8Tmp.length(), product.m_tstrDescribe ) )
 	    return false;
+	// sort.
+	const Json::Value& valSort = valProduct[ "sort" ];
+	if ( !valSort.isInt() )
+		return false;
+	product.m_nSortType = valSort.asInt();
+	// user define sort.
+	if ( product.m_nSortType == -1 ) {
+	    const Json::Value& valUDSort = valProduct["udsort"];
+		if ( !valUDSort.isString() )
+			return false;
+		strUtf8Tmp = valUDSort.asString();
+		if ( !UTF8ToTCHAR( strUtf8Tmp, product.m_tstrUDSort ) )
+			return false;
+	}
 	// images.
 	const Json::Value& valImages = valProduct[ "images" ];
 	if ( !valImages.isArray() )

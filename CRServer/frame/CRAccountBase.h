@@ -2,7 +2,8 @@
 #define __CRACCOUNTBASE_H__
 #include "CRLoginRecord.h"
 #include "CRTypes.h"
-#include "CRPersistenceObj.h"
+#include "CRSaveable.h"
+#include "CRLoadable.h"
 //
 struct CRLoginParam {
 	CRLoginParam();

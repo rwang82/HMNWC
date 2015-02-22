@@ -19,6 +19,8 @@ public:
 	bool addAccount( CRAccountBase* pAccountNew, int& nErrCode );
 	CRAccountBase* getAccount( const tstring_type& tstrAccountName, int& nErrCode );
 	bool getAccountsData( const tstr_container_type& containerAccountName, accountdata_container_type& containerAccountData, int& nErrCode );
+    bool refreshAccountsData( const tstr_container_type& containerAccountName, int& nErrCode );
+	bool refreshAccountData( const tstring_type& tstrAccountName, int& nErrCode );
 private:
 	bool _hasAccount( const tstring_type& tstrAccountName, int& nErrCode );
 	void _clearAllAccount();

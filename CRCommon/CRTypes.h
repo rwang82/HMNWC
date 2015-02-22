@@ -3,9 +3,11 @@
 #include "tchar.h"
 #include <string>
 #include <deque>
+#include <list>
 
 typedef std::basic_string< TCHAR > tstring_type;
 typedef std::deque< tstring_type > tstr_container_type;
+typedef std::list< tstring_type > tstr_list_type;
 
 enum ENUMOSTYPE {
 	EOS_UNKNOWN = 0,

@@ -1,6 +1,6 @@
 #ifndef __CRACCOUNTDATALIST_H__
 #define __CRACCOUNTDATALIST_H__
-#include "CRPersistenceObj.h"
+#include "CRLoadable.h"
 #include "CRAccountBase.h"
 #include "CRAccountUser.h"
 #include <list>

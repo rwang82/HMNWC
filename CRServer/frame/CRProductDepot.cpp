@@ -53,13 +53,17 @@ bool CRProductDepot::_hasProductInCache( const tstring_type& tstrUUID ) const {
 }
 
 bool CRProductDepot::_loadProductFromDB( const tstring_type& tstrUUID, int& nErrCode ) {
-	CRProduct* pNewProduct = new CRProduct();
-	CFuncPack fpkDeProduct( ::gfnDelObj< CRProduct >, pNewProduct );
 
-	if ( !g_CRSrvRoot.m_pSrvDBProxy->loadFromDB( (void*)&tstrUUID, pNewProduct, nErrCode ) )
-		return false;
+	// need more code here. 
 
-	fpkDeProduct.Cancel();
-	m_mapUUID2ProductCache[ tstrUUID ] = pNewProduct;
-	return true;
+	return false;
+	//CRProduct* pNewProduct = new CRProduct();
+	//CFuncPack fpkDeProduct( ::gfnDelObj< CRProduct >, pNewProduct );
+
+	//if ( !g_CRSrvRoot.m_pSrvDBProxy->loadFromDB( (void*)&tstrUUID, pNewProduct, nErrCode ) )
+	//	return false;
+
+	//fpkDeProduct.Cancel();
+	//m_mapUUID2ProductCache[ tstrUUID ] = pNewProduct;
+	//return true;
 }

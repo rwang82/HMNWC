@@ -2,7 +2,7 @@
 #define __CRRMSGHANDLER4ADDATTETION_H__
 #include "CRRMsgHandlerBase.h"
 #include "CRTypes.h"
-#include "CRAddAttetion.h"
+#include "CRAttetionRecord.h"
 
 class CRRMsgHandler4AddAttetion : public CRRMsgHandlerBase {
 public:
@@ -14,11 +14,11 @@ public:
 	virtual void accept( const CRRMsgMetaData& rmsgMetaData, const CRRMsgBinary* pRMsgBinary );
 
 private:
-	bool parseParams( const Json::Value& jsonRoot, CRAddAttetion& paramAddAttetion );
-	bool checkParams( const CRAddAttetion& paramAddAttetion, int& nErrCode );
-	bool execute( const CRAddAttetion& paramAddAttetion, int& nErrCode );
+	bool parseParams( const Json::Value& jsonRoot, CRAttetionRecord& paramAddAttetion );
+	bool checkParams( const CRAttetionRecord& paramAddAttetion, int& nErrCode );
+	bool execute( const CRAttetionRecord& paramAddAttetion, int& nErrCode );
 	void sendFailedAck( const CRRMsgMetaData& rmsgMetaData, int nErrCode );
-	void sendSuccessAck( const CRRMsgMetaData& rmsgMetaData, const CRAddAttetion& paramAddAttetion );
+	void sendSuccessAck( const CRRMsgMetaData& rmsgMetaData, const CRAttetionRecord& paramAddAttetion );
 };
 
 

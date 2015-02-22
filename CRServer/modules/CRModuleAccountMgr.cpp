@@ -54,6 +54,10 @@ bool CRModuleAccountMgr::doLogin( const CRLoginParam& loginParam, int& nErrCode 
 	if ( !m_tsAccess.safeEnterFunc() )
 		return false;
 	CMemFuncPack mfpkSafeExit( &m_tsAccess, &HMTSHelper::safeExitFunc );
+	//
+	if ( !m_accountDepot.refreshAccountData( loginParam.m_tstrUserName, nErrCode ) )
+		return false;
+	//
 	CRAccountBase* pAccount = (CRAccountBase*)m_accountDepot.getAccount( loginParam.m_tstrUserName, nErrCode );
 	if ( !pAccount ) {
 		nErrCode = CRERR_SRV_ACCOUNTNAME_ISNOT_EXIST;
@@ -63,9 +67,6 @@ bool CRModuleAccountMgr::doLogin( const CRLoginParam& loginParam, int& nErrCode 
 	if ( bSuccess ) {
 	    _addAccount2SocketMap( loginParam.m_pRMsgMetaData->m_sConnect, pAccount );
 	}
-	mfpkSafeExit.Do();
-	//
-	need more code here, to update account info from DB.
 	return bSuccess;
 }
 

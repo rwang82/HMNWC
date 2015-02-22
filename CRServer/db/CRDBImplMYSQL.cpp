@@ -3,10 +3,12 @@
 #include "CRAccountUser.h"
 #include "CRAccountAdmin.h"
 #include "CRProduct.h"
-#include "CRAddAttetion.h"
+#include "CRAttetionRecord.h"
 #include "CRAccountList.h"
+#include "CRAttetionRecordList.h"
 #include "CRMisc.h"
 #include "CRErrCode.h"
+#include "HMCharConv.h"
 #include <string>
 #include <atlconv.h>
 //
@@ -138,6 +140,7 @@ bool CRDBImplMYSQL::doSave( const CRProduct* pProduct, int& nErrCode ) {
 	std::string strSQLMsg;
 	char szBufTmp[ 50 ];
 	std::string strTmp;
+	std::string strUtf8;
 
 	// add product record.
 	strSQLMsg = "insert into products values(";
@@ -151,6 +154,11 @@ bool CRDBImplMYSQL::doSave( const CRProduct* pProduct, int& nErrCode ) {
 	strSQLMsg += T2A( pProduct->m_tstrPrice.c_str() );
 	strSQLMsg += "\",\"";
 	strSQLMsg += T2A( pProduct->m_tstrDescribe.c_str() );
+	strSQLMsg += "\",\"";
+	_itoa_s( pProduct->m_nSortType, szBufTmp, 10 );
+	strSQLMsg += szBufTmp;
+	strSQLMsg += "\",\"";
+	strSQLMsg += T2A( pProduct->m_tstrUDSort.c_str() );
 	strSQLMsg += "\",\"";
 	strContainer2JsonStrWithQuotes( pProduct->m_containerImages, strTmp );
 	strSQLMsg += strTmp.c_str();
@@ -284,12 +292,6 @@ bool CRDBImplMYSQL::doLoad( void* pParamKey, CRAccountAdmin& destObj, int& nErrC
 	return true;
 }
 
-bool CRDBImplMYSQL::doLoad( void* pParamKey, CRProduct& destObj, int& nErrCode ) {
-
-
-	return false;
-}
-
 bool CRDBImplMYSQL::doLoad( void* pParamKey, CRAccountList& destObj, int& nErrCode ) {
 	//  select * from accountuser where username = 'wyf'
 	if ( !_isReady() )
@@ -357,7 +359,7 @@ bool CRDBImplMYSQL::doLoad( void* pParamKey, CRAccountList& destObj, int& nErrCo
 	return true;
 }
 
-bool CRDBImplMYSQL::doSave( const CRAddAttetion* pAddAttetion, int& nErrCode ) {
+bool CRDBImplMYSQL::doSave( const CRAttetionRecord* pAddAttetion, int& nErrCode ) {
 	if ( !_isReady() )
         return false;
 	std::string strSQLMsg;
@@ -389,7 +391,44 @@ bool CRDBImplMYSQL::doSave( const CRAddAttetion* pAddAttetion, int& nErrCode ) {
 	return 0 == mysql_query( &m_inst, strSQLMsg.c_str() );
 }
 
+bool CRDBImplMYSQL::doLoad( void* pParamKey, CRAttetionRecordList& destObj, int& nErrCode ) {
+	CRFetchAttetionRecordListParam* pFARLParam = (CRFetchAttetionRecordListParam*)pParamKey;
 
+	nErrCode = CRERR_SRV_NONE;
+	if ( !pFARLParam ) {
+	    nErrCode = CRERR_SRV_PARAM_INVALID;
+		return false;
+	}
+	switch ( pFARLParam->m_eFetchMode )
+	{
+	case CRFetchAttetionRecordListParam::EFM_ATTETION:
+	{
+	    return _doLoadAttetions( pFARLParam->m_tstrAccountName, destObj, nErrCode );
+	}
+		break;
+	case CRFetchAttetionRecordListParam::EFM_ATTETIONED:
+	{
+	    return _doLoadAttetioneds( pFARLParam->m_tstrAccountName, destObj, nErrCode );
+	}
+		break;
+	default:
+	    nErrCode = CRERR_SRV_PARAM_INVALID;
+		break;
+	}
+
+	assert( false );
+	return false;
+}
+
+bool CRDBImplMYSQL::_doLoadAttetions( const tstring_type& tstrAccountName, CRAttetionRecordList& destObj, int& nErrCode ) {
+
+	return false;
+}
+
+bool CRDBImplMYSQL::_doLoadAttetioneds( const tstring_type& tstrAccountName, CRAttetionRecordList& destObj, int& nErrCode ) {
+    
+	return false;
+}
 
 
 

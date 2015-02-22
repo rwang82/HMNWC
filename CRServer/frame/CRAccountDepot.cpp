@@ -41,6 +41,27 @@ bool CRAccountDepot::addAccount( CRAccountBase* pAccountNew, int& nErrCode ) {
 	return true;
 }
 
+bool CRAccountDepot::refreshAccountsData( const tstr_container_type& containerAccountName, int& nErrCode ) {
+	nErrCode = CRERR_SRV_NONE;
+	if ( !m_tsAccess.safeEnterFunc() )
+		return false;
+	CMemFuncPack mfpkSafeExit( &m_tsAccess, &HMTSHelper::safeExitFunc );
+	name2obj_map_type::const_iterator citName2Obj, ciendName2Obj;
+	tstr_container_type::const_iterator citName, ciendName;
+	CRAccountData* pAccountData = NULL;
+
+	// fetch account info from db.
+	return _loadAccountFromDB( containerAccountName, nErrCode );
+}
+
+bool CRAccountDepot::refreshAccountData( const tstring_type& tstrAccountName, int& nErrCode ) {
+	tstr_container_type containerAccountName;
+
+	containerAccountName.push_back( tstrAccountName );
+
+	return refreshAccountsData( containerAccountName, nErrCode );
+}
+
 bool CRAccountDepot::getAccountsData( const tstr_container_type& containerAccountName, accountdata_container_type& containerAccountData, int& nErrCode ) {
 	nErrCode = CRERR_SRV_NONE;
 	if ( !m_tsAccess.safeEnterFunc() )

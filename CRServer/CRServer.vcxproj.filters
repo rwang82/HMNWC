@@ -168,9 +168,6 @@
     <ClCompile Include="db\CRDBImplMYSQL.cpp">
       <Filter>db</Filter>
     </ClCompile>
-    <ClCompile Include="db\CRPersistenceObj.cpp">
-      <Filter>db</Filter>
-    </ClCompile>
     <ClCompile Include="rmsghandler\CRRMsgHandler4ProductPublish.cpp">
       <Filter>rmsghandler</Filter>
     </ClCompile>
@@ -192,9 +189,6 @@
     <ClCompile Include="rmsghandler\CRRMsgHandler4AddAttetion.cpp">
       <Filter>rmsghandler</Filter>
     </ClCompile>
-    <ClCompile Include="data\CRAddAttetion.cpp">
-      <Filter>data</Filter>
-    </ClCompile>
     <ClCompile Include="rmsghandler\CRRMsgHandler4FetchAccountInfo.cpp">
       <Filter>rmsghandler</Filter>
     </ClCompile>
@@ -203,6 +197,21 @@
     </ClCompile>
     <ClCompile Include="helper\CRSrvMisc.cpp">
       <Filter>helper</Filter>
+    </ClCompile>
+    <ClCompile Include="rmsghandler\CRRMsgHandler4FetchAttetionList.cpp">
+      <Filter>rmsghandler</Filter>
+    </ClCompile>
+    <ClCompile Include="frame\CRAttetionRecordDepot.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="data\CRAttetionRecord.cpp">
+      <Filter>data</Filter>
+    </ClCompile>
+    <ClCompile Include="data\CRAttetionRecordList.cpp">
+      <Filter>data</Filter>
+    </ClCompile>
+    <ClCompile Include="modules\CRModuleAttetionRecord.cpp">
+      <Filter>modules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -347,9 +356,6 @@
     <ClInclude Include="db\CRDBImplMYSQL.h">
       <Filter>db</Filter>
     </ClInclude>
-    <ClInclude Include="db\CRPersistenceObj.h">
-      <Filter>db</Filter>
-    </ClInclude>
     <ClInclude Include="rmsghandler\CRRMsgHandler4ProductPublish.h">
       <Filter>rmsghandler</Filter>
     </ClInclude>
@@ -371,9 +377,6 @@
     <ClInclude Include="rmsghandler\CRRMsgHandler4AddAttetion.h">
       <Filter>rmsghandler</Filter>
     </ClInclude>
-    <ClInclude Include="data\CRAddAttetion.h">
-      <Filter>data</Filter>
-    </ClInclude>
     <ClInclude Include="rmsghandler\CRRMsgHandler4FetchAccountInfo.h">
       <Filter>rmsghandler</Filter>
     </ClInclude>
@@ -382,6 +385,27 @@
     </ClInclude>
     <ClInclude Include="helper\CRSrvMisc.h">
       <Filter>helper</Filter>
+    </ClInclude>
+    <ClInclude Include="rmsghandler\CRRMsgHandler4FetchAttetionList.h">
+      <Filter>rmsghandler</Filter>
+    </ClInclude>
+    <ClInclude Include="frame\CRAttetionRecordDepot.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="data\CRAttetionRecord.h">
+      <Filter>data</Filter>
+    </ClInclude>
+    <ClInclude Include="data\CRAttetionRecordList.h">
+      <Filter>data</Filter>
+    </ClInclude>
+    <ClInclude Include="db\CRLoadable.h">
+      <Filter>db</Filter>
+    </ClInclude>
+    <ClInclude Include="db\CRSaveable.h">
+      <Filter>db</Filter>
+    </ClInclude>
+    <ClInclude Include="modules\CRModuleAttetionRecord.h">
+      <Filter>modules</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

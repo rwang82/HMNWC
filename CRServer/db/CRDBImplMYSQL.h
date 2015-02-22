@@ -13,16 +13,18 @@ public:
 	virtual bool doSave( const CRAccountUser* pAccount, int& nErrCode );
 	virtual bool doSave( const CRAccountAdmin* pAccount, int& nErrCode );
 	virtual bool doSave( const CRProduct* pProduct, int& nErrCode );
-	virtual bool doSave( const CRAddAttetion* pAddAttetion, int& nErrCode );
+	virtual bool doSave( const CRAttetionRecord* pAddAttetion, int& nErrCode );
 
 	//
 	virtual bool doLoad( void* pParamKey, CRAccountUser& destObj, int& nErrCode );
 	virtual bool doLoad( void* pParamKey, CRAccountAdmin& destObj, int& nErrCode );
-	virtual bool doLoad( void* pParamKey, CRProduct& destObj, int& nErrCode );
 	virtual bool doLoad( void* pParamKey, CRAccountList& destObj, int& nErrCode );
+    virtual bool doLoad( void* pParamKey, CRAttetionRecordList& destObj, int& nErrCode );
 private:
 	bool _connect2DB();
 	bool _isReady();
+	bool _doLoadAttetions( const tstring_type& tstrAccountName, CRAttetionRecordList& destObj, int& nErrCode );
+	bool _doLoadAttetioneds( const tstring_type& tstrAccountName, CRAttetionRecordList& destObj, int& nErrCode );
 
 private:
 	unsigned int m_uFlag;

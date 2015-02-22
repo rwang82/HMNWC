@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "CRSrvDBProxy.h"
 #include "CRDBImplMYSQL.h"
-#include "CRPersistenceObj.h"
+#include "CRSaveable.h"
+#include "CRLoadable.h"
 #include "CRErrCode.h"
 
 CRSrvDBProxy::CRSrvDBProxy()

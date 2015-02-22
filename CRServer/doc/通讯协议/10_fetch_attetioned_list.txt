@@ -1,0 +1,33 @@
+//////////////////////////////
+// request fetch attetioned list.
+{
+    "cmd":{
+        "type":21,
+        "sn":34252,
+        "os":100,
+        "ver":"0.1"
+    },
+    "params":{
+        "username":"rom.wang",
+        "index_start":0,
+        "count":20
+    }
+}
+//////////////////////////////
+// acknowledge fetch attetioned list.
+{
+    "cmd":{
+        "type":22,
+        "sn":34252,
+        "os":100,
+        "ver":"0.1"
+    },
+    "params":{
+        "result":0,
+        "reason":1,
+        "attetioneds":[
+            "wyf",
+            "qhm"
+        ]
+    }
+}

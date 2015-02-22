@@ -1,0 +1,67 @@
+//////////////////////////////
+// request of fetch account products-published.
+{
+    "cmd":{
+        "type":19,
+        "sn":34252,
+        "os":100,
+        "ver":"0.1"
+    },
+    "params":{
+        "username_list":[
+            "rom.wang",
+            "wyf"
+        ]
+    }
+}
+//////////////////////////////
+// acknowledge of fetch account products-published.
+{
+    "cmd":{
+        "type":20,
+        "sn":34252,
+        "os":100,
+        "ver":"0.1"
+    },
+    "params":{
+        "result":0,
+        "reason":1,
+        "account_products_list":[
+            "rom.wang":[
+                {
+                    "uuid":"xxxx-xxxxxx-xxxx-xxx",
+                    "title":"good_wine",
+                    "price":"12.5", // notice, it's a string type. 
+                    "describe":"good wine, fear a far way?",
+                    "sort":0, //0 - means food. and more detail need to see product_sort_table.txt, -1 means user-define type.
+                    "udsort":"wine", // if sort == -1, udsort is valid.
+                    "images":[
+                        "xxxx-xxxxxx-xxxx-xxx", // it's a guid.
+                        "xxxx-xxxxxx-xxxx-xxx"
+                    ],
+                    "keywords":[
+                        "wine",
+                        "drink"
+                    ]
+                },
+                {
+                    "uuid":"xxxx-xxxxxx-xxxx-xxx",
+                    "title":"pencil",
+                    "price":"1.5", // notice, it's a string type. 
+                    "describe":"every good student need a good pencil.",
+                    "sort":0, //0 - means food. and more detail need to see product_sort_table.txt, -1 means user-define type.
+                    "udsort":"xxx", // if sort == -1, udsort is valid.
+                    "images":[
+                        "xxxx-xxxxxx-xxxx-xxx", // it's a guid.
+                        "xxxx-xxxxxx-xxxx-xxx"
+                    ],
+                    "keywords":[
+                        "pen"
+                    ]
+                }
+            ],
+            "wyf":[
+            ]
+        ]
+    }
+}

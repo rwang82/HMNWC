@@ -10,6 +10,7 @@
 #include "CRModuleCmdDispatch.h"
 #include "CRModuleAccountMgr.h"
 #include "CRModuleProductMgr.h"
+#include "CRModuleAttetionRecord.h"
 #include "CRRCmdDefs.h"
 #include "CRRMsgHandler4Login.h"
 #include "CRRMsgHandler4Logoff.h"
@@ -17,6 +18,7 @@
 #include "CRRMsgHandler4ProductPublish.h"
 #include "CRRMsgHandler4AddAttetion.h"
 #include "CRRMsgHandler4FetchAccountInfo.h"
+#include "CRRMsgHandler4FetchAttetionList.h"
 #include "CRSrvDBProxy.h"
 #include "hmcmn_event_depot.h"
 #include "HMMisc.h"
@@ -88,6 +90,7 @@ void CRServerRoot::_initModules() {
 	MODULE_ADD( ECRMODULE_ID_CMDDISPATCH, CRModuleCmdDispatch );
     MODULE_ADD( ECRMODULE_ID_ACCOUNTMGR, CRModuleAccountMgr );
 	MODULE_ADD( ECRMODULE_ID_PRODUCTMGR, CRModuleProductMgr );
+	MODULE_ADD( ECRMODULE_ID_ATTETIONRECORD, CRModuleAttetionRecord );
 }
 
 void CRServerRoot::_unInitModules() {
@@ -103,6 +106,7 @@ void CRServerRoot::_initCmdHandlers() {
 	CMDHANDLER_ADD( CRCMDTYPE_REQ_PRODUCT_PUBLISH, CRRMsgHandler4ProductPublish );
 	CMDHANDLER_ADD( CRCMDTYPE_REQ_ADD_ATTETION, CRRMsgHandler4AddAttetion );
     CMDHANDLER_ADD( CRCMDTYPE_REQ_FETCH_ACCOUNT_INFO, CRRMsgHandler4FetchAccountInfo );
+	CMDHANDLER_ADD( CRCMDTYPE_REQ_FETCH_ATTETION_LIST, CRRMsgHandler4FetchAttetionList );
 } 
 
 void CRServerRoot::_unInit( ) {

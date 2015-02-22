@@ -14,6 +14,8 @@
             "title":"good_wine",
             "price":"12.5", // notice, it's a string type. 
             "describe":"good wine, fear a far way?",
+            "sort":0, //0 - means food. and more detail need to see product_sort_table.txt, -1 means user-define type.
+            "udsort":"wine", // if sort == -1, udsort is valid.
             "images":[
                 "xxxx-xxxxxx-xxxx-xxx", // it's a guid.
                 "xxxx-xxxxxx-xxxx-xxx"

@@ -23,7 +23,7 @@ CRRMsgHandler4AddAttetion::~CRRMsgHandler4AddAttetion() {
 }
 
 void CRRMsgHandler4AddAttetion::accept( const CRRMsgMetaData& rmsgMetaData, const CRRMsgJson* pRMsgJson ) {
-	CRAddAttetion paramAddAttetion;
+	CRAttetionRecord paramAddAttetion;
 	int nErrCode = CRERR_SRV_NONE;
 
 	if ( !parseParams( pRMsgJson->m_jsonRoot, paramAddAttetion ) ) {
@@ -43,7 +43,7 @@ void CRRMsgHandler4AddAttetion::accept( const CRRMsgMetaData& rmsgMetaData, cons
 	sendSuccessAck( rmsgMetaData, paramAddAttetion );
 }
 
-bool CRRMsgHandler4AddAttetion::checkParams( const CRAddAttetion& paramAddAttetion, int& nErrCode ) {
+bool CRRMsgHandler4AddAttetion::checkParams( const CRAttetionRecord& paramAddAttetion, int& nErrCode ) {
 	CRModuleAccountMgr* pAccountMgr = (CRModuleAccountMgr*)g_CRSrvRoot.m_pModuleDepot->getModule( ECRMODULE_ID_ACCOUNTMGR );
 	if ( !pAccountMgr )
 		return false;
@@ -57,7 +57,7 @@ bool CRRMsgHandler4AddAttetion::checkParams( const CRAddAttetion& paramAddAtteti
 	return true;
 }
 
-bool CRRMsgHandler4AddAttetion::execute( const CRAddAttetion& paramAddAttetion, int& nErrCode ) {
+bool CRRMsgHandler4AddAttetion::execute( const CRAttetionRecord& paramAddAttetion, int& nErrCode ) {
     return g_CRSrvRoot.m_pSrvDBProxy->save2DB( &paramAddAttetion, nErrCode );
 }
 
@@ -65,7 +65,7 @@ void CRRMsgHandler4AddAttetion::accept( const CRRMsgMetaData& rmsgMetaData, cons
 
 }
 
-bool CRRMsgHandler4AddAttetion::parseParams( const Json::Value& jsonRoot, CRAddAttetion& paramAddAttetion ) {
+bool CRRMsgHandler4AddAttetion::parseParams( const Json::Value& jsonRoot, CRAttetionRecord& paramAddAttetion ) {
 	const Json::Value& valParams = jsonRoot[ "params" ];
 	std::string strUtf8;
 	tstring_type tstrData;
@@ -104,7 +104,7 @@ void CRRMsgHandler4AddAttetion::sendFailedAck( const CRRMsgMetaData& rmsgMetaDat
 	g_CRSrvRoot.m_pNWPServer->send( rmsgMetaData.m_sConnect, (const unsigned char*)strRMsg.c_str(), strRMsg.length() + 1 );
 }
 
-void CRRMsgHandler4AddAttetion::sendSuccessAck( const CRRMsgMetaData& rmsgMetaData, const CRAddAttetion& paramAddAttetion ) {
+void CRRMsgHandler4AddAttetion::sendSuccessAck( const CRRMsgMetaData& rmsgMetaData, const CRAttetionRecord& paramAddAttetion ) {
 	Json::Value valParams;
 	USES_CONVERSION;
 	std::string strRMsg;

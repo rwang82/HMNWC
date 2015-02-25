@@ -6,9 +6,11 @@
 #include "CRAttetionRecord.h"
 #include "CRAccountList.h"
 #include "CRAttetionRecordList.h"
+#include "CRAccountProducts.h"
 #include "CRMisc.h"
 #include "CRErrCode.h"
 #include "HMCharConv.h"
+#include "FuncPack.h"
 #include <string>
 #include <atlconv.h>
 //
@@ -38,6 +40,24 @@ enum ENUMCRDBMYSQLACCOUNTADMINFIELD {
     CRDBMYSQL_ACCOUNTADMIN_FIELD_ATTETION,
 	CRDBMYSQL_ACCOUNTADMIN_FIELD_PUBLISHED,
 	CRDBMYSQL_ACCOUNTADMIN_FIELD_COUNT
+};
+enum ENUMCRDBMYSQLPRODUCTSFIELD {
+    CRDBMYSQL_PRODUCTS_FIELD_PUBLISHER = 0,
+	CRDBMYSQL_PRODUCTS_FIELD_UUID,
+	CRDBMYSQL_PRODUCTS_FIELD_TITLE,
+	CRDBMYSQL_PRODUCTS_FIELD_PRICE,
+	CRDBMYSQL_PRODUCTS_FIELD_DESCRIPTION,
+	CRDBMYSQL_PRODUCTS_FIELD_SORT,
+	CRDBMYSQL_PRODUCTS_FIELD_UDSORT,
+	CRDBMYSQL_PRODUCTS_FIELD_IMAGES,
+	CRDBMYSQL_PRODUCTS_FIELD_KEYWORD,
+	CRDBMYSQL_PRODUCTS_FIELD_STATUS,
+	CRDBMYSQL_PRODUCTS_FIELD_COUNT
+};
+enum ENUMCRDBMYSQLATTETIONINFOFIELD {
+    CRDBMYSQL_ATTETIONINFO_FIELD_ATTETIONFROM = 0,
+	CRDBMYSQL_ATTETIONINFO_FIELD_ATTETIONTO,
+	CRDBMYSQL_ATTETIONINFO_FIELD_COUNT
 };
 //
 CRDBImplMYSQL::CRDBImplMYSQL()
@@ -367,9 +387,9 @@ bool CRDBImplMYSQL::doSave( const CRAttetionRecord* pAddAttetion, int& nErrCode 
 
 	strSQLMsg = "insert into attetioninfo values(";
 	strSQLMsg += "\"";
-	strSQLMsg += T2A( pAddAttetion->m_tstrUserName.c_str() );
+	strSQLMsg += T2A( pAddAttetion->m_tstrUserNameFrom.c_str() );
 	strSQLMsg += "\",\"";
-	strSQLMsg += T2A( pAddAttetion->m_tstrDestUserName.c_str() );
+	strSQLMsg += T2A( pAddAttetion->m_tstrUserNameTo.c_str() );
 	strSQLMsg += "\")";
 	
 	//
@@ -378,14 +398,14 @@ bool CRDBImplMYSQL::doSave( const CRAttetionRecord* pAddAttetion, int& nErrCode 
 
 	// update attetion count
 	strSQLMsg = "update accountuser set attetion=attetion+1 where username in('";
-	strSQLMsg += T2A(pAddAttetion->m_tstrUserName.c_str());
+	strSQLMsg += T2A(pAddAttetion->m_tstrUserNameFrom.c_str());
 	strSQLMsg += "')";
 	if ( 0 != mysql_query( &m_inst, strSQLMsg.c_str() ) )
 		return false;
 
 	// update attetioned count
 	strSQLMsg = "update accountuser set attetioned=attetioned+1 where username in('";
-	strSQLMsg += T2A(pAddAttetion->m_tstrDestUserName.c_str());
+	strSQLMsg += T2A(pAddAttetion->m_tstrUserNameTo.c_str());
 	strSQLMsg += "')";
 
 	return 0 == mysql_query( &m_inst, strSQLMsg.c_str() );
@@ -420,21 +440,258 @@ bool CRDBImplMYSQL::doLoad( void* pParamKey, CRAttetionRecordList& destObj, int&
 	return false;
 }
 
-bool CRDBImplMYSQL::_doLoadAttetions( const tstring_type& tstrAccountName, CRAttetionRecordList& destObj, int& nErrCode ) {
+bool CRDBImplMYSQL::_doLoadAttetionRecord( const std::string& strSQLMsg, CRAttetionRecordList& destObj, int& nErrCode ) {
+	MYSQL_RES* pMYSQLRes = NULL;
+	unsigned int uNumFields;
+	MYSQL_ROW mysqlRow;
+	char* pFieldData = NULL;
+	tstring_type tstrTmp;
+	
+	//
+	if ( 0 != mysql_query( &m_inst, strSQLMsg.c_str() ) ) {
+	    nErrCode = CRERR_SRV_DB_NOTREADY;
+		return false;
+	}
 
-	return false;
+	pMYSQLRes = mysql_store_result( &m_inst );
+	if ( !pMYSQLRes ) {
+		nErrCode = CRERR_SRV_DB_NODATA;
+	    return false;
+	}
+	
+	uNumFields = mysql_num_fields( pMYSQLRes );
+    if ( uNumFields != CRDBMYSQL_ATTETIONINFO_FIELD_COUNT ) {
+	    assert( false );
+		nErrCode = CRERR_SRV_DB_DATA_FORMAT_ERROR;
+		return false;
+	}
+
+	//
+	unsigned uIndex = 0;
+	while ( mysqlRow = mysql_fetch_row( pMYSQLRes ) ) {
+		CRAttetionRecord* pAttetionRecord = new CRAttetionRecord();
+		CFuncPack fpkDelRecord( ::gfnDelObj< CRAttetionRecord >, pAttetionRecord );
+		//
+		pFieldData = mysqlRow[ CRDBMYSQL_ATTETIONINFO_FIELD_ATTETIONFROM ];
+		if ( !UTF8ToTCHAR( pFieldData, tstrTmp ) )
+			continue;
+		pAttetionRecord->m_tstrUserNameFrom = tstrTmp;
+		//
+	    pFieldData = mysqlRow[ CRDBMYSQL_ATTETIONINFO_FIELD_ATTETIONTO ];
+		if ( !UTF8ToTCHAR( pFieldData, tstrTmp ) )
+			continue;
+		pAttetionRecord->m_tstrUserNameTo = tstrTmp;
+		//
+		destObj.m_listAttetionRecords.push_back( pAttetionRecord );
+        fpkDelRecord.Cancel();
+	}
+
+	return true;
+}
+
+bool CRDBImplMYSQL::_doLoadAttetions( const tstring_type& tstrAccountName, CRAttetionRecordList& destObj, int& nErrCode ) {
+	// select * from attetioninfo where attetionfrom = 'wyf'
+	std::string strSQLMsg;
+	std::string strUTF8;
+
+	strSQLMsg = "select * from attetioninfo where attetionfrom = '";
+	if ( !TCHARToUTF8( tstrAccountName, strUTF8 ) )
+		return false;
+	strSQLMsg += strUTF8;
+	strSQLMsg += "';";
+
+	return _doLoadAttetionRecord( strSQLMsg, destObj, nErrCode );
 }
 
 bool CRDBImplMYSQL::_doLoadAttetioneds( const tstring_type& tstrAccountName, CRAttetionRecordList& destObj, int& nErrCode ) {
-    
-	return false;
+	// select * from attetioninfo where attetionto = 'wyf'
+	std::string strSQLMsg;
+	std::string strUTF8;
+
+	strSQLMsg = "select * from attetioninfo where attetionto = '";
+	if ( !TCHARToUTF8( tstrAccountName, strUTF8 ) )
+		return false;
+	strSQLMsg += strUTF8;
+	strSQLMsg += "';";
+
+	return _doLoadAttetionRecord( strSQLMsg, destObj, nErrCode );
 }
 
+bool CRDBImplMYSQL::doLoad( void* pParamKey, CRAccountProducts& destObj, int& nErrCode ) {
+	// select * from products where publisher = 'wyf';
+	std::string strSQLMsg;
+	std::string strUTF8;
+	MYSQL_RES* pMYSQLRes = NULL;
+	unsigned int uNumFields;
+	MYSQL_ROW mysqlRow;
 
+	const CRFetchAccountProducts* pFAPParam = (const CRFetchAccountProducts*)pParamKey;
+	if ( !pParamKey )
+		return false;
+	
+	strSQLMsg = "select * from products where publisher = '";
+    if ( !TCHARToUTF8( pFAPParam->m_tstrAccountName, strUTF8 ) ) 
+		return false;
+	strSQLMsg += strUTF8;
+	strSQLMsg += "';";
+	
+	//
+	if ( 0 != mysql_query( &m_inst, strSQLMsg.c_str() ) )
+		return false;
 
+	pMYSQLRes = mysql_store_result( &m_inst );
+	if ( !pMYSQLRes ) {
+	    return false;
+	}
+	
+	uNumFields = mysql_num_fields( pMYSQLRes );
+    if ( uNumFields != CRDBMYSQL_PRODUCTS_FIELD_COUNT ) {
+	    assert( false );
+		return false;
+	}
 
+	//
+	unsigned uIndex = 0;
+	while ( mysqlRow = mysql_fetch_row( pMYSQLRes ) ) {
+		CRProduct* pProduct = _createProduct( mysqlRow );
+		if ( !pProduct )
+			continue;
+		if ( uIndex >= pFAPParam->m_uIndexStart ) {
+			if ( uIndex < ( pFAPParam->m_uIndexStart + pFAPParam->m_uCount ) ) {
+		        destObj.m_listProduct.push_back( pProduct );
+			} else {
+			    break;
+			}
+		}
+		uIndex ++;
+	}
 
+	return true;
+}
 
+bool CRDBImplMYSQL::doLoad( void* pParamKey, CRProduct& destObj, int& nErrCode ) {
+    // select * from products where uuid = 'cbc32a17-d45c-424c-90e3-5e714374c7eb';
+	std::string strSQLMsg;
+	tstring_type* ptstrUUID = (tstring_type*)pParamKey;
+	MYSQL_RES* pMYSQLRes = NULL;
+	unsigned int uNumFields;
+	MYSQL_ROW mysqlRow;
+	char* pFieldData = NULL;
+	USES_CONVERSION;
+
+	strSQLMsg = "select * from products where uuid = '";
+	strSQLMsg += T2A( ptstrUUID->c_str() );
+	strSQLMsg += "';";
+	
+	//
+	if ( 0 != mysql_query( &m_inst, strSQLMsg.c_str() ) )
+		return false;
+
+	pMYSQLRes = mysql_store_result( &m_inst );
+	if ( !pMYSQLRes ) {
+	    return false;
+	}
+	
+	uNumFields = mysql_num_fields( pMYSQLRes );
+    if ( uNumFields != CRDBMYSQL_PRODUCTS_FIELD_COUNT ) {
+	    assert( false );
+		return false;
+	}
+
+	mysqlRow = mysql_fetch_row( pMYSQLRes );
+	if ( !mysqlRow )
+		return false;
+	// just need 1st result.
+	return _fillProduct( mysqlRow, &destObj );
+}
+
+CRProduct* CRDBImplMYSQL::_createProduct( MYSQL_ROW mysqlRow ) {
+    CRProduct* pProduct = new CRProduct();
+	CFuncPack fpkDelProduct( ::gfnDelObj<CRProduct>, pProduct );
+
+	if ( !_fillProduct( mysqlRow, pProduct ) )
+		return NULL;
+	
+	fpkDelProduct.Cancel();
+	return pProduct;
+}
+
+bool CRDBImplMYSQL::_fillProduct( MYSQL_ROW mysqlRow, CRProduct* pProduct ) {
+	char* pFieldData = NULL;
+	tstring_type tstrTmp;
+
+	//
+	pFieldData = mysqlRow[ CRDBMYSQL_PRODUCTS_FIELD_PUBLISHER ];
+    if ( !UTF8ToTCHAR( pFieldData, tstrTmp ) )
+	    return false;
+    pProduct->m_tstrPublisher = tstrTmp;
+	//
+	pFieldData = mysqlRow[ CRDBMYSQL_PRODUCTS_FIELD_UUID ];
+	if ( !UTF8ToTCHAR( pFieldData, tstrTmp ) )
+		return false;
+	pProduct->m_tstrUUID = tstrTmp;
+	//
+	pFieldData = mysqlRow[ CRDBMYSQL_PRODUCTS_FIELD_TITLE ];
+	if ( !UTF8ToTCHAR( pFieldData, tstrTmp ) )
+		return false;
+	pProduct->m_tstrTitle = tstrTmp;
+	//
+	pFieldData = mysqlRow[ CRDBMYSQL_PRODUCTS_FIELD_PRICE ];
+	if ( !UTF8ToTCHAR( pFieldData, tstrTmp ) )
+		return false;
+	pProduct->m_tstrPrice = tstrTmp;
+	//
+	pFieldData = mysqlRow[ CRDBMYSQL_PRODUCTS_FIELD_DESCRIPTION ];
+	if ( !UTF8ToTCHAR( pFieldData, tstrTmp ) )
+		return false;
+	pProduct->m_tstrDescribe = tstrTmp;
+	//
+	pFieldData = mysqlRow[ CRDBMYSQL_PRODUCTS_FIELD_SORT ];
+	pProduct->m_nSortType = atoi( pFieldData );
+	//
+	pFieldData = mysqlRow[ CRDBMYSQL_PRODUCTS_FIELD_UDSORT ];
+	if ( !UTF8ToTCHAR( pFieldData, tstrTmp ) )
+		return false;
+	pProduct->m_tstrUDSort = tstrTmp;
+	//
+	pFieldData = mysqlRow[ CRDBMYSQL_PRODUCTS_FIELD_IMAGES ];
+	if ( !_parseJsonStringArray( pFieldData, pProduct->m_containerImages ) )
+		return false;
+	//
+	pFieldData = mysqlRow[ CRDBMYSQL_PRODUCTS_FIELD_KEYWORD ];
+	if ( !_parseJsonStringArray( pFieldData, pProduct->m_containerKeywords ) )
+		return false;
+	//
+	pFieldData = mysqlRow[ CRDBMYSQL_PRODUCTS_FIELD_STATUS ];
+	pProduct->m_nPassStatus = atoi( pFieldData );
+
+	return true;
+}
+
+bool CRDBImplMYSQL::_parseJsonStringArray( char* pFieldData, tstr_container_type& containerStr ) {
+    if ( !pFieldData )
+		return false;
+	Json::Reader reader;
+	Json::Value jsonArray;
+	std::string strUTF8;
+	tstring_type tstrTmp;
+
+	if( !reader.parse( pFieldData, jsonArray ) )
+		return false;
+	int nCount = jsonArray.size();
+	for ( int nIndex = 0; nIndex<nCount; ++nIndex ) {
+		Json::Value& valItem = jsonArray[ nIndex ];
+	    if ( !valItem.isString() )
+			continue;
+		strUTF8 = valItem.asString();
+		//
+		if ( !UTF8ToTCHAR( strUTF8, tstrTmp ) )
+			continue;
+		containerStr.push_back( tstrTmp ); 
+	}
+
+	return true;
+}
 
 
 

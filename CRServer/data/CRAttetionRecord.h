@@ -12,8 +12,8 @@ public:
 	virtual bool save2DB( CRDBImplBase* pDBImpl, int& nErrCode ) const;
 
 public:
-	tstring_type m_tstrUserName;
-	tstring_type m_tstrDestUserName;
+	tstring_type m_tstrUserNameFrom;
+	tstring_type m_tstrUserNameTo;
 
 };
 

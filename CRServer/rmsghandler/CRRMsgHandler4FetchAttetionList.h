@@ -16,7 +16,7 @@ public:
 
 private:
 	bool _parseParams( const Json::Value& jsonRoot, CRFetchAttetionRecordListParam& param );
-	void _sendSuccessAck( const CRRMsgMetaData& rmsgMetaData, const CRAttetionRecordList& listRecords );
+	void _sendSuccessAck( const CRRMsgMetaData& rmsgMetaData, const tstring_type& tstrAccountName, const CRAttetionRecordList& listRecords );
 	void _sendFailedAck( const CRRMsgMetaData& rmsgMetaData, int nErrCode );
 };
 

@@ -48,10 +48,10 @@ bool CRRMsgHandler4AddAttetion::checkParams( const CRAttetionRecord& paramAddAtt
 	if ( !pAccountMgr )
 		return false;
 
-	if ( !pAccountMgr->getAccount( paramAddAttetion.m_tstrDestUserName, nErrCode ) )
+	if ( !pAccountMgr->getAccount( paramAddAttetion.m_tstrUserNameTo, nErrCode ) )
 		return false;
 
-	if ( !pAccountMgr->getAccount( paramAddAttetion.m_tstrUserName, nErrCode ) )
+	if ( !pAccountMgr->getAccount( paramAddAttetion.m_tstrUserNameFrom, nErrCode ) )
 		return false;
 
 	return true;
@@ -79,7 +79,7 @@ bool CRRMsgHandler4AddAttetion::parseParams( const Json::Value& jsonRoot, CRAtte
 	strUtf8 = valUserName.asString();
 	if ( !UTF8ToTCHAR( (const unsigned char*)strUtf8.c_str(), strUtf8.size(), tstrData ) )
 		return false;
-	paramAddAttetion.m_tstrUserName = tstrData;
+	paramAddAttetion.m_tstrUserNameFrom = tstrData;
 	//
 	const Json::Value& valAttetion = valParams[ "attetion" ];
 	if ( !valAttetion.isString() )
@@ -87,7 +87,7 @@ bool CRRMsgHandler4AddAttetion::parseParams( const Json::Value& jsonRoot, CRAtte
 	strUtf8 = valAttetion.asString();
 	if ( !UTF8ToTCHAR( (const unsigned char*)strUtf8.c_str(), strUtf8.size(), tstrData ) )
 		return false;
-	paramAddAttetion.m_tstrDestUserName = tstrData;
+	paramAddAttetion.m_tstrUserNameTo = tstrData;
 
 	return true;
 }
@@ -111,7 +111,7 @@ void CRRMsgHandler4AddAttetion::sendSuccessAck( const CRRMsgMetaData& rmsgMetaDa
 	std::string strUtf8;
 
 	valParams[ "result" ] = 1;
-	if ( !TCHARToUTF8( paramAddAttetion.m_tstrDestUserName, strUtf8 ) ) {
+	if ( !TCHARToUTF8( paramAddAttetion.m_tstrUserNameTo, strUtf8 ) ) {
 	    assert( false );
 		return;
 	}

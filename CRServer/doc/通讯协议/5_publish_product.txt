@@ -39,6 +39,7 @@
     "params":{
         "result":0,
         "reason":1,
+        "username":"rom.wang",
         "product_uuid":"xxxx-xxxxxx-xxxx-xxx"
     }
 }

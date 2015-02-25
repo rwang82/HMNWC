@@ -213,6 +213,12 @@
     <ClCompile Include="modules\CRModuleAttetionRecord.cpp">
       <Filter>modules</Filter>
     </ClCompile>
+    <ClCompile Include="rmsghandler\CRRMsgHandler4FetchAccountProduct.cpp">
+      <Filter>rmsghandler</Filter>
+    </ClCompile>
+    <ClCompile Include="data\CRAccountProducts.cpp">
+      <Filter>data</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -406,6 +412,12 @@
     </ClInclude>
     <ClInclude Include="modules\CRModuleAttetionRecord.h">
       <Filter>modules</Filter>
+    </ClInclude>
+    <ClInclude Include="rmsghandler\CRRMsgHandler4FetchAccountProduct.h">
+      <Filter>rmsghandler</Filter>
+    </ClInclude>
+    <ClInclude Include="data\CRAccountProducts.h">
+      <Filter>data</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

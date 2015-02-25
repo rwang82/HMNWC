@@ -109,6 +109,7 @@
     <ClCompile Include="accounts\CRAccountUser.cpp" />
     <ClCompile Include="CRServer.cpp" />
     <ClCompile Include="data\CRAccountList.cpp" />
+    <ClCompile Include="data\CRAccountProducts.cpp" />
     <ClCompile Include="data\CRAttetionRecord.cpp" />
     <ClCompile Include="data\CRAttetionRecordList.cpp" />
     <ClCompile Include="data\CRProduct.cpp" />
@@ -137,6 +138,7 @@
     <ClCompile Include="rmsghandler\CRRMsgHandler4AccountReg.cpp" />
     <ClCompile Include="rmsghandler\CRRMsgHandler4AddAttetion.cpp" />
     <ClCompile Include="rmsghandler\CRRMsgHandler4FetchAccountInfo.cpp" />
+    <ClCompile Include="rmsghandler\CRRMsgHandler4FetchAccountProduct.cpp" />
     <ClCompile Include="rmsghandler\CRRMsgHandler4FetchAttetionList.cpp" />
     <ClCompile Include="rmsghandler\CRRMsgHandler4Login.cpp" />
     <ClCompile Include="rmsghandler\CRRMsgHandler4Logoff.cpp" />
@@ -169,6 +171,7 @@
     <ClInclude Include="accounts\CRAccountLogoff.h" />
     <ClInclude Include="accounts\CRAccountUser.h" />
     <ClInclude Include="data\CRAccountList.h" />
+    <ClInclude Include="data\CRAccountProducts.h" />
     <ClInclude Include="data\CRAttetionRecord.h" />
     <ClInclude Include="data\CRAttetionRecordList.h" />
     <ClInclude Include="data\CRProduct.h" />
@@ -202,6 +205,7 @@
     <ClInclude Include="rmsghandler\CRRMsgHandler4AccountReg.h" />
     <ClInclude Include="rmsghandler\CRRMsgHandler4AddAttetion.h" />
     <ClInclude Include="rmsghandler\CRRMsgHandler4FetchAccountInfo.h" />
+    <ClInclude Include="rmsghandler\CRRMsgHandler4FetchAccountProduct.h" />
     <ClInclude Include="rmsghandler\CRRMsgHandler4FetchAttetionList.h" />
     <ClInclude Include="rmsghandler\CRRMsgHandler4Login.h" />
     <ClInclude Include="rmsghandler\CRRMsgHandler4Logoff.h" />

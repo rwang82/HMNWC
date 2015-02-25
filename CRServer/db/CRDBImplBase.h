@@ -18,6 +18,7 @@ class CRProduct;
 class CRAttetionRecord;
 class CRAccountList;
 class CRAttetionRecordList;
+class CRAccountProducts;
 //
 class CRDBImplBase {
 public:
@@ -38,6 +39,8 @@ public:
 	virtual bool doLoad( void* pParamKey, CRAccountAdmin& destObj, int& nErrCode ) = 0;
 	virtual bool doLoad( void* pParamKey, CRAccountList& destObj, int& nErrCode ) = 0;
     virtual bool doLoad( void* pParamKey, CRAttetionRecordList& destObj, int& nErrCode ) = 0;
+    virtual bool doLoad( void* pParamKey, CRAccountProducts& destObj, int& nErrCode ) = 0;
+	virtual bool doLoad( void* pParamKey, CRProduct& destObj, int& nErrCode ) = 0;
 };
 
 

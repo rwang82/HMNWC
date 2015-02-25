@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CRAttetionRecordList.h"
 #include "CRDBImplBase.h"
+#include "CRAttetionRecord.h"
 //
 CRFetchAttetionRecordListParam::CRFetchAttetionRecordListParam()
 : m_eFetchMode( EFM_ATTETION )

@@ -19,6 +19,7 @@
 #include "CRRMsgHandler4AddAttetion.h"
 #include "CRRMsgHandler4FetchAccountInfo.h"
 #include "CRRMsgHandler4FetchAttetionList.h"
+#include "CRRMsgHandler4FetchAccountProduct.h"
 #include "CRSrvDBProxy.h"
 #include "hmcmn_event_depot.h"
 #include "HMMisc.h"
@@ -107,6 +108,7 @@ void CRServerRoot::_initCmdHandlers() {
 	CMDHANDLER_ADD( CRCMDTYPE_REQ_ADD_ATTETION, CRRMsgHandler4AddAttetion );
     CMDHANDLER_ADD( CRCMDTYPE_REQ_FETCH_ACCOUNT_INFO, CRRMsgHandler4FetchAccountInfo );
 	CMDHANDLER_ADD( CRCMDTYPE_REQ_FETCH_ATTETION_LIST, CRRMsgHandler4FetchAttetionList );
+	CMDHANDLER_ADD( CRCMDTYPE_REQ_FETCH_ACCOUNT_PRODUCTS, CRRMsgHandler4FetchAccountProduct );
 } 
 
 void CRServerRoot::_unInit( ) {

@@ -9,6 +9,7 @@ CRProduct::CRProduct() {
 	m_tstrDescribe = _T("");
 	m_nSortType = -1;
 	m_tstrUDSort = _T("");
+	m_nPassStatus = 0;
 }
 
 CRProduct::CRProduct( const CRProduct& val ) {
@@ -37,5 +38,8 @@ bool CRProduct::save2DB( CRDBImplBase* pDBImpl, int& nErrCode ) const {
 	return pDBImpl->doSave( this, nErrCode );
 }
 
+bool CRProduct::loadFromDB( void* pParamKey, CRDBImplBase* pDBImpl, int& nErrCode ) {
+    return pDBImpl->doLoad( pParamKey, *this, nErrCode );
+}
 
 

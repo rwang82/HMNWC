@@ -3,6 +3,7 @@
 #include "CRModuleBase.h"
 #include "CRProductDepot.h"
 #include "CRRMsg.h"
+#include "CRTypes.h"
 
 class CRProductPublishParam {
 public:
@@ -17,7 +18,7 @@ public:
 
 public:
 	bool doPublishProduct( const CRProductPublishParam& paramPublishProduct, int& nErrCode );
-
+	bool fillAccountProducts2Json( const CRFetchAccountProducts& fapParam, Json::Value& valProducts, int& nErrCode );
 private:
 	CRProductDepot m_productDepot;
 

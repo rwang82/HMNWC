@@ -42,10 +42,11 @@ void CRRMsgHandler4FetchAttetionList::accept( const CRRMsgMetaData& rmsgMetaData
 	//
 	if ( !pModuleAttetionRecord->doFetchRecords( paramFARL, listRecords, nErrCode ) ) {
 	    _sendFailedAck( rmsgMetaData, nErrCode );
+		return;
 	}
 
 	//
-	_sendSuccessAck( rmsgMetaData, listRecords );
+	_sendSuccessAck( rmsgMetaData, paramFARL.m_tstrAccountName, listRecords );
 }
 
 void CRRMsgHandler4FetchAttetionList::accept( const CRRMsgMetaData& rmsgMetaData, const CRRMsgBinary* pRMsgBinary ) {
@@ -78,21 +79,24 @@ bool CRRMsgHandler4FetchAttetionList::_parseParams( const Json::Value& jsonRoot,
 	return true;
 }
 
-void CRRMsgHandler4FetchAttetionList::_sendSuccessAck( const CRRMsgMetaData& rmsgMetaData, const CRAttetionRecordList& listRecords ) {
+void CRRMsgHandler4FetchAttetionList::_sendSuccessAck( const CRRMsgMetaData& rmsgMetaData, const tstring_type& tstrAccountName, const CRAttetionRecordList& listRecords ) {
     Json::Value valParams;
 	std::string strRMsg;
 	std::string strUTF8;
 
 	valParams[ "result" ] = 1;
+	if ( !TCHARToUTF8( tstrAccountName, strUTF8 ) )
+		return;
+	valParams[ "username" ] = strUTF8;
 	Json::Value& valAttetions = valParams[ "attetions" ];
 	//
 	for ( CRAttetionRecord* pRecord : listRecords.m_listAttetionRecords ) {
-		if ( !TCHARToUTF8( pRecord->m_tstrDestUserName, strUTF8 ) )
+		if ( !TCHARToUTF8( pRecord->m_tstrUserNameTo, strUTF8 ) )
 			return;
 	    valAttetions.append( strUTF8.c_str() );
 	}
 	//
-	CRRMsgMaker::createRMsg( valParams, CRCMDTYPE_ACK_ACCOUNT_REG, strRMsg );
+	CRRMsgMaker::createRMsg( valParams, CRCMDTYPE_ACK_FETCH_ATTETION_LIST, strRMsg );
 	//
 	g_CRSrvRoot.m_pNWPServer->send( rmsgMetaData.m_sConnect, (const unsigned char*)strRMsg.c_str(), strRMsg.length() + 1 );
 }

@@ -46,8 +46,8 @@ const CRAccountBase* CRModuleAccountMgr::getAccount( SOCKET sConnect ) const {
 	return citSocket2Account->second;
 }
 
-const CRAccountBase* CRModuleAccountMgr::getAccount( const tstring_type& tstrAccountName, int& nErrCode ) {
-	return m_accountDepot.getAccount( tstrAccountName, nErrCode );
+const CRAccountBase* CRModuleAccountMgr::getAccount( const utf8_type& strAccountName, int& nErrCode ) {
+	return m_accountDepot.getAccount( strAccountName, nErrCode );
 }
 
 bool CRModuleAccountMgr::doLogin( const CRLoginParam& loginParam, int& nErrCode ) {
@@ -55,10 +55,10 @@ bool CRModuleAccountMgr::doLogin( const CRLoginParam& loginParam, int& nErrCode 
 		return false;
 	CMemFuncPack mfpkSafeExit( &m_tsAccess, &HMTSHelper::safeExitFunc );
 	//
-	if ( !m_accountDepot.refreshAccountData( loginParam.m_tstrUserName, nErrCode ) )
+	if ( !m_accountDepot.refreshAccountData( loginParam.m_strUserName, nErrCode ) )
 		return false;
 	//
-	CRAccountBase* pAccount = (CRAccountBase*)m_accountDepot.getAccount( loginParam.m_tstrUserName, nErrCode );
+	CRAccountBase* pAccount = (CRAccountBase*)m_accountDepot.getAccount( loginParam.m_strUserName, nErrCode );
 	if ( !pAccount ) {
 		nErrCode = CRERR_SRV_ACCOUNTNAME_ISNOT_EXIST;
 	    return false;
@@ -74,7 +74,7 @@ bool CRModuleAccountMgr::doLogoff( const CRLogoffParam& logoffParam, int& nErrCo
 	if ( !m_tsAccess.safeEnterFunc() )
 		return false;
 	CMemFuncPack mfpkSafeExit( &m_tsAccess, &HMTSHelper::safeExitFunc );
-	CRAccountBase* pAccount = (CRAccountBase*)m_accountDepot.getAccount( logoffParam.m_tstrUserName, nErrCode );
+	CRAccountBase* pAccount = (CRAccountBase*)m_accountDepot.getAccount( logoffParam.m_strUserName, nErrCode );
 	if ( !pAccount ) {
 		nErrCode = CRERR_SRV_ACCOUNTNAME_ISNOT_EXIST;
 	    return false;
@@ -95,7 +95,7 @@ bool CRModuleAccountMgr::doRegAccount( const CRAccountData& accountRegParam, int
 	bool bOK = false;
 	nErrCode = CRERR_SRV_NONE;
 	//
-	if ( m_accountDepot.hasAccount( accountRegParam.m_tstrUserName, nErrCode ) ) {
+	if ( m_accountDepot.hasAccount( accountRegParam.m_strUserName, nErrCode ) ) {
 	    nErrCode = CRERR_SRV_ACCOUNTNAME_EXIST;
 		return false;
 	} else {
@@ -175,7 +175,7 @@ bool CRModuleAccountMgr::_hasAccountInSocketMap( CRAccountBase* pAccount ) const
 }
 
 
-void CRModuleAccountMgr::getAccountsData( tstr_container_type containerAccountName, accountdata_container_type& containerAccountData ) {
+void CRModuleAccountMgr::getAccountsData( utf8_container_type containerAccountName, accountdata_container_type& containerAccountData ) {
 	int nErrCode = CRERR_SRV_NONE;
 	m_accountDepot.getAccountsData( containerAccountName, containerAccountData, nErrCode );
 }

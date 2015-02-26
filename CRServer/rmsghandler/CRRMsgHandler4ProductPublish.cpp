@@ -44,11 +44,10 @@ void CRRMsgHandler4ProductPublish::accept( const CRRMsgMetaData& rmsgMetaData, c
 
 void CRRMsgHandler4ProductPublish::_sendSuccessAck( const CRProductPublishParam& param ) {
 	Json::Value valParams;
-	USES_CONVERSION;
 	std::string strRMsg;
 
 	valParams[ "result" ] = 1;
-	valParams[ "product_uuid" ] = T2A( param.m_product.m_tstrUUID.c_str() );
+	valParams[ "product_uuid" ] = param.m_product.m_strUUID;
 	CRRMsgMaker::createRMsg( valParams, CRCMDTYPE_ACK_PRODUCT_PUBLISH, strRMsg );
     //
 	g_CRSrvRoot.m_pNWPServer->send( param.m_pRMsgMetaData->m_sConnect, (const unsigned char*)strRMsg.c_str(), strRMsg.length() + 1 );
@@ -62,7 +61,7 @@ void CRRMsgHandler4ProductPublish::_sendFailedAck( const CRProductPublishParam& 
 
 	valParams[ "result" ] = 0;
 	valParams[ "reason" ] = nErrCode;
-	valParams[ "product_uuid" ] = T2A( param.m_product.m_tstrUUID.c_str() );
+	valParams[ "product_uuid" ] = param.m_product.m_strUUID;
 	CRRMsgMaker::createRMsg( valParams, CRCMDTYPE_ACK_PRODUCT_PUBLISH, strRMsg );
 	//
 	g_CRSrvRoot.m_pNWPServer->send( param.m_pRMsgMetaData->m_sConnect, (const unsigned char*)strRMsg.c_str(), strRMsg.length() + 1 );
@@ -76,19 +75,17 @@ void CRRMsgHandler4ProductPublish::accept( const CRRMsgMetaData& rmsgMetaData, c
 bool CRRMsgHandler4ProductPublish::_parseParams( const Json::Value& jsonRoot, CRProductPublishParam& paramPublishProduct ) {
 	USES_CONVERSION;
 	std::string strUtf8Tmp;
-	tstring_type tstrTmp;
+	utf8_type strTmp;
 	CRProduct& product = paramPublishProduct.m_product;
 	
 	const Json::Value& valParams = jsonRoot[ "params" ];
 	if ( !valParams.isObject() )
 		return false;
-	// get tstrUserName
+	// get strUserName
 	const Json::Value& valUserName = valParams[ "username" ];
 	if ( !valUserName.isString() )
 		return false;
-	strUtf8Tmp = valUserName.asString();
-	if ( !UTF8ToTCHAR( (const unsigned char*)strUtf8Tmp.c_str(), strUtf8Tmp.length(), product.m_tstrPublisher ) )
-	    return false;
+	product.m_strPublisher = valUserName.asString();
 	// 
 	const Json::Value& valProduct = valParams[ "product" ];
 	if ( !valProduct.isObject() )
@@ -97,30 +94,22 @@ bool CRRMsgHandler4ProductPublish::_parseParams( const Json::Value& jsonRoot, CR
 	const Json::Value& valUUID = valProduct[ "uuid" ];
 	if ( !valUUID.isString() )
 		return false;
-	strUtf8Tmp = valUUID.asString();
-	if ( !UTF8ToTCHAR( (const unsigned char*)strUtf8Tmp.c_str(), strUtf8Tmp.length(), product.m_tstrUUID ) )
-		return false;
+	product.m_strUUID = valUUID.asString();
 	// title.
 	const Json::Value& valTitle = valProduct[ "title" ];
 	if ( !valTitle.isString() )
 		return false;
-	strUtf8Tmp = valTitle.asString();
-	if ( !UTF8ToTCHAR( (const unsigned char*)strUtf8Tmp.c_str(), strUtf8Tmp.length(), product.m_tstrTitle ) )
-	    return false;
+	product.m_strTitle = valTitle.asString();
 	// price.
 	const Json::Value& valPrice = valProduct[ "price" ];
-	if ( !valTitle.isString() )
+	if ( !valPrice.isString() )
 		return false;
-	strUtf8Tmp = valPrice.asString();
-	if ( !UTF8ToTCHAR( (const unsigned char*)strUtf8Tmp.c_str(), strUtf8Tmp.length(), product.m_tstrPrice ) )
-	    return false;
+	product.m_strPrice = valPrice.asString();
 	// describe.
 	const Json::Value& valDescribe = valProduct[ "describe" ];
 	if ( !valDescribe.isString() )
 		return false;
-	strUtf8Tmp = valDescribe.asString();
-    if ( !UTF8ToTCHAR( (const unsigned char*)strUtf8Tmp.c_str(), strUtf8Tmp.length(), product.m_tstrDescribe ) )
-	    return false;
+	product.m_strDescribe = valDescribe.asString();
 	// sort.
 	const Json::Value& valSort = valProduct[ "sort" ];
 	if ( !valSort.isInt() )
@@ -131,9 +120,7 @@ bool CRRMsgHandler4ProductPublish::_parseParams( const Json::Value& jsonRoot, CR
 	    const Json::Value& valUDSort = valProduct["udsort"];
 		if ( !valUDSort.isString() )
 			return false;
-		strUtf8Tmp = valUDSort.asString();
-		if ( !UTF8ToTCHAR( strUtf8Tmp, product.m_tstrUDSort ) )
-			return false;
+		product.m_strUDSort = valUDSort.asString();
 	}
 	// images.
 	const Json::Value& valImages = valProduct[ "images" ];
@@ -143,7 +130,7 @@ bool CRRMsgHandler4ProductPublish::_parseParams( const Json::Value& jsonRoot, CR
 		const Json::Value& valImage = valImages[ i ];
 		if ( !valImage.isString() )
 			return false;
-		product.m_containerImages.push_back( A2T( valImage.asString().c_str() ) );
+		product.m_containerImages.push_back( valImage.asString() );
 	}
 	// keywords.
 	const Json::Value& valKeywords = valProduct[ "keywords" ];
@@ -153,10 +140,7 @@ bool CRRMsgHandler4ProductPublish::_parseParams( const Json::Value& jsonRoot, CR
 	    const Json::Value& valKeyword = valKeywords[ i ];
 		if ( !valKeyword.isString() )
 			return false;
-	    strUtf8Tmp = valDescribe.asString();
-		if ( !UTF8ToTCHAR( (const unsigned char*)strUtf8Tmp.c_str(), strUtf8Tmp.length(), tstrTmp ) )
-	        return false;
-		product.m_containerKeywords.push_back( tstrTmp );
+		product.m_containerKeywords.push_back( valDescribe.asString() );
 	}
 
 	return true;

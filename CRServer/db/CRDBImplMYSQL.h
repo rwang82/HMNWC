@@ -26,12 +26,12 @@ public:
 private:
 	bool _connect2DB();
 	bool _isReady();
-	bool _doLoadAttetions( const tstring_type& tstrAccountName, CRAttetionRecordList& destObj, int& nErrCode );
-	bool _doLoadAttetioneds( const tstring_type& tstrAccountName, CRAttetionRecordList& destObj, int& nErrCode );
+	bool _doLoadAttetions( const utf8_type& strAccountName, CRAttetionRecordList& destObj, int& nErrCode );
+	bool _doLoadAttetioneds( const utf8_type& strAccountName, CRAttetionRecordList& destObj, int& nErrCode );
 	bool _doLoadAttetionRecord( const std::string& strSQLMsg, CRAttetionRecordList& destObj, int& nErrCode );
 	CRProduct* _createProduct( MYSQL_ROW mysqlRow );
 	bool _fillProduct( MYSQL_ROW mysqlRow, CRProduct* pProduct );
-	bool _parseJsonStringArray( char* pFieldData, tstr_container_type& containerStr );
+	bool _parseJsonStringArray( char* pFieldData, utf8_container_type& containerStr );
 
 private:
 	unsigned int m_uFlag;

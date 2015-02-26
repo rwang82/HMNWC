@@ -3,8 +3,8 @@
 //
 #define DEFAULT_INI_VAL (0xEEFFEEFF)
 //
-HMIniHelper::HMIniHelper( const TCHAR* pIniFilePath )
-: m_tstrIniFilePath( !pIniFilePath ? _T("") : pIniFilePath ) {
+HMIniHelper::HMIniHelper( const TCHAR* szIniFilePath )
+: m_tstrIniFilePath( szIniFilePath ? szIniFilePath : _T("") ) {
 	
 }
 
@@ -62,4 +62,3 @@ bool HMIniHelper::_isReady() {
 		&& ( ::_taccess( m_tstrIniFilePath.c_str( ), 0 ) == 0 );
 }
 
-//	tstring_type m_tstrIniFilePath;

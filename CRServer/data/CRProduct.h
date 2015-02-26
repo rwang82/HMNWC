@@ -3,6 +3,7 @@
 #include "CRTypes.h"
 #include "CRSaveable.h"
 #include "CRLoadable.h"
+#include <string>
 
 enum ENUMCRPRODUCTSTATUS {
     CRPRODUCT_STATUS_PENDING = 0,
@@ -23,15 +24,15 @@ public:
 	virtual bool loadFromDB( void* pParamKey, CRDBImplBase* pDBImpl, int& nErrCode );
 
 public:
-	tstring_type m_tstrPublisher; // the username of publisher
-	tstring_type m_tstrUUID;
-    tstring_type m_tstrTitle;
-	tstring_type m_tstrPrice;
-	tstring_type m_tstrDescribe;
+	utf8_type m_strPublisher; // the username of publisher
+	utf8_type m_strUUID;
+    utf8_type m_strTitle;
+	utf8_type m_strPrice;
+	utf8_type m_strDescribe;
 	int m_nSortType; // default sort.
-	tstring_type m_tstrUDSort; // user define sort.
-	tstr_container_type m_containerImages;
-	tstr_container_type m_containerKeywords;
+	utf8_type m_strUDSort; // user define sort.
+	utf8_container_type m_containerImages;
+	utf8_container_type m_containerKeywords;
 	int m_nPassStatus;
 };
 

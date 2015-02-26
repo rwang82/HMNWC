@@ -20,7 +20,7 @@ CRProductDepot::~CRProductDepot() {
 bool CRProductDepot::addProduct2Pend( const CRProduct* pProductNew, int& nErrCode ) {
 	if ( !pProductNew )
         return false;
-	if ( _hasProduct( pProductNew->m_tstrUUID ) ) {
+	if ( _hasProduct( pProductNew->m_strUUID ) ) {
 		assert( false );
 		return false;
 	}
@@ -41,27 +41,27 @@ bool CRProductDepot::fillAccountProducts2Json( const CRFetchAccountProducts& fap
 	nErrCode = CRERR_SRV_NONE;
 	
 	// clear cache.
-	itName2PL = m_mapName2ProductListCache.find( fapParam.m_tstrAccountName );
+	itName2PL = m_mapName2ProductListCache.find( fapParam.m_strAccountName );
 	if ( itName2PL != m_mapName2ProductListCache.end() ) {
 	    delete itName2PL->second;
 		itName2PL->second = NULL;
 		m_mapName2ProductListCache.clear();
-		_clearRAPFDBFlag( fapParam.m_tstrAccountName );
+		_clearRAPFDBFlag( fapParam.m_strAccountName );
 	}
 	//
 	if ( !_loadAccountProductsFromDB( fapParam, nErrCode ) )
 	    return false;
 	//
-	itName2PL = m_mapName2ProductListCache.find( fapParam.m_tstrAccountName );
+	itName2PL = m_mapName2ProductListCache.find( fapParam.m_strAccountName );
 	if ( itName2PL == m_mapName2ProductListCache.end() )
 	    return false;
 
 	// save cache version, not finish.
-	//itName2PL = m_mapName2ProductListCache.find( fapParam.m_tstrAccountName );
+	//itName2PL = m_mapName2ProductListCache.find( fapParam.m_strAccountName );
 	//if ( itName2PL == m_mapName2ProductListCache.end() ) {
 	//	if ( !_loadAccountProductsFromDB( fapParam, nErrCode ) )
 	//		return false;
-	//	itName2PL = m_mapName2ProductListCache.find( fapParam.m_tstrAccountName );
+	//	itName2PL = m_mapName2ProductListCache.find( fapParam.m_strAccountName );
 	//	if ( itName2PL == m_mapName2ProductListCache.end() )
 	//		return false;
 	//}
@@ -83,39 +83,22 @@ bool CRProductDepot::_fillProduct2Item( const CRProduct* pProduct, Json::Value& 
 	if ( !pProduct )
 		return false;
 	std::string strUTF8;
-	tstr_container_type::const_iterator citStr, ciendStr;
+	utf8_container_type::const_iterator citStr, ciendStr;
 	//
-	if ( !TCHARToUTF8( pProduct->m_tstrUUID, strUTF8 ) )
-		return false;
-	valItem[ "uuid" ] = strUTF8;
-    //
-	if ( !TCHARToUTF8( pProduct->m_tstrTitle, strUTF8 ) )
-		return false;
-	valItem[ "title" ] = strUTF8;
-	//
-	if ( !TCHARToUTF8( pProduct->m_tstrPrice, strUTF8 ) )
-		return false;
-	valItem[ "price" ] = strUTF8;
-	//
-	if ( !TCHARToUTF8( pProduct->m_tstrDescribe, strUTF8 ) )
-		return false;
-	valItem[ "describe" ] = strUTF8;
-	//
+	valItem[ "uuid" ] = pProduct->m_strUUID;
+	valItem[ "publisher" ] = pProduct->m_strPublisher;
+	valItem[ "title" ] = pProduct->m_strTitle;
+	valItem[ "price" ] = pProduct->m_strPrice;
+	valItem[ "describe" ] = pProduct->m_strDescribe;
 	valItem[ "sort" ] = pProduct->m_nSortType;
-	//
-	if ( !TCHARToUTF8( pProduct->m_tstrUDSort, strUTF8 ) )
-		return false;
-	valItem[ "udsort" ] = strUTF8;
-	//
+	valItem[ "udsort" ] = pProduct->m_strUDSort;
 	Json::Value& valImages = valItem["images"];
 	if ( pProduct->m_containerImages.size() == 0 ) {
 	    valImages = Json::Value(Json::arrayValue);
 	} else {
 		ciendStr = pProduct->m_containerImages.end();
 		for ( citStr = pProduct->m_containerImages.begin(); citStr!=ciendStr; ++citStr ) {
-			if ( !TCHARToUTF8( *citStr, strUTF8 ) )
-				continue;
-			valImages.append( strUTF8 );
+			valImages.append( *citStr );
 		}
 	}
 	//
@@ -125,28 +108,26 @@ bool CRProductDepot::_fillProduct2Item( const CRProduct* pProduct, Json::Value& 
 	} else {
         ciendStr = pProduct->m_containerKeywords.end();
         for ( citStr = pProduct->m_containerKeywords.begin(); citStr!=ciendStr; ++citStr ) {
-	        if ( !TCHARToUTF8( *citStr, strUTF8 ) )
-                continue;
-            valKeywords.append( strUTF8 );
+            valKeywords.append( *citStr );
         }    
 	}
 
 	return true;
 }
 
-bool CRProductDepot::_setReadAccountProductFromDBFlag( const tstring_type& tstrAccountName ) {
-	if ( tstrAccountName.length() == 0 )
+bool CRProductDepot::_setReadAccountProductFromDBFlag( const utf8_type& strAccountName ) {
+	if ( strAccountName.length() == 0 )
 		return false;
-    m_mapName2Flag[ tstrAccountName ] = 1;
+    m_mapName2Flag[ strAccountName ] = 1;
 	return true;
 }
 
-void CRProductDepot::_clearRAPFDBFlag( const tstring_type& tstrAccountName ) {
-    m_mapName2Flag.erase( tstrAccountName );
+void CRProductDepot::_clearRAPFDBFlag( const utf8_type& strAccountName ) {
+    m_mapName2Flag.erase( strAccountName );
 }
 
-bool CRProductDepot::_hasRAPFDBFlag( const tstring_type& tstrAccountName ) const {
-	return m_mapName2Flag.find( tstrAccountName ) != m_mapName2Flag.end();
+bool CRProductDepot::_hasRAPFDBFlag( const utf8_type& strAccountName ) const {
+	return m_mapName2Flag.find( strAccountName ) != m_mapName2Flag.end();
 }
 
 void CRProductDepot::_saveProduct2UUIDMap( CRProduct* pProductNew ) {
@@ -154,22 +135,22 @@ void CRProductDepot::_saveProduct2UUIDMap( CRProduct* pProductNew ) {
 		return;
     uuid2product_map_type::iterator itId2P;
 
-	itId2P = m_mapUUID2ProductCache.find( pProductNew->m_tstrUUID );
+	itId2P = m_mapUUID2ProductCache.find( pProductNew->m_strUUID );
 	if ( itId2P != m_mapUUID2ProductCache.end() ) {
 		delete itId2P->second;
 		itId2P->second = pProductNew;
 	} else {
-        m_mapUUID2ProductCache[ pProductNew->m_tstrUUID ] = pProductNew;
+        m_mapUUID2ProductCache[ pProductNew->m_strUUID ] = pProductNew;
 	}
 }
 
-void CRProductDepot::_eraseProductInList( const tstring_type& tstrUUID, product_list_type* pProductList ) {
+void CRProductDepot::_eraseProductInList( const utf8_type& strUUID, product_list_type* pProductList ) {
     product_list_type::iterator itP, iendP;
 	
 	iendP = pProductList->end();
 	for ( itP = pProductList->begin(); itP!=iendP; ++itP ) {
 		CRProduct* pProduct = (*itP);
-	    if ( pProduct->m_tstrUUID == tstrUUID ) {
+	    if ( pProduct->m_strUUID == strUUID ) {
 		    // delete pProduct; // because m_mapUUID2ProductCache hold CRProduct.
 			pProductList->erase( itP );
             return;
@@ -183,19 +164,19 @@ void CRProductDepot::_saveProduct2AccountMap( CRProduct* pProductNew ) {
 	name2pl_map_type::iterator itName2PL;
 	product_list_type* pListProduct = NULL;
 
-	if ( !_hasRAPFDBFlag( pProductNew->m_tstrPublisher ) ) 
+	if ( !_hasRAPFDBFlag( pProductNew->m_strPublisher ) ) 
 		return;
 	//
-	itName2PL = m_mapName2ProductListCache.find( pProductNew->m_tstrPublisher );
+	itName2PL = m_mapName2ProductListCache.find( pProductNew->m_strPublisher );
 	if ( itName2PL != m_mapName2ProductListCache.end() ) {
 	    pListProduct = itName2PL->second;
 	} else {
 	    pListProduct = new std::list< CRProduct* >();
-		m_mapName2ProductListCache[ pProductNew->m_tstrPublisher ] = pListProduct;
+		m_mapName2ProductListCache[ pProductNew->m_strPublisher ] = pListProduct;
 	}
 	assert( pListProduct != NULL );
 	//
-	_eraseProductInList( pProductNew->m_tstrUUID, pListProduct );
+	_eraseProductInList( pProductNew->m_strUUID, pListProduct );
 	//
 	pListProduct->push_front( pProductNew );
 }
@@ -230,15 +211,15 @@ void CRProductDepot::_clearCache() {
 	m_mapUUID2ProductCache.clear();
 }
 
-bool CRProductDepot::_hasProduct( const tstring_type& tstrUUID ) {
+bool CRProductDepot::_hasProduct( const utf8_type& strUUID ) {
 	int nErrCode = CRERR_SRV_NONE;
-	return _hasProductInCache( tstrUUID ) || _loadProductFromDB( tstrUUID, nErrCode );
+	return _hasProductInCache( strUUID ) || _loadProductFromDB( strUUID, nErrCode );
 }
 
-bool CRProductDepot::_hasProductInCache( const tstring_type& tstrUUID ) const {
+bool CRProductDepot::_hasProductInCache( const utf8_type& strUUID ) const {
 	uuid2product_map_type::const_iterator itId2Product;
 
-	itId2Product = m_mapUUID2ProductCache.find( tstrUUID );
+	itId2Product = m_mapUUID2ProductCache.find( strUUID );
 	return ( itId2Product != m_mapUUID2ProductCache.end() );
 }
 
@@ -250,7 +231,7 @@ bool CRProductDepot::_loadAccountProductsFromDB( const CRFetchAccountProducts& f
 	if ( !g_CRSrvRoot.m_pSrvDBProxy->loadFromDB( (void*)&fapParam, &accountProducts, nErrCode ) )
 		return false;
     //
-	_setReadAccountProductFromDBFlag( fapParam.m_tstrAccountName );
+	_setReadAccountProductFromDBFlag( fapParam.m_strAccountName );
 	//
 	iendProduct = accountProducts.m_listProduct.end();
 	for ( itProduct = accountProducts.m_listProduct.begin(); itProduct!=iendProduct; ++itProduct ) {
@@ -260,11 +241,11 @@ bool CRProductDepot::_loadAccountProductsFromDB( const CRFetchAccountProducts& f
 	return true;
 }
 
-bool CRProductDepot::_loadProductFromDB( const tstring_type& tstrUUID, int& nErrCode ) {
+bool CRProductDepot::_loadProductFromDB( const utf8_type& strUUID, int& nErrCode ) {
 	CRProduct* pNewProduct = new CRProduct();
 	CFuncPack fpkDeProduct( ::gfnDelObj< CRProduct >, pNewProduct );
 
-	if ( !g_CRSrvRoot.m_pSrvDBProxy->loadFromDB( (void*)&tstrUUID, pNewProduct, nErrCode ) )
+	if ( !g_CRSrvRoot.m_pSrvDBProxy->loadFromDB( (void*)&strUUID, pNewProduct, nErrCode ) )
 		return false;
 
 	fpkDeProduct.Cancel();

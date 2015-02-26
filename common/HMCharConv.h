@@ -4,11 +4,11 @@
 #include <string>
 
 
-bool UTF8ToTCHAR( const unsigned char* szUtf8Buf, unsigned int uLenUtf8Buf, std::basic_string< TCHAR >& tstrDest );
+bool UTF8ToTCHAR( const unsigned char* szUtf8Buf, unsigned int uLenUtf8Buf, std::basic_string< TCHAR >& strDest );
 
-bool UTF8ToTCHAR( const std::string strUtf8, std::basic_string< TCHAR >& tstrDest );
+bool UTF8ToTCHAR( const std::string strUtf8, std::basic_string< TCHAR >& strDest );
 
-bool TCHARToUTF8( const std::basic_string< TCHAR >& tstrSource, std::basic_string< char >& strDest );
+bool TCHARToUTF8( const std::basic_string< TCHAR >& strSource, std::basic_string< char >& strDest );
 
 bool UTF8ToUTF16( const unsigned char* szUtf8Buf, unsigned int uLenUtf8Buf, std::basic_string< wchar_t >& wstrUtf16 );
 

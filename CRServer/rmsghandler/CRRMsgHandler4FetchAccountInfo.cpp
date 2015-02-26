@@ -56,18 +56,10 @@ void CRRMsgHandler4FetchAccountInfo::_sendSuccessAck( const CRRMsgMetaData& rmsg
 	for ( citAccountData = containerAccountData.begin(); citAccountData!=ciendAccountData; ++citAccountData ) {
 	    Json::Value valItem;
 		//
-		TCHARToUTF8( citAccountData->m_tstrUserName, strUtf8 );
-		valItem[ "username" ] = strUtf8;
-		//
-		TCHARToUTF8( citAccountData->m_tstrPhoneNum, strUtf8 );
-		valItem[ "phone" ] = strUtf8;
-		//
-		TCHARToUTF8( citAccountData->m_tstrEMail, strUtf8 );
-		valItem[ "email" ] = strUtf8;
-		//
-		TCHARToUTF8( citAccountData->m_tstrNickName, strUtf8 );
-		valItem[ "nickname" ] = strUtf8;
-		//
+		valItem[ "username" ] = citAccountData->m_strUserName;
+		valItem[ "phone" ] = citAccountData->m_strPhoneNum;
+		valItem[ "email" ] = citAccountData->m_strEMail;
+		valItem[ "nickname" ] = citAccountData->m_strNickName;
 		valItem[ "sort" ] = citAccountData->m_eSortType;
 		valItem[ "attetioned" ] = citAccountData->m_nCountAttetioned;
         valItem[ "attetion" ] = citAccountData->m_nCountAttetion;
@@ -91,7 +83,7 @@ void CRRMsgHandler4FetchAccountInfo::accept( const CRRMsgMetaData& rmsgMetaData,
 }
 
 bool CRRMsgHandler4FetchAccountInfo::_parseParams( Json::Value jsonRoot, CRFetchAccountInfoParam& param ) {
-    tstring_type tstrAccountName;
+    utf8_type strAccountName;
 	
 	const Json::Value& valParams = jsonRoot[ "params" ];
 	if ( !valParams.isObject() )
@@ -104,10 +96,7 @@ bool CRRMsgHandler4FetchAccountInfo::_parseParams( Json::Value jsonRoot, CRFetch
 	    const Json::Value& valAccountName = valAccountNames[ nIndex ];
 		if ( !valAccountName.isString() )
             return false;
-		std::string strAccountName = valAccountName.asString();
-		if ( !UTF8ToTCHAR( strAccountName, tstrAccountName ) )
-			return false;
-		param.m_containerAccountName.push_back( tstrAccountName );
+		param.m_containerAccountName.push_back( valAccountName.asString() );
 	}
     
 	return true;

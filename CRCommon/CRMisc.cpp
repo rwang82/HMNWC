@@ -4,7 +4,7 @@
 #include "HMCharConv.h"
 #include <atlconv.h>
 
-void strContainer2JsonStr( const tstr_container_type& container, std::string& strJson ) {
+void strContainer2JsonStr( const utf8_container_type& container, std::string& strJson ) {
     USES_CONVERSION;
 	if ( container.size() == 0 ) {
 	    strJson = "[]";
@@ -13,14 +13,14 @@ void strContainer2JsonStr( const tstr_container_type& container, std::string& st
 	Json::FastWriter writer;
 	Json::Value jsonRoot;
 
-	for ( const tstring_type& tstrVal : container ) {
-	    jsonRoot.append( T2A( tstrVal.c_str() ) );
+	for ( const utf8_type& strVal : container ) {
+	    jsonRoot.append( strVal.c_str() );
 	}
 	strJson = writer.write( jsonRoot );
 }
 
 
-void strContainer2JsonStrWithQuotes( const tstr_container_type& container, std::string& strJson ) {
+void strContainer2JsonStrWithQuotes( const utf8_container_type& container, std::string& strJson ) {
     USES_CONVERSION;
 	int nCount = container.size();
 	if ( nCount == 0 ) {
@@ -29,7 +29,7 @@ void strContainer2JsonStrWithQuotes( const tstr_container_type& container, std::
 	}
 	strJson = "[\\\"";
 	for ( int nIndex = 0; nIndex < nCount; ++nIndex ) {
-	    strJson += T2A( container[ nIndex ].c_str() );
+	    strJson += container[ nIndex ];
 		if ( nIndex + 1 != nCount ) {
 		    strJson += "\\\",\\\"";
 		}

@@ -4,11 +4,11 @@
 #include "CRTypes.h"
 
 CRAccountData::CRAccountData( const CRAccountData& val )
-: m_tstrUserName( val.m_tstrUserName )
-, m_tstrPassword( val.m_tstrPassword )
-, m_tstrPhoneNum( val.m_tstrPhoneNum )
-, m_tstrEMail( val.m_tstrEMail )
-, m_tstrNickName( val.m_tstrNickName )
+: m_strUserName( val.m_strUserName )
+, m_strPassword( val.m_strPassword )
+, m_strPhoneNum( val.m_strPhoneNum )
+, m_strEMail( val.m_strEMail )
+, m_strNickName( val.m_strNickName )
 , m_eSortType( val.m_eSortType )
 , m_nCountAttetioned( val.m_nCountAttetioned )
 , m_nCountAttetion( val.m_nCountAttetion )
@@ -17,11 +17,11 @@ CRAccountData::CRAccountData( const CRAccountData& val )
 }
 
 CRAccountData::CRAccountData()
-: m_tstrUserName( _T("") )
-, m_tstrPassword( _T("") )
-, m_tstrPhoneNum( _T("") )
-, m_tstrEMail( _T("") )
-, m_tstrNickName( _T("") )
+: m_strUserName( "" )
+, m_strPassword( "" )
+, m_strPhoneNum( "" )
+, m_strEMail( "" )
+, m_strNickName( "" )
 , m_eSortType( EACCOUNT_SORT_UNKNOWN )
 , m_nCountAttetion( 0 )
 , m_nCountAttetioned( 0 )
@@ -33,11 +33,11 @@ CRAccountData& CRAccountData::operator=( const CRAccountData& val ) {
 	if ( &val == this ) {
 	    return *this;
 	}
-    m_tstrUserName = val.m_tstrUserName;
-    m_tstrPassword = val.m_tstrPassword;
-    m_tstrPhoneNum = val.m_tstrPhoneNum;
-    m_tstrEMail = val.m_tstrEMail;
-    m_tstrNickName = val.m_tstrNickName;
+    m_strUserName = val.m_strUserName;
+    m_strPassword = val.m_strPassword;
+    m_strPhoneNum = val.m_strPhoneNum;
+    m_strEMail = val.m_strEMail;
+    m_strNickName = val.m_strNickName;
     m_eSortType = val.m_eSortType;
     m_nCountAttetion = val.m_nCountAttetion;
     m_nCountAttetioned = val.m_nCountAttetioned;
@@ -65,7 +65,7 @@ CRAccountBase::~CRAccountBase() {
 bool CRAccountBase::doLogin( const CRLoginParam& loginParam, int& nErrCode ) {
     CRLoginInfo loginInfo;
 	//
-	if ( loginParam.m_tstrPassword.compare( m_data.m_tstrPassword ) != 0 ) {
+	if ( loginParam.m_strPassword.compare( m_data.m_strPassword ) != 0 ) {
 	    nErrCode = CRERR_SRV_ACCOUNT_PASSWORD_INCORRECT;
 		return false;
 	}

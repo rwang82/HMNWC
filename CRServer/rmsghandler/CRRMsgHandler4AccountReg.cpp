@@ -72,52 +72,39 @@ void CRRMsgHandler4AccountReg::_sendFailedAck( const CRRMsgMetaData& rmsgMetaDat
 }
 
 bool CRRMsgHandler4AccountReg::_parseParams( const Json::Value& jsonRoot, CRAccountData& paramAccountReg ) {
-	USES_CONVERSION;
-	std::string strTmp;
-	tstring_type tstrTmp;
-
 	const Json::Value& valParams = jsonRoot[ "params" ];
 	if ( !valParams.isObject() )
 		return false;
-	// get tstrAccountName.
+	// get strAccountName.
 	const Json::Value& valUserName = valParams[ "username" ];
 	if ( !valUserName.isString() )
 		return false;
-	strTmp = valUserName.asString();
-	if ( !UTF8ToTCHAR( (const unsigned char*)strTmp.c_str(), strTmp.length() + 1, tstrTmp ) )
-		return false;
-	paramAccountReg.m_tstrUserName = tstrTmp;
-	// get tstrPassword
+	paramAccountReg.m_strUserName = valUserName.asString();
+	// get strPassword
 	const Json::Value& valPassword = valParams[ "password" ];
 	if ( !valPassword.isString() )
 		return false;
-	paramAccountReg.m_tstrPassword = A2T( valPassword.asString().c_str() );
+	paramAccountReg.m_strPassword = valPassword.asString();
 	// get nSortType
 	const Json::Value& valSort = valParams[ "sort" ];
 	if ( !valSort.isInt() )
 		return false;
     paramAccountReg.m_eSortType = (ENUMACCOUNTSORT)valSort.asInt();
-	// get tstrPhoneNum
+	// get strPhoneNum
 	const Json::Value& valPhone = valParams[ "phone" ];
 	if ( !valPhone.isString() )
 		return false;
-	paramAccountReg.m_tstrPhoneNum = A2T( valPhone.asString().c_str() );
-	// get tstrNickName
+	paramAccountReg.m_strPhoneNum = valPhone.asString();
+	// get strNickName
 	const Json::Value& valNickName = valParams[ "nickname" ];
 	if ( !valNickName.isString() )
 		return false;
-	strTmp = valNickName.asString();
-	if ( !UTF8ToTCHAR( (const unsigned char*)strTmp.c_str(), strTmp.length() + 1, tstrTmp ) )
-		return false;
-	paramAccountReg.m_tstrNickName = tstrTmp;
-	// get tstrEMail
+	paramAccountReg.m_strNickName = valNickName.asString();
+	// get strEMail
 	const Json::Value& valEMail = valParams[ "email" ];
 	if ( !valEMail.isString() )
 		return false;
-	strTmp = valEMail.asString();
-	if ( !UTF8ToTCHAR( (const unsigned char*)strTmp.c_str(), strTmp.length() + 1, tstrTmp ) )
-		return false;
-	paramAccountReg.m_tstrEMail = tstrTmp;
+	paramAccountReg.m_strEMail = valEMail.asString();
 
 	return true;
 }

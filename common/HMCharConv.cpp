@@ -3,35 +3,35 @@
 #include <assert.h>
 
 
-bool UTF8ToTCHAR( const std::string strUtf8, std::basic_string< TCHAR >& tstrDest ) {
-    return UTF8ToTCHAR( (const unsigned char*)strUtf8.c_str(), strUtf8.length() + 1, tstrDest );
+bool UTF8ToTCHAR( const std::string strUtf8, std::basic_string< TCHAR >& strDest ) {
+    return UTF8ToTCHAR( (const unsigned char*)strUtf8.c_str(), strUtf8.length() + 1, strDest );
 }
 
-bool UTF8ToTCHAR( const unsigned char* szUtf8Buf, unsigned int uLenUtf8Buf, std::basic_string< TCHAR >& tstrDest ) {
+bool UTF8ToTCHAR( const unsigned char* szUtf8Buf, unsigned int uLenUtf8Buf, std::basic_string< TCHAR >& strDest ) {
     std::basic_string< wchar_t > wstrUtf16;
 
 	if ( !UTF8ToUTF16( szUtf8Buf, uLenUtf8Buf, wstrUtf16 ) )
 		return false;
 
 #ifdef _UNICODE
-	tstrDest = wstrUtf16;
+	strDest = wstrUtf16;
 #else 
 	std::string strAnsi;
 	if ( !UTF16ToANSI( wstrUtf16, strAnsi ) ) {
 	    return false;
 	}
-	tstrDest = strAnsi;
+	strDest = strAnsi;
 #endif //_UNICODE
 	
 	return true;
 }
 
-bool TCHARToUTF8( const std::basic_string< TCHAR >& tstrSource, std::basic_string< char >& strUtf8 ) {
+bool TCHARToUTF8( const std::basic_string< TCHAR >& strSource, std::basic_string< char >& strUtf8 ) {
 	std::basic_string< wchar_t > wstrUtf16;
 #ifdef _UNICODE
-	wstrUtf16 = tstrSource;
+	wstrUtf16 = strSource;
 #else
-	if ( !ANSIToUTF16( tstrSource, wstrUtf16 ) )
+	if ( !ANSIToUTF16( strSource, wstrUtf16 ) )
 		return false;
 #endif //__UNICODE
 	

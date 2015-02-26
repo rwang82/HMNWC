@@ -10,11 +10,11 @@
 class CRRMsgHandler4FetchAccountProduct : public CRRMsgHandlerBase{
 private:
 	struct CRFetchAccountProductParam {
-	    tstr_container_type m_containerAccountName; 
+	    utf8_container_type m_containerAccountName; 
 	}; 
 	struct CRFetchAccountProductResult {
 		typedef std::list< CRProduct* > product_list_type;
-	    typedef std::map< tstring_type, product_list_type* > name2pl_map_type;
+	    typedef std::map< utf8_type, product_list_type* > name2pl_map_type;
 		CRFetchAccountProductResult();
 		~CRFetchAccountProductResult();
 

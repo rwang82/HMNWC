@@ -10,16 +10,16 @@
 //
 class CRErrCodeDepot {
 	typedef int errcode_type;
-	typedef std::basic_string< TCHAR > tstring_type;
-	typedef std::map< errcode_type, tstring_type > errcode2decribe_map_type;
+	typedef std::basic_string< TCHAR > utf8_type;
+	typedef std::map< errcode_type, utf8_type > errcode2decribe_map_type;
 public:
 	CRErrCodeDepot(){};
 	~CRErrCodeDepot(){};
 	static CRErrCodeDepot* getInstance();
 
 public:
-	bool regErrCode( int nErrCode, const tstring_type& tstrErrDescribe );
-	bool getErrDescribe( int nErrCode, tstring_type& tstrErrDescribe ) const;
+	bool regErrCode( int nErrCode, const utf8_type& strErrDescribe );
+	bool getErrDescribe( int nErrCode, utf8_type& strErrDescribe ) const;
 
 private:
 	bool _hasErrCode( int nErrCode );
@@ -34,7 +34,7 @@ CRErrCodeDepot* CRErrCodeDepot::getInstance() {
 	return &s_instance;
 };
 
-bool CRErrCodeDepot::regErrCode( int nErrCode, const tstring_type& tstrErrDescribe ) {
+bool CRErrCodeDepot::regErrCode( int nErrCode, const utf8_type& strErrDescribe ) {
 	if ( !m_tsAccess.safeEnterFunc() )
 		return false;
 	CMemFuncPack mfpkSafeExit( &m_tsAccess, &HMTSHelper::safeExitFunc );
@@ -44,11 +44,11 @@ bool CRErrCodeDepot::regErrCode( int nErrCode, const tstring_type& tstrErrDescri
 		return false;
 	}
 
-	m_mapErrCode2Describe[ nErrCode ] = tstrErrDescribe;
+	m_mapErrCode2Describe[ nErrCode ] = strErrDescribe;
 	return true;
 }
 
-bool CRErrCodeDepot::getErrDescribe( int nErrCode, tstring_type& tstrErrDescribe ) const {
+bool CRErrCodeDepot::getErrDescribe( int nErrCode, utf8_type& strErrDescribe ) const {
 	if ( !m_tsAccess.safeEnterFunc() )
 		return false;
 	CMemFuncPack mfpkSafeExit( &m_tsAccess, &HMTSHelper::safeExitFunc );
@@ -59,7 +59,7 @@ bool CRErrCodeDepot::getErrDescribe( int nErrCode, tstring_type& tstrErrDescribe
 	if ( citErrItem != m_mapErrCode2Describe.end() )
 		return false;
 
-	tstrErrDescribe = citErrItem->second;
+	strErrDescribe = citErrItem->second;
 	return true;
 }
 

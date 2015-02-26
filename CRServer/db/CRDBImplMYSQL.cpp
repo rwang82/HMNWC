@@ -100,15 +100,15 @@ bool CRDBImplMYSQL::doSave( const CRAccountUser* pAccount, int& nErrCode ) {
 
 	strSQLMsg = "insert into accountuser values(";
 	strSQLMsg += "\"";
-	strSQLMsg += T2A( pAccount->m_data.m_tstrUserName.c_str() );
+	strSQLMsg += pAccount->m_data.m_strUserName;
 	strSQLMsg += "\",\"";
-	strSQLMsg += T2A( pAccount->m_data.m_tstrPassword.c_str() );
+	strSQLMsg += pAccount->m_data.m_strPassword;
 	strSQLMsg += "\",\"";
-	strSQLMsg += T2A( pAccount->m_data.m_tstrPhoneNum.c_str() );
+	strSQLMsg += pAccount->m_data.m_strPhoneNum;
 	strSQLMsg += "\",\"";
-	strSQLMsg += T2A( pAccount->m_data.m_tstrEMail.c_str() );
+	strSQLMsg += pAccount->m_data.m_strEMail;
 	strSQLMsg += "\",\"";
-	strSQLMsg += T2A( pAccount->m_data.m_tstrNickName.c_str() );
+	strSQLMsg += pAccount->m_data.m_strNickName;
 	strSQLMsg += "\",";
 	_itoa_s( (int)pAccount->m_data.m_eSortType, szBufTmp, 10 );
 	strSQLMsg += szBufTmp;
@@ -135,15 +135,15 @@ bool CRDBImplMYSQL::doSave( const CRAccountAdmin* pAccount, int& nErrCode ) {
 
 	strSQLMsg = "insert into accountadmin values(";
 	strSQLMsg += "\"";
-	strSQLMsg += T2A( pAccount->m_data.m_tstrUserName.c_str() );
+	strSQLMsg += pAccount->m_data.m_strUserName;
 	strSQLMsg += "\",\"";
-	strSQLMsg += T2A( pAccount->m_data.m_tstrPassword.c_str() );
+	strSQLMsg += pAccount->m_data.m_strPassword;
 	strSQLMsg += "\",\"";
-	strSQLMsg += T2A( pAccount->m_data.m_tstrPhoneNum.c_str() );
+	strSQLMsg += pAccount->m_data.m_strPhoneNum;
 	strSQLMsg += "\",\"";
-	strSQLMsg += T2A( pAccount->m_data.m_tstrEMail.c_str() );
+	strSQLMsg += pAccount->m_data.m_strEMail;
 	strSQLMsg += "\",\"";
-	strSQLMsg += T2A( pAccount->m_data.m_tstrNickName.c_str() );
+	strSQLMsg += pAccount->m_data.m_strNickName;
 	strSQLMsg += "\",";
 	_itoa_s( (int)pAccount->m_data.m_eSortType, szBufTmp, 10 );
 	strSQLMsg += szBufTmp;
@@ -165,20 +165,21 @@ bool CRDBImplMYSQL::doSave( const CRProduct* pProduct, int& nErrCode ) {
 	// add product record.
 	strSQLMsg = "insert into products values(";
 	strSQLMsg += "\"";
-	strSQLMsg += T2A( pProduct->m_tstrPublisher.c_str() );
+	strSQLMsg += pProduct->m_strPublisher;
 	strSQLMsg += "\",\"";
-	strSQLMsg += T2A( pProduct->m_tstrUUID.c_str() );
+	strSQLMsg += pProduct->m_strUUID;
 	strSQLMsg += "\",\"";
-	strSQLMsg += T2A( pProduct->m_tstrTitle.c_str() );
+	//strSQLMsg += T2A( pProduct->m_strTitle.c_str() );
+	strSQLMsg += pProduct->m_strTitle;
 	strSQLMsg += "\",\"";
-	strSQLMsg += T2A( pProduct->m_tstrPrice.c_str() );
+	strSQLMsg += pProduct->m_strPrice;
 	strSQLMsg += "\",\"";
-	strSQLMsg += T2A( pProduct->m_tstrDescribe.c_str() );
+	strSQLMsg += pProduct->m_strDescribe;
 	strSQLMsg += "\",\"";
 	_itoa_s( pProduct->m_nSortType, szBufTmp, 10 );
 	strSQLMsg += szBufTmp;
 	strSQLMsg += "\",\"";
-	strSQLMsg += T2A( pProduct->m_tstrUDSort.c_str() );
+	strSQLMsg += pProduct->m_strUDSort;
 	strSQLMsg += "\",\"";
 	strContainer2JsonStrWithQuotes( pProduct->m_containerImages, strTmp );
 	strSQLMsg += strTmp.c_str();
@@ -194,7 +195,7 @@ bool CRDBImplMYSQL::doSave( const CRProduct* pProduct, int& nErrCode ) {
 	
 	// update published count
 	strSQLMsg = "update accountuser set published=published+1 where username in('";
-	strSQLMsg += T2A(pProduct->m_tstrPublisher.c_str());
+	strSQLMsg += pProduct->m_strPublisher;
 	strSQLMsg += "')";
 
 	return 0 == mysql_query( &m_inst, strSQLMsg.c_str() );
@@ -204,8 +205,8 @@ bool CRDBImplMYSQL::doLoad( void* pParamKey, CRAccountUser& destObj, int& nErrCo
 	//  select * from accountuser where username='wyf'
 	if ( !_isReady() )
 		return false;
-	tstring_type* ptstrAccountName = (tstring_type*)pParamKey;
-	if ( !ptstrAccountName ) {
+	utf8_type* pstrAccountName = (utf8_type*)pParamKey;
+	if ( !pstrAccountName ) {
 	    nErrCode = CRERR_SRV_PARAM_INVALID;
 		return false;
 	}
@@ -217,7 +218,7 @@ bool CRDBImplMYSQL::doLoad( void* pParamKey, CRAccountUser& destObj, int& nErrCo
 	char* pFieldData = NULL;
 
 	strCmd = "select * from accountuser where username='";
-	strCmd += T2A( ptstrAccountName->c_str() );
+	strCmd += *pstrAccountName;
 	strCmd += "'";
 	if ( 0 != mysql_query( &m_inst, strCmd.c_str() ) ) {
 	    return false;
@@ -236,15 +237,15 @@ bool CRDBImplMYSQL::doLoad( void* pParamKey, CRAccountUser& destObj, int& nErrCo
 		return false;
 
 	pFieldData = mysqlRow[ CRDBMYSQL_ACCOUNTUSER_FIELD_USERNAME ];
-	destObj.m_data.m_tstrUserName = pFieldData ? A2T( pFieldData ) : _T("");
+	destObj.m_data.m_strUserName = pFieldData ? pFieldData : "";
 	pFieldData = mysqlRow[ CRDBMYSQL_ACCOUNTUSER_FIELD_PASSWORD ];
-	destObj.m_data.m_tstrPassword = pFieldData ? A2T( pFieldData ) : _T("");
+	destObj.m_data.m_strPassword = pFieldData ? pFieldData : "";
 	pFieldData = mysqlRow[ CRDBMYSQL_ACCOUNTUSER_FIELD_PHONENUM ];
-	destObj.m_data.m_tstrPhoneNum = pFieldData ? A2T( pFieldData ) : _T("");
+	destObj.m_data.m_strPhoneNum = pFieldData ? pFieldData : "";
 	pFieldData = mysqlRow[ CRDBMYSQL_ACCOUNTUSER_FIELD_EMAIL ];
-	destObj.m_data.m_tstrEMail = pFieldData ? A2T( pFieldData ) : _T("");
+	destObj.m_data.m_strEMail = pFieldData ? pFieldData : "";
 	pFieldData = mysqlRow[ CRDBMYSQL_ACCOUNTUSER_FIELD_NICKNAME ];
-	destObj.m_data.m_tstrNickName = pFieldData ? A2T( pFieldData ) : _T("");
+	destObj.m_data.m_strNickName = pFieldData ? pFieldData : "";
 	pFieldData = mysqlRow[ CRDBMYSQL_ACCOUNTUSER_FIELD_SORTTYPE ];
 	destObj.m_data.m_eSortType = (ENUMACCOUNTSORT)atoi( pFieldData );
 	pFieldData = mysqlRow[ CRDBMYSQL_ACCOUNTUSER_FIELD_ATTETIONED ];
@@ -260,8 +261,8 @@ bool CRDBImplMYSQL::doLoad( void* pParamKey, CRAccountAdmin& destObj, int& nErrC
 	//  select * from accountuser where username = 'wyf'
 	if ( !_isReady() )
 		return false;
-	tstring_type* ptstrAccountName = (tstring_type*)pParamKey;
-	if ( !ptstrAccountName ) {
+	utf8_type* pstrAccountName = (utf8_type*)pParamKey;
+	if ( !pstrAccountName ) {
 	    nErrCode = CRERR_SRV_PARAM_INVALID;
 		return false;
 	}
@@ -273,7 +274,7 @@ bool CRDBImplMYSQL::doLoad( void* pParamKey, CRAccountAdmin& destObj, int& nErrC
 	char* pFieldData = NULL; 
 
 	strCmd = "select * from accountadmin where username='";
-	strCmd += T2A( ptstrAccountName->c_str() );
+	strCmd += *pstrAccountName;
 	strCmd += "'";
 	if ( 0 != mysql_query( &m_inst, strCmd.c_str() ) ) {
 	    return false;
@@ -292,15 +293,15 @@ bool CRDBImplMYSQL::doLoad( void* pParamKey, CRAccountAdmin& destObj, int& nErrC
 		return false;
 
 	pFieldData = mysqlRow[ CRDBMYSQL_ACCOUNTADMIN_FIELD_USERNAME ];
-	destObj.m_data.m_tstrUserName = pFieldData ? A2T( pFieldData ) : _T("");
+	destObj.m_data.m_strUserName = pFieldData ? pFieldData : "";
 	pFieldData = mysqlRow[ CRDBMYSQL_ACCOUNTADMIN_FIELD_PASSWORD ];
-	destObj.m_data.m_tstrPassword = pFieldData ? A2T( pFieldData ) : _T("");
+	destObj.m_data.m_strPassword = pFieldData ? pFieldData : "";
 	pFieldData = mysqlRow[ CRDBMYSQL_ACCOUNTADMIN_FIELD_PHONENUM ];
-	destObj.m_data.m_tstrPhoneNum = pFieldData ? A2T( pFieldData ) : _T("");
+	destObj.m_data.m_strPhoneNum = pFieldData ? pFieldData : "";
 	pFieldData = mysqlRow[ CRDBMYSQL_ACCOUNTADMIN_FIELD_EMAIL ];
-	destObj.m_data.m_tstrEMail = pFieldData ? A2T( pFieldData ) : _T("");
+	destObj.m_data.m_strEMail = pFieldData ? pFieldData : "";
 	pFieldData = mysqlRow[ CRDBMYSQL_ACCOUNTADMIN_FIELD_NICKNAME ];
-	destObj.m_data.m_tstrNickName = pFieldData ? A2T( pFieldData ) : _T("");
+	destObj.m_data.m_strNickName = pFieldData ? pFieldData : "";
 	pFieldData = mysqlRow[ CRDBMYSQL_ACCOUNTADMIN_FIELD_SORTTYPE ];
 	destObj.m_data.m_eSortType = (ENUMACCOUNTSORT)atoi( pFieldData );
     pFieldData = mysqlRow[ CRDBMYSQL_ACCOUNTADMIN_FIELD_ATTETIONED ];
@@ -316,12 +317,11 @@ bool CRDBImplMYSQL::doLoad( void* pParamKey, CRAccountList& destObj, int& nErrCo
 	//  select * from accountuser where username = 'wyf'
 	if ( !_isReady() )
 		return false;
-	tstr_container_type* pAccountNames = (tstr_container_type*)pParamKey;
+	utf8_container_type* pAccountNames = (utf8_container_type*)pParamKey;
 	if ( !pAccountNames ) {
 	    nErrCode = CRERR_SRV_PARAM_INVALID;
 		return false;
 	}
-	USES_CONVERSION;
 	std::string strCmd;
 	MYSQL_RES* pMYSQLRes = NULL;
     MYSQL_ROW mysqlRow;
@@ -332,7 +332,7 @@ bool CRDBImplMYSQL::doLoad( void* pParamKey, CRAccountList& destObj, int& nErrCo
 	uCountAccountName = pAccountNames->size();
 	strCmd = "select * from accountuser where username in('";
 	for ( unsigned int uIndex = 0; uIndex<uCountAccountName; ++uIndex ) {
-	    strCmd += T2A( pAccountNames->at( uIndex ).c_str() );
+	    strCmd += pAccountNames->at( uIndex );
 		if ( (uIndex + 1) != uCountAccountName ) {
             strCmd += "','";
 		}
@@ -355,15 +355,15 @@ bool CRDBImplMYSQL::doLoad( void* pParamKey, CRAccountList& destObj, int& nErrCo
 	while ( mysqlRow = mysql_fetch_row( pMYSQLRes ) ) {
 		CRAccountUser* pAccountNew = new CRAccountUser();
 		pFieldData = mysqlRow[ CRDBMYSQL_ACCOUNTUSER_FIELD_USERNAME ];
-		pAccountNew->m_data.m_tstrUserName = pFieldData ? A2T( pFieldData ) : _T("");
+		pAccountNew->m_data.m_strUserName = pFieldData ? pFieldData : "";
 		pFieldData = mysqlRow[ CRDBMYSQL_ACCOUNTUSER_FIELD_PASSWORD ];
-		pAccountNew->m_data.m_tstrPassword = pFieldData ? A2T( pFieldData ) : _T("");
+		pAccountNew->m_data.m_strPassword = pFieldData ? pFieldData : "";
 		pFieldData = mysqlRow[ CRDBMYSQL_ACCOUNTUSER_FIELD_PHONENUM ];
-		pAccountNew->m_data.m_tstrPhoneNum = pFieldData ? A2T( pFieldData ) : _T("");
+		pAccountNew->m_data.m_strPhoneNum = pFieldData ? pFieldData : "";
 		pFieldData = mysqlRow[ CRDBMYSQL_ACCOUNTUSER_FIELD_EMAIL ];
-		pAccountNew->m_data.m_tstrEMail = pFieldData ? A2T( pFieldData ) : _T("");
+		pAccountNew->m_data.m_strEMail = pFieldData ? pFieldData : "";
 		pFieldData = mysqlRow[ CRDBMYSQL_ACCOUNTUSER_FIELD_NICKNAME ];
-		pAccountNew->m_data.m_tstrNickName = pFieldData ? A2T( pFieldData ) : _T("");
+		pAccountNew->m_data.m_strNickName = pFieldData ? pFieldData : "";
 		pFieldData = mysqlRow[ CRDBMYSQL_ACCOUNTUSER_FIELD_SORTTYPE ];
 		pAccountNew->m_data.m_eSortType = (ENUMACCOUNTSORT)atoi( pFieldData );
 		pFieldData = mysqlRow[ CRDBMYSQL_ACCOUNTUSER_FIELD_ATTETIONED ];
@@ -383,13 +383,12 @@ bool CRDBImplMYSQL::doSave( const CRAttetionRecord* pAddAttetion, int& nErrCode 
 	if ( !_isReady() )
         return false;
 	std::string strSQLMsg;
-	USES_CONVERSION;
 
 	strSQLMsg = "insert into attetioninfo values(";
 	strSQLMsg += "\"";
-	strSQLMsg += T2A( pAddAttetion->m_tstrUserNameFrom.c_str() );
+	strSQLMsg += pAddAttetion->m_strUserNameFrom;
 	strSQLMsg += "\",\"";
-	strSQLMsg += T2A( pAddAttetion->m_tstrUserNameTo.c_str() );
+	strSQLMsg += pAddAttetion->m_strUserNameTo;
 	strSQLMsg += "\")";
 	
 	//
@@ -398,14 +397,14 @@ bool CRDBImplMYSQL::doSave( const CRAttetionRecord* pAddAttetion, int& nErrCode 
 
 	// update attetion count
 	strSQLMsg = "update accountuser set attetion=attetion+1 where username in('";
-	strSQLMsg += T2A(pAddAttetion->m_tstrUserNameFrom.c_str());
+	strSQLMsg += pAddAttetion->m_strUserNameFrom;
 	strSQLMsg += "')";
 	if ( 0 != mysql_query( &m_inst, strSQLMsg.c_str() ) )
 		return false;
 
 	// update attetioned count
 	strSQLMsg = "update accountuser set attetioned=attetioned+1 where username in('";
-	strSQLMsg += T2A(pAddAttetion->m_tstrUserNameTo.c_str());
+	strSQLMsg += pAddAttetion->m_strUserNameTo;
 	strSQLMsg += "')";
 
 	return 0 == mysql_query( &m_inst, strSQLMsg.c_str() );
@@ -423,12 +422,12 @@ bool CRDBImplMYSQL::doLoad( void* pParamKey, CRAttetionRecordList& destObj, int&
 	{
 	case CRFetchAttetionRecordListParam::EFM_ATTETION:
 	{
-	    return _doLoadAttetions( pFARLParam->m_tstrAccountName, destObj, nErrCode );
+	    return _doLoadAttetions( pFARLParam->m_strAccountName, destObj, nErrCode );
 	}
 		break;
 	case CRFetchAttetionRecordListParam::EFM_ATTETIONED:
 	{
-	    return _doLoadAttetioneds( pFARLParam->m_tstrAccountName, destObj, nErrCode );
+	    return _doLoadAttetioneds( pFARLParam->m_strAccountName, destObj, nErrCode );
 	}
 		break;
 	default:
@@ -445,7 +444,7 @@ bool CRDBImplMYSQL::_doLoadAttetionRecord( const std::string& strSQLMsg, CRAttet
 	unsigned int uNumFields;
 	MYSQL_ROW mysqlRow;
 	char* pFieldData = NULL;
-	tstring_type tstrTmp;
+	utf8_type strTmp;
 	
 	//
 	if ( 0 != mysql_query( &m_inst, strSQLMsg.c_str() ) ) {
@@ -473,14 +472,10 @@ bool CRDBImplMYSQL::_doLoadAttetionRecord( const std::string& strSQLMsg, CRAttet
 		CFuncPack fpkDelRecord( ::gfnDelObj< CRAttetionRecord >, pAttetionRecord );
 		//
 		pFieldData = mysqlRow[ CRDBMYSQL_ATTETIONINFO_FIELD_ATTETIONFROM ];
-		if ( !UTF8ToTCHAR( pFieldData, tstrTmp ) )
-			continue;
-		pAttetionRecord->m_tstrUserNameFrom = tstrTmp;
+		pAttetionRecord->m_strUserNameFrom = pFieldData;
 		//
 	    pFieldData = mysqlRow[ CRDBMYSQL_ATTETIONINFO_FIELD_ATTETIONTO ];
-		if ( !UTF8ToTCHAR( pFieldData, tstrTmp ) )
-			continue;
-		pAttetionRecord->m_tstrUserNameTo = tstrTmp;
+		pAttetionRecord->m_strUserNameTo = pFieldData;
 		//
 		destObj.m_listAttetionRecords.push_back( pAttetionRecord );
         fpkDelRecord.Cancel();
@@ -489,29 +484,25 @@ bool CRDBImplMYSQL::_doLoadAttetionRecord( const std::string& strSQLMsg, CRAttet
 	return true;
 }
 
-bool CRDBImplMYSQL::_doLoadAttetions( const tstring_type& tstrAccountName, CRAttetionRecordList& destObj, int& nErrCode ) {
+bool CRDBImplMYSQL::_doLoadAttetions( const utf8_type& strAccountName, CRAttetionRecordList& destObj, int& nErrCode ) {
 	// select * from attetioninfo where attetionfrom = 'wyf'
 	std::string strSQLMsg;
 	std::string strUTF8;
 
 	strSQLMsg = "select * from attetioninfo where attetionfrom = '";
-	if ( !TCHARToUTF8( tstrAccountName, strUTF8 ) )
-		return false;
-	strSQLMsg += strUTF8;
+	strSQLMsg += strAccountName;
 	strSQLMsg += "';";
 
 	return _doLoadAttetionRecord( strSQLMsg, destObj, nErrCode );
 }
 
-bool CRDBImplMYSQL::_doLoadAttetioneds( const tstring_type& tstrAccountName, CRAttetionRecordList& destObj, int& nErrCode ) {
+bool CRDBImplMYSQL::_doLoadAttetioneds( const utf8_type& strAccountName, CRAttetionRecordList& destObj, int& nErrCode ) {
 	// select * from attetioninfo where attetionto = 'wyf'
 	std::string strSQLMsg;
 	std::string strUTF8;
 
 	strSQLMsg = "select * from attetioninfo where attetionto = '";
-	if ( !TCHARToUTF8( tstrAccountName, strUTF8 ) )
-		return false;
-	strSQLMsg += strUTF8;
+	strSQLMsg += strAccountName;
 	strSQLMsg += "';";
 
 	return _doLoadAttetionRecord( strSQLMsg, destObj, nErrCode );
@@ -530,9 +521,7 @@ bool CRDBImplMYSQL::doLoad( void* pParamKey, CRAccountProducts& destObj, int& nE
 		return false;
 	
 	strSQLMsg = "select * from products where publisher = '";
-    if ( !TCHARToUTF8( pFAPParam->m_tstrAccountName, strUTF8 ) ) 
-		return false;
-	strSQLMsg += strUTF8;
+	strSQLMsg += pFAPParam->m_strAccountName;
 	strSQLMsg += "';";
 	
 	//
@@ -572,15 +561,14 @@ bool CRDBImplMYSQL::doLoad( void* pParamKey, CRAccountProducts& destObj, int& nE
 bool CRDBImplMYSQL::doLoad( void* pParamKey, CRProduct& destObj, int& nErrCode ) {
     // select * from products where uuid = 'cbc32a17-d45c-424c-90e3-5e714374c7eb';
 	std::string strSQLMsg;
-	tstring_type* ptstrUUID = (tstring_type*)pParamKey;
+	utf8_type* pstrUUID = (utf8_type*)pParamKey;
 	MYSQL_RES* pMYSQLRes = NULL;
 	unsigned int uNumFields;
 	MYSQL_ROW mysqlRow;
 	char* pFieldData = NULL;
-	USES_CONVERSION;
 
 	strSQLMsg = "select * from products where uuid = '";
-	strSQLMsg += T2A( ptstrUUID->c_str() );
+	strSQLMsg += pstrUUID->c_str();
 	strSQLMsg += "';";
 	
 	//
@@ -618,41 +606,29 @@ CRProduct* CRDBImplMYSQL::_createProduct( MYSQL_ROW mysqlRow ) {
 
 bool CRDBImplMYSQL::_fillProduct( MYSQL_ROW mysqlRow, CRProduct* pProduct ) {
 	char* pFieldData = NULL;
-	tstring_type tstrTmp;
+	utf8_type strTmp;
 
 	//
 	pFieldData = mysqlRow[ CRDBMYSQL_PRODUCTS_FIELD_PUBLISHER ];
-    if ( !UTF8ToTCHAR( pFieldData, tstrTmp ) )
-	    return false;
-    pProduct->m_tstrPublisher = tstrTmp;
+    pProduct->m_strPublisher = pFieldData;
 	//
 	pFieldData = mysqlRow[ CRDBMYSQL_PRODUCTS_FIELD_UUID ];
-	if ( !UTF8ToTCHAR( pFieldData, tstrTmp ) )
-		return false;
-	pProduct->m_tstrUUID = tstrTmp;
+	pProduct->m_strUUID = pFieldData;
 	//
 	pFieldData = mysqlRow[ CRDBMYSQL_PRODUCTS_FIELD_TITLE ];
-	if ( !UTF8ToTCHAR( pFieldData, tstrTmp ) )
-		return false;
-	pProduct->m_tstrTitle = tstrTmp;
+	pProduct->m_strTitle = pFieldData;
 	//
 	pFieldData = mysqlRow[ CRDBMYSQL_PRODUCTS_FIELD_PRICE ];
-	if ( !UTF8ToTCHAR( pFieldData, tstrTmp ) )
-		return false;
-	pProduct->m_tstrPrice = tstrTmp;
+	pProduct->m_strPrice = pFieldData;
 	//
 	pFieldData = mysqlRow[ CRDBMYSQL_PRODUCTS_FIELD_DESCRIPTION ];
-	if ( !UTF8ToTCHAR( pFieldData, tstrTmp ) )
-		return false;
-	pProduct->m_tstrDescribe = tstrTmp;
+	pProduct->m_strDescribe = pFieldData;
 	//
 	pFieldData = mysqlRow[ CRDBMYSQL_PRODUCTS_FIELD_SORT ];
 	pProduct->m_nSortType = atoi( pFieldData );
 	//
 	pFieldData = mysqlRow[ CRDBMYSQL_PRODUCTS_FIELD_UDSORT ];
-	if ( !UTF8ToTCHAR( pFieldData, tstrTmp ) )
-		return false;
-	pProduct->m_tstrUDSort = tstrTmp;
+	pProduct->m_strUDSort = pFieldData;
 	//
 	pFieldData = mysqlRow[ CRDBMYSQL_PRODUCTS_FIELD_IMAGES ];
 	if ( !_parseJsonStringArray( pFieldData, pProduct->m_containerImages ) )
@@ -668,13 +644,11 @@ bool CRDBImplMYSQL::_fillProduct( MYSQL_ROW mysqlRow, CRProduct* pProduct ) {
 	return true;
 }
 
-bool CRDBImplMYSQL::_parseJsonStringArray( char* pFieldData, tstr_container_type& containerStr ) {
+bool CRDBImplMYSQL::_parseJsonStringArray( char* pFieldData, utf8_container_type& containerStr ) {
     if ( !pFieldData )
 		return false;
 	Json::Reader reader;
 	Json::Value jsonArray;
-	std::string strUTF8;
-	tstring_type tstrTmp;
 
 	if( !reader.parse( pFieldData, jsonArray ) )
 		return false;
@@ -683,11 +657,7 @@ bool CRDBImplMYSQL::_parseJsonStringArray( char* pFieldData, tstr_container_type
 		Json::Value& valItem = jsonArray[ nIndex ];
 	    if ( !valItem.isString() )
 			continue;
-		strUTF8 = valItem.asString();
-		//
-		if ( !UTF8ToTCHAR( strUTF8, tstrTmp ) )
-			continue;
-		containerStr.push_back( tstrTmp ); 
+		containerStr.push_back( valItem.asString() ); 
 	}
 
 	return true;

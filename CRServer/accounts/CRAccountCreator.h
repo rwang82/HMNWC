@@ -12,7 +12,7 @@ public:
 
 public:
 	static CRAccountBase* create( const CRAccountData& paramAccountReg, int& nErrCode );
-	static CRAccountBase* loadFromDB( const tstring_type& tstrAccountName, int& nErrCode );
+	static CRAccountBase* loadFromDB( const utf8_type& strAccountName, int& nErrCode );
 };
 
 #endif //__CRACCOUNTCREATOR_H__

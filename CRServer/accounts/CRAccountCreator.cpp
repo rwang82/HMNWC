@@ -33,18 +33,18 @@ CRAccountBase* CRAccountCreator::create( const CRAccountData& paramAccountReg, i
 	return false;
 }
 
-CRAccountBase* CRAccountCreator::loadFromDB( const tstring_type& tstrAccountName, int& nErrCode ) {
+CRAccountBase* CRAccountCreator::loadFromDB( const utf8_type& strAccountName, int& nErrCode ) {
 	//
 	CRAccountUser* pAccountUser = new CRAccountUser();
 	CFuncPack fpkDelAccountUser( ::gfnDelObj< CRAccountUser >, pAccountUser );
-	if ( g_CRSrvRoot.m_pSrvDBProxy->loadFromDB( (void*)&tstrAccountName, pAccountUser, nErrCode ) ) {
+	if ( g_CRSrvRoot.m_pSrvDBProxy->loadFromDB( (void*)&strAccountName, pAccountUser, nErrCode ) ) {
 	    fpkDelAccountUser.Cancel();
 		return pAccountUser;
 	}
 	//
 	CRAccountAdmin* pAccountAdmin = new CRAccountAdmin();
 	CFuncPack fpkDelAccountAdmin( ::gfnDelObj< CRAccountAdmin >, pAccountAdmin );
-	if ( g_CRSrvRoot.m_pSrvDBProxy->loadFromDB( (void*)&tstrAccountName, pAccountAdmin, nErrCode ) ) {
+	if ( g_CRSrvRoot.m_pSrvDBProxy->loadFromDB( (void*)&strAccountName, pAccountAdmin, nErrCode ) ) {
 	    fpkDelAccountAdmin.Cancel();
 		return pAccountAdmin;
 	}

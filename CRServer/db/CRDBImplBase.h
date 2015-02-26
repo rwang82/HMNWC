@@ -22,9 +22,6 @@ class CRAccountProducts;
 //
 class CRDBImplBase {
 public:
-	typedef std::basic_string< TCHAR > tstring_type;
-	//typedef std::deque< ENUMCRDBFIELDTYPE > crdbfield_container_type;
-public:
 	CRDBImplBase(){};
 	virtual ~CRDBImplBase(){};
 

@@ -46,7 +46,7 @@ void CRRMsgHandler4FetchAttetionList::accept( const CRRMsgMetaData& rmsgMetaData
 	}
 
 	//
-	_sendSuccessAck( rmsgMetaData, paramFARL.m_tstrAccountName, listRecords );
+	_sendSuccessAck( rmsgMetaData, paramFARL.m_strAccountName, listRecords );
 }
 
 void CRRMsgHandler4FetchAttetionList::accept( const CRRMsgMetaData& rmsgMetaData, const CRRMsgBinary* pRMsgBinary ) {
@@ -62,9 +62,7 @@ bool CRRMsgHandler4FetchAttetionList::_parseParams( const Json::Value& jsonRoot,
 	const Json::Value& valUserName = valParams[ "username" ];
 	if ( !valUserName.isString() )
 		return false;
-	strUtf8 = valUserName.asString();
-	if ( !UTF8ToTCHAR( strUtf8, param.m_tstrAccountName ) )
-		return false;
+	param.m_strAccountName = valUserName.asString();
 	//
 	const Json::Value& valIndexStart = valParams[ "index_start" ];
 	if ( !valIndexStart.isInt() )
@@ -79,21 +77,17 @@ bool CRRMsgHandler4FetchAttetionList::_parseParams( const Json::Value& jsonRoot,
 	return true;
 }
 
-void CRRMsgHandler4FetchAttetionList::_sendSuccessAck( const CRRMsgMetaData& rmsgMetaData, const tstring_type& tstrAccountName, const CRAttetionRecordList& listRecords ) {
+void CRRMsgHandler4FetchAttetionList::_sendSuccessAck( const CRRMsgMetaData& rmsgMetaData, const utf8_type& strAccountName, const CRAttetionRecordList& listRecords ) {
     Json::Value valParams;
 	std::string strRMsg;
 	std::string strUTF8;
 
 	valParams[ "result" ] = 1;
-	if ( !TCHARToUTF8( tstrAccountName, strUTF8 ) )
-		return;
-	valParams[ "username" ] = strUTF8;
+	valParams[ "username" ] = strAccountName;
 	Json::Value& valAttetions = valParams[ "attetions" ];
 	//
 	for ( CRAttetionRecord* pRecord : listRecords.m_listAttetionRecords ) {
-		if ( !TCHARToUTF8( pRecord->m_tstrUserNameTo, strUTF8 ) )
-			return;
-	    valAttetions.append( strUTF8.c_str() );
+	    valAttetions.append( pRecord->m_strUserNameTo );
 	}
 	//
 	CRRMsgMaker::createRMsg( valParams, CRCMDTYPE_ACK_FETCH_ATTETION_LIST, strRMsg );

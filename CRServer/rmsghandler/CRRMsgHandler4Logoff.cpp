@@ -16,7 +16,7 @@ const int CRLOGOFF_RESULT_SUCCESS = 1;
 const int CRLOGOFF_RESULT_FAILED = 0;
 //
 CRLogoffParam::CRLogoffParam()
-: m_tstrUserName( _T("") )
+: m_strUserName( "" )
 , m_pRMsgMetaData( NULL )
 , m_eOSType( EOS_UNKNOWN ) {
 
@@ -40,14 +40,14 @@ void CRRMsgHandler4Logoff::accept( const CRRMsgMetaData& rmsgMetaData, const CRR
 	
 	if ( !_fillLogoffParam( rmsgMetaData, pRMsgJson, logoffParam ) ) {
 		nErrCode = CRLOGOFF_ERR_INVALIDPARAMS;
-		_sendResultAck( rmsgMetaData, pRMsgJson, logoffParam.m_tstrUserName, false, nErrCode );
+		_sendResultAck( rmsgMetaData, pRMsgJson, logoffParam.m_strUserName, false, nErrCode );
 		return;
 	}
 	//
 	if ( _doLogoff( logoffParam, nErrCode ) ) {
-		_sendResultAck( rmsgMetaData, pRMsgJson, logoffParam.m_tstrUserName, true );
+		_sendResultAck( rmsgMetaData, pRMsgJson, logoffParam.m_strUserName, true );
 	} else {
-		_sendResultAck( rmsgMetaData, pRMsgJson, logoffParam.m_tstrUserName, false, nErrCode );
+		_sendResultAck( rmsgMetaData, pRMsgJson, logoffParam.m_strUserName, false, nErrCode );
 	}
 }
 
@@ -58,19 +58,18 @@ void CRRMsgHandler4Logoff::accept( const CRRMsgMetaData& rmsgMetaData, const CRR
 bool CRRMsgHandler4Logoff::_fillLogoffParam( const CRRMsgMetaData& rmsgMetaData, const CRRMsgJson* pRMsgJson, CRLogoffParam& logoffParam ) {
     if ( !pRMsgJson )
 		return false;
-	USES_CONVERSION;
 	// m_pRMsgMetaData.
 	logoffParam.m_pRMsgMetaData = &rmsgMetaData;
 	// m_eOSType.
     logoffParam.m_eOSType = pRMsgJson->m_eOSType;
-	// m_tstrUserName.
+	// m_strUserName.
 	const Json::Value& valParams = pRMsgJson->m_jsonRoot[ "params" ];
 	if ( !valParams.isObject() )
 		return false;
 	const Json::Value& valUserName = valParams[ "username" ];
 	if ( !valUserName.isString() )
 		return false;
-	logoffParam.m_tstrUserName = A2T( valUserName.asString().c_str() );
+	logoffParam.m_strUserName = valUserName.asString();
 	return true;
 }
 
@@ -85,7 +84,7 @@ bool CRRMsgHandler4Logoff::_doLogoff( const CRLogoffParam& logoffParam, int& nEr
 	return pModuleAccountMgr->doLogoff( logoffParam, nErrCode );
 }
 
-void CRRMsgHandler4Logoff::_sendResultAck( const CRRMsgMetaData& rmsgMetaData, const CRRMsgJson* pRMsgJson, const tstring_type& tstrUserName, bool bSuccess, int nErrCode ) {
+void CRRMsgHandler4Logoff::_sendResultAck( const CRRMsgMetaData& rmsgMetaData, const CRRMsgJson* pRMsgJson, const utf8_type& strUserName, bool bSuccess, int nErrCode ) {
 	USES_CONVERSION;
 	Json::Value ackJsonRoot;
 	Json::Value& valParams = ackJsonRoot[ "params" ];
@@ -95,7 +94,7 @@ void CRRMsgHandler4Logoff::_sendResultAck( const CRRMsgMetaData& rmsgMetaData, c
 	// fill cmd.
 	CRRMsgJsonHelper::fillCmd( ackJsonRoot, CRCMDTYPE_ACK_LOGOFF, pRMsgJson->m_nCmdSN, pRMsgJson->m_eOSType );
     // fill params.
-	valParams[ "username" ] = T2A( tstrUserName.c_str() );
+	valParams[ "username" ] = strUserName;
 	valParams[ "result" ] = bSuccess ? CRLOGOFF_RESULT_SUCCESS : CRLOGOFF_RESULT_FAILED;
 	//
 	strRMsgAck = jsonWriter.write( ackJsonRoot );
@@ -104,7 +103,7 @@ void CRRMsgHandler4Logoff::_sendResultAck( const CRRMsgMetaData& rmsgMetaData, c
 	
 }
 
-void CRRMsgHandler4Logoff::_sendResultAck( const CRRMsgMetaData& rmsgMetaData, const CRRMsgBinary* pRMsgJson, const tstring_type& tstrUserName, bool bSuccess, int nErrCode ) {
+void CRRMsgHandler4Logoff::_sendResultAck( const CRRMsgMetaData& rmsgMetaData, const CRRMsgBinary* pRMsgJson, const utf8_type& strUserName, bool bSuccess, int nErrCode ) {
 
 }
 

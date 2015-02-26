@@ -7,13 +7,13 @@
 class CRProduct;
 //
 struct CRFetchAccountProducts {
-	CRFetchAccountProducts( const tstring_type& tstrAccountName, unsigned int uIndexStart, unsigned int uCount ) {
-	    m_tstrAccountName = tstrAccountName;
+	CRFetchAccountProducts( const utf8_type& strAccountName, unsigned int uIndexStart, unsigned int uCount ) {
+	    m_strAccountName = strAccountName;
 		m_uIndexStart = uIndexStart;
 		m_uCount = uCount;
 	}
 	~CRFetchAccountProducts(){}
-    tstring_type m_tstrAccountName;
+    utf8_type m_strAccountName;
 	unsigned int m_uIndexStart;
 	unsigned int m_uCount;
 };

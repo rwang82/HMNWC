@@ -21,8 +21,8 @@ const int CRLOGIN_RESULT_FAILED = 0;
 const int CRLOGIN_RESULT_SUCCESS = 1;
 //
 CRLoginParam::CRLoginParam()
-: m_tstrUserName( _T("") )
-, m_tstrPassword( _T("") )
+: m_strUserName( "" )
+, m_strPassword( "" )
 , m_pRMsgMetaData( NULL )
 , m_eOSType( EOS_UNKNOWN ) {
 }
@@ -83,16 +83,16 @@ bool CRRMsgHandler4Login::_fillLoginParam( const CRRMsgMetaData& rmsgMetaData, c
 	const Json::Value& valParams = pRMsgJson->m_jsonRoot[ "params" ];
 	if ( !valParams.isObject() )
 		return false;
-	// m_tstrUserName
+	// m_strUserName
 	const Json::Value& valUserName = valParams[ "username" ];
 	if ( !valUserName.isString() )
 		return false;
-	loginParam.m_tstrUserName = A2T(valUserName.asString().c_str());
-	// m_tstrPassword
+	loginParam.m_strUserName = valUserName.asString();
+	// m_strPassword
 	const Json::Value& valPassword = valParams[ "password" ];
 	if ( !valPassword.isString() )
 		return false;
-	loginParam.m_tstrPassword = A2T(valPassword.asString().c_str());
+	loginParam.m_strPassword = valPassword.asString();
 
 	return true;
 }
@@ -117,41 +117,21 @@ void CRRMsgHandler4Login::_sendSuccessAck( const CRLoginParam& loginParam, const
 	std::string strRMsgAck;
 	const CRAccountBase* pAccountObj = NULL;
 	CRModuleAccountMgr* pAccountMgr = (CRModuleAccountMgr*)g_CRSrvRoot.m_pModuleDepot->getModule( ECRMODULE_ID_ACCOUNTMGR );
-	std::string strTmp;
-	tstring_type tstrTmp;
-
+	
 	pAccountObj = pAccountMgr->getAccount( rmsgMetaData.m_sConnect );
 	// fill cmd.
 	CRRMsgJsonHelper::fillCmd( ackJsonRoot, CRCMDTYPE_ACK_LOGIN, pRMsgJson->m_nCmdSN, pRMsgJson->m_eOSType );
     // fill params.
 	valParams[ "result" ] = CRLOGIN_RESULT_SUCCESS;
-	if ( !TCHARToUTF8( loginParam.m_tstrUserName, strTmp ) ) {
-	    assert( false );
-		return;
-	}
-	valParams[ "username" ] = strTmp;
+	valParams[ "username" ] = loginParam.m_strUserName;
 	if ( pAccountObj ) {
 		//
-        valParams[ "phone" ] = T2A( pAccountObj->m_data.m_tstrPhoneNum.c_str() );
-		//
-		if ( !TCHARToUTF8( pAccountObj->m_data.m_tstrEMail, strTmp ) ) {
-			assert( false );
-			return;
-		}
-		valParams[ "email" ] = strTmp;
-		//
-		if ( !TCHARToUTF8( pAccountObj->m_data.m_tstrNickName, strTmp ) ) {
-			assert( false );
-			return;
-		}
-		valParams[ "nickname" ] = strTmp;
-		//
+        valParams[ "phone" ] = pAccountObj->m_data.m_strPhoneNum;
+		valParams[ "email" ] = pAccountObj->m_data.m_strEMail;
+		valParams[ "nickname" ] = pAccountObj->m_data.m_strNickName;
 		valParams[ "sort" ] = (int)pAccountObj->m_data.m_eSortType;
-		//
 		valParams[ "attetioned" ] = pAccountObj->m_data.m_nCountAttetioned;
-		//
 		valParams[ "attetion" ] = pAccountObj->m_data.m_nCountAttetion;
-		//
 		valParams[ "published" ] = pAccountObj->m_data.m_nCountPublished;
 	} else {
 	    assert( false );
@@ -173,7 +153,7 @@ void CRRMsgHandler4Login::_sendFailedAck( const CRLoginParam& loginParam, const 
 	// fill cmd.
 	CRRMsgJsonHelper::fillCmd( ackJsonRoot, CRCMDTYPE_ACK_LOGIN, pRMsgJson->m_nCmdSN, pRMsgJson->m_eOSType );
     // fill params.
-	valParams[ "username" ] = T2A( loginParam.m_tstrUserName.c_str() );
+	valParams[ "username" ] = loginParam.m_strUserName;
 	valParams[ "result" ] = CRLOGIN_RESULT_FAILED;
 	valParams[ "reason" ] = nErrCode;
 	//

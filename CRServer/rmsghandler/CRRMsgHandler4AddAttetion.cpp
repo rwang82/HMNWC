@@ -48,10 +48,10 @@ bool CRRMsgHandler4AddAttetion::checkParams( const CRAttetionRecord& paramAddAtt
 	if ( !pAccountMgr )
 		return false;
 
-	if ( !pAccountMgr->getAccount( paramAddAttetion.m_tstrUserNameTo, nErrCode ) )
+	if ( !pAccountMgr->getAccount( paramAddAttetion.m_strUserNameTo, nErrCode ) )
 		return false;
 
-	if ( !pAccountMgr->getAccount( paramAddAttetion.m_tstrUserNameFrom, nErrCode ) )
+	if ( !pAccountMgr->getAccount( paramAddAttetion.m_strUserNameFrom, nErrCode ) )
 		return false;
 
 	return true;
@@ -68,7 +68,7 @@ void CRRMsgHandler4AddAttetion::accept( const CRRMsgMetaData& rmsgMetaData, cons
 bool CRRMsgHandler4AddAttetion::parseParams( const Json::Value& jsonRoot, CRAttetionRecord& paramAddAttetion ) {
 	const Json::Value& valParams = jsonRoot[ "params" ];
 	std::string strUtf8;
-	tstring_type tstrData;
+	utf8_type strData;
 
 	if ( !valParams.isObject() )
 		 return false;
@@ -76,18 +76,12 @@ bool CRRMsgHandler4AddAttetion::parseParams( const Json::Value& jsonRoot, CRAtte
 	const Json::Value& valUserName = valParams[ "username" ];
 	if ( !valUserName.isString() )
 		return false;
-	strUtf8 = valUserName.asString();
-	if ( !UTF8ToTCHAR( (const unsigned char*)strUtf8.c_str(), strUtf8.size(), tstrData ) )
-		return false;
-	paramAddAttetion.m_tstrUserNameFrom = tstrData;
+	paramAddAttetion.m_strUserNameFrom = valUserName.asString();
 	//
 	const Json::Value& valAttetion = valParams[ "attetion" ];
 	if ( !valAttetion.isString() )
 		return false;
-	strUtf8 = valAttetion.asString();
-	if ( !UTF8ToTCHAR( (const unsigned char*)strUtf8.c_str(), strUtf8.size(), tstrData ) )
-		return false;
-	paramAddAttetion.m_tstrUserNameTo = tstrData;
+	paramAddAttetion.m_strUserNameTo = valAttetion.asString();
 
 	return true;
 }
@@ -111,11 +105,7 @@ void CRRMsgHandler4AddAttetion::sendSuccessAck( const CRRMsgMetaData& rmsgMetaDa
 	std::string strUtf8;
 
 	valParams[ "result" ] = 1;
-	if ( !TCHARToUTF8( paramAddAttetion.m_tstrUserNameTo, strUtf8 ) ) {
-	    assert( false );
-		return;
-	}
-	valParams[ "attetion" ] = strUtf8.c_str();
+	valParams[ "attetion" ] = paramAddAttetion.m_strUserNameTo;
 	CRRMsgMaker::createRMsg( valParams, CRCMDTYPE_ACK_ADD_ATTETION, strRMsg );
 	//
 	g_CRSrvRoot.m_pNWPServer->send( rmsgMetaData.m_sConnect, (const unsigned char*)strRMsg.c_str(), strRMsg.length() + 1 );

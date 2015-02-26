@@ -5,7 +5,7 @@
 //
 CRFetchAttetionRecordListParam::CRFetchAttetionRecordListParam()
 : m_eFetchMode( EFM_ATTETION )
-, m_tstrAccountName( _T("") )
+, m_strAccountName( "" )
 , m_uIndexStart( 0 )
 , m_uCount( 0 ) {
 }

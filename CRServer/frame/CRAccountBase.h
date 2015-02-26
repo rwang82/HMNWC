@@ -8,8 +8,8 @@
 struct CRLoginParam {
 	CRLoginParam();
 	~CRLoginParam();
-	tstring_type m_tstrUserName;
-	tstring_type m_tstrPassword;
+	utf8_type m_strUserName;
+	utf8_type m_strPassword;
 	const CRRMsgMetaData* m_pRMsgMetaData;
 	ENUMOSTYPE m_eOSType;
 };
@@ -17,7 +17,7 @@ struct CRLoginParam {
 struct CRLogoffParam {
 	CRLogoffParam();
 	~CRLogoffParam();
-	tstring_type m_tstrUserName;
+	utf8_type m_strUserName;
 	const CRRMsgMetaData* m_pRMsgMetaData;
 	ENUMOSTYPE m_eOSType;
 };
@@ -27,11 +27,11 @@ struct CRAccountData{
 	CRAccountData();
 	~CRAccountData();
 	CRAccountData& operator=( const CRAccountData& val );
-    tstring_type m_tstrUserName;
-	tstring_type m_tstrPassword;
-	tstring_type m_tstrPhoneNum;
-	tstring_type m_tstrEMail;
-	tstring_type m_tstrNickName;
+    utf8_type m_strUserName;
+	utf8_type m_strPassword;
+	utf8_type m_strPhoneNum;
+	utf8_type m_strEMail;
+	utf8_type m_strNickName;
 	int m_nCountAttetioned;
 	int m_nCountAttetion;
 	int m_nCountPublished;
@@ -40,7 +40,7 @@ struct CRAccountData{
 //
 class CRAccountBase : public CRSaveable, public CRLoadable{
 public:
-	typedef std::basic_string< TCHAR > tstring_type;
+	typedef std::basic_string< TCHAR > utf8_type;
 public:
 	CRAccountBase();
 	CRAccountBase( const CRAccountData& paramAccountReg );

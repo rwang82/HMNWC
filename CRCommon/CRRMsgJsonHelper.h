@@ -9,7 +9,7 @@ public:
 	~CRRMsgJsonHelper(){}
 
 public:
-	static void fillCmd( Json::Value& jsonRoot, int nCmdType, int nCmdSN, ENUMOSTYPE eOSType, const tstring_type& tstrCmdTitle = _T(""), const tstring_type& tstrCmdVer = _T("") );
+	static void fillCmd( Json::Value& jsonRoot, int nCmdType, int nCmdSN, ENUMOSTYPE eOSType, const utf8_type& strCmdTitle = "", const utf8_type& strCmdVer = "" );
 
 
 };

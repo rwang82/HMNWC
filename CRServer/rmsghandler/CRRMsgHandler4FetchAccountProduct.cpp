@@ -63,17 +63,14 @@ bool CRRMsgHandler4FetchAccountProduct::_parseParams( const Json::Value& jsonRoo
 	if ( !valUserNameList.isArray() )
 		return false;
 	std::string strUTF8;
-	tstring_type tstrTmp;
+	utf8_type strTmp;
 	//
 	int nCount = valUserNameList.size();
 	for ( int nIndex = 0; nIndex<nCount; ++nIndex ) {
 	    const Json::Value& valItem = valUserNameList[ nIndex ];
 		if ( !valItem.isString() )
 			continue;
-		strUTF8 = valItem.asString();
-		if ( !UTF8ToTCHAR( strUTF8, tstrTmp  ) )
-			continue;
-		fapParam.m_containerAccountName.push_back( tstrTmp );
+		fapParam.m_containerAccountName.push_back( valItem.asString() );
 	}
 
 	return true;
@@ -97,7 +94,7 @@ void CRRMsgHandler4FetchAccountProduct::accept( const CRRMsgMetaData& rmsgMetaDa
 }
 
 bool CRRMsgHandler4FetchAccountProduct::_execute( const CRFetchAccountProductParam& fapParam, Json::Value& valAccountProductList, int& nErrCode ) {
-	tstr_container_type::const_iterator citAccountName, ciendAccountName;
+	utf8_container_type::const_iterator citAccountName, ciendAccountName;
 	CRModuleProductMgr* pProductMgr = (CRModuleProductMgr*)g_CRSrvRoot.m_pModuleDepot->getModule( ECRMODULE_ID_PRODUCTMGR );
 	CRModuleAccountMgr* pAccountMgr = (CRModuleAccountMgr*)g_CRSrvRoot.m_pModuleDepot->getModule( ECRMODULE_ID_ACCOUNTMGR );
 	const CRAccountBase* pAccount = NULL;
@@ -110,14 +107,9 @@ bool CRRMsgHandler4FetchAccountProduct::_execute( const CRFetchAccountProductPar
 		if ( !pAccount )
 			return false;
 		pAccountData = &pAccount->m_data;
-		CRFetchAccountProducts fapItem( pAccountData->m_tstrUserName, 0, pAccountData->m_nCountPublished );
+		CRFetchAccountProducts fapItem( pAccountData->m_strUserName, 0, pAccountData->m_nCountPublished );
 
-		if ( !TCHARToUTF8( pAccountData->m_tstrUserName, strUTF8 ) ) {
-		    assert( false );
-			continue;
-		}
-  
-		Json::Value& valProducts = valAccountProductList[ strUTF8 ];
+		Json::Value& valProducts = valAccountProductList[ pAccountData->m_strUserName ];
 		if ( !pProductMgr->fillAccountProducts2Json( fapItem, valProducts, nErrCode ) )
 			return false;
 	}

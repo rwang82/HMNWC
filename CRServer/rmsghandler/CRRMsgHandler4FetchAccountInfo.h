@@ -9,7 +9,7 @@ class CRRMsgHandler4FetchAccountInfo : public CRRMsgHandlerBase {
 private:	
 	class CRFetchAccountInfoParam {
 	public:
-		tstr_container_type m_containerAccountName;
+		utf8_container_type m_containerAccountName;
 	};
 
 public:

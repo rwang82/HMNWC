@@ -30,6 +30,7 @@
             "rom.wang":[
                 {
                     "uuid":"xxxx-xxxxxx-xxxx-xxx",
+                    "publisher":"rom.wang",
                     "title":"good_wine",
                     "price":"12.5", // notice, it's a string type. 
                     "describe":"good wine, fear a far way?",
@@ -46,6 +47,7 @@
                 },
                 {
                     "uuid":"xxxx-xxxxxx-xxxx-xxx",
+                    "publisher":"rom.wang",
                     "title":"pencil",
                     "price":"1.5", // notice, it's a string type. 
                     "describe":"every good student need a good pencil.",

@@ -27,8 +27,8 @@ public:
 
 public:
 	const CRAccountBase* getAccount( SOCKET sConnect ) const;
-	const CRAccountBase* getAccount( const tstring_type& tstrAccountName, int& nErrCode );
-    void getAccountsData( tstr_container_type containerAccountName, accountdata_container_type& containerAccountData );
+	const CRAccountBase* getAccount( const utf8_type& strAccountName, int& nErrCode );
+    void getAccountsData( utf8_container_type containerAccountName, accountdata_container_type& containerAccountData );
 	// event handler.
 public:
 	void onEvtClientAccept( void* pParam1, void* pParam2 );

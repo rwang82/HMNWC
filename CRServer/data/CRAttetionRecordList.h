@@ -17,7 +17,7 @@ public:
 
 public:
 	ENUMFETCHMODE m_eFetchMode;
-	tstring_type m_tstrAccountName;
+	utf8_type m_strAccountName;
 	unsigned int m_uIndexStart;
 	unsigned int m_uCount;
 };

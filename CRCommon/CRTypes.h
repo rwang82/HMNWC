@@ -5,9 +5,10 @@
 #include <deque>
 #include <list>
 
+typedef std::string utf8_type;
+typedef std::deque< utf8_type > utf8_container_type;
+typedef std::list< utf8_type > utf8_list_type;
 typedef std::basic_string< TCHAR > tstring_type;
-typedef std::deque< tstring_type > tstr_container_type;
-typedef std::list< tstring_type > tstr_list_type;
 
 enum ENUMOSTYPE {
 	EOS_UNKNOWN = 0,

@@ -3,25 +3,25 @@
 #include "CRDBImplBase.h"
 
 CRProduct::CRProduct() {
-	m_tstrUUID = _T("");
-    m_tstrTitle = _T("");
-	m_tstrPrice = _T("");
-	m_tstrDescribe = _T("");
+	m_strUUID = "";
+    m_strTitle = "";
+	m_strPrice = "";
+	m_strDescribe = "";
 	m_nSortType = -1;
-	m_tstrUDSort = _T("");
+	m_strUDSort = "";
 	m_nPassStatus = 0;
 }
 
 CRProduct::CRProduct( const CRProduct& val ) {
-	tstr_container_type::const_iterator citStr, ciendStr;
+	utf8_container_type::const_iterator citStr, ciendStr;
 
 	//
-	m_tstrUUID = val.m_tstrUUID;
-	m_tstrTitle = val.m_tstrTitle;
-	m_tstrPrice = val.m_tstrPrice;
-	m_tstrDescribe = val.m_tstrDescribe;
+	m_strUUID = val.m_strUUID;
+	m_strTitle = val.m_strTitle;
+	m_strPrice = val.m_strPrice;
+	m_strDescribe = val.m_strDescribe;
 	m_nSortType = val.m_nSortType;
-	m_tstrUDSort = val.m_tstrUDSort;
+	m_strUDSort = val.m_strUDSort;
 	//
 	ciendStr = val.m_containerImages.end();
 	for ( citStr = val.m_containerImages.begin(); citStr!=ciendStr; ++citStr ) {

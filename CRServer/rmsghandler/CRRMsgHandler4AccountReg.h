@@ -14,8 +14,8 @@ private:
 
 private:
     bool _parseParams( const Json::Value& jsonRoot, CRAccountData& paramAccountReg );
-	void _sendSuccessAck( const CRRMsgMetaData& rmsgMetaData );
-	void _sendFailedAck( const CRRMsgMetaData& rmsgMetaData, int nErrCode );
+	void _sendSuccessAck( int nCmdSN, const CRRMsgMetaData& rmsgMetaData );
+	void _sendFailedAck( int nCmdSN, const CRRMsgMetaData& rmsgMetaData, int nErrCode );
 };
 
 #endif //__CRRMSGHANDLER4ACCOUNTREG_H__

@@ -139,6 +139,7 @@
     <ClCompile Include="rmsghandler\CRRMsgHandler4AddAttetion.cpp" />
     <ClCompile Include="rmsghandler\CRRMsgHandler4FetchAccountInfo.cpp" />
     <ClCompile Include="rmsghandler\CRRMsgHandler4FetchAccountProduct.cpp" />
+    <ClCompile Include="rmsghandler\CRRMsgHandler4FetchAttetionedList.cpp" />
     <ClCompile Include="rmsghandler\CRRMsgHandler4FetchAttetionList.cpp" />
     <ClCompile Include="rmsghandler\CRRMsgHandler4Login.cpp" />
     <ClCompile Include="rmsghandler\CRRMsgHandler4Logoff.cpp" />
@@ -206,6 +207,7 @@
     <ClInclude Include="rmsghandler\CRRMsgHandler4AddAttetion.h" />
     <ClInclude Include="rmsghandler\CRRMsgHandler4FetchAccountInfo.h" />
     <ClInclude Include="rmsghandler\CRRMsgHandler4FetchAccountProduct.h" />
+    <ClInclude Include="rmsghandler\CRRMsgHandler4FetchAttetionedList.h" />
     <ClInclude Include="rmsghandler\CRRMsgHandler4FetchAttetionList.h" />
     <ClInclude Include="rmsghandler\CRRMsgHandler4Login.h" />
     <ClInclude Include="rmsghandler\CRRMsgHandler4Logoff.h" />

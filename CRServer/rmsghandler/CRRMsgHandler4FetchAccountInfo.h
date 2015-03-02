@@ -22,8 +22,8 @@ public:
 
 private:
 	bool _parseParams( Json::Value jsonRoot, CRFetchAccountInfoParam& param );
-	void _sendSuccessAck( const CRRMsgMetaData& rmsgMetaData, CRAccountDepot::accountdata_container_type containerAccountData );
-	void _sendFailedAck( const CRRMsgMetaData& rmsgMetaData, int nErrCode );
+	void _sendSuccessAck( int nCmdSN, const CRRMsgMetaData& rmsgMetaData, CRAccountDepot::accountdata_container_type containerAccountData );
+	void _sendFailedAck( int nCmdSN, const CRRMsgMetaData& rmsgMetaData, int nErrCode );
 };
 
 

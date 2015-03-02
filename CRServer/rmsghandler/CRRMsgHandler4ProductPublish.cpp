@@ -35,26 +35,26 @@ void CRRMsgHandler4ProductPublish::accept( const CRRMsgMetaData& rmsgMetaData, c
 	paramPublishProduct.m_pRMsgMetaData = &rmsgMetaData;
 	// do publish.
 	if ( pProductMgr->doPublishProduct( paramPublishProduct, nErrCode ) ) {
-	    _sendSuccessAck( paramPublishProduct );
+	    _sendSuccessAck( pRMsgJson->m_nCmdSN, paramPublishProduct );
 	} else {
-	    _sendFailedAck( paramPublishProduct, nErrCode );
+	    _sendFailedAck( pRMsgJson->m_nCmdSN, paramPublishProduct, nErrCode );
 	}
 
 }
 
-void CRRMsgHandler4ProductPublish::_sendSuccessAck( const CRProductPublishParam& param ) {
+void CRRMsgHandler4ProductPublish::_sendSuccessAck( int nCmdSN, const CRProductPublishParam& param ) {
 	Json::Value valParams;
 	std::string strRMsg;
 
 	valParams[ "result" ] = 1;
 	valParams[ "product_uuid" ] = param.m_product.m_strUUID;
-	CRRMsgMaker::createRMsg( valParams, CRCMDTYPE_ACK_PRODUCT_PUBLISH, strRMsg );
+	CRRMsgMaker::createRMsg( valParams, CRCMDTYPE_ACK_PRODUCT_PUBLISH, nCmdSN, strRMsg );
     //
 	g_CRSrvRoot.m_pNWPServer->send( param.m_pRMsgMetaData->m_sConnect, (const unsigned char*)strRMsg.c_str(), strRMsg.length() + 1 );
 
 }
 
-void CRRMsgHandler4ProductPublish::_sendFailedAck( const CRProductPublishParam& param, int nErrCode ) {
+void CRRMsgHandler4ProductPublish::_sendFailedAck( int nCmdSN, const CRProductPublishParam& param, int nErrCode ) {
     Json::Value valParams;
 	USES_CONVERSION;
 	std::string strRMsg;
@@ -62,7 +62,7 @@ void CRRMsgHandler4ProductPublish::_sendFailedAck( const CRProductPublishParam& 
 	valParams[ "result" ] = 0;
 	valParams[ "reason" ] = nErrCode;
 	valParams[ "product_uuid" ] = param.m_product.m_strUUID;
-	CRRMsgMaker::createRMsg( valParams, CRCMDTYPE_ACK_PRODUCT_PUBLISH, strRMsg );
+	CRRMsgMaker::createRMsg( valParams, CRCMDTYPE_ACK_PRODUCT_PUBLISH, nCmdSN, strRMsg );
 	//
 	g_CRSrvRoot.m_pNWPServer->send( param.m_pRMsgMetaData->m_sConnect, (const unsigned char*)strRMsg.c_str(), strRMsg.length() + 1 );
 

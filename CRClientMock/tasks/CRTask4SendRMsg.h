@@ -21,7 +21,7 @@ protected:
 
 protected:
 	bool _waitConnected( CRCCommProxyBase* pCommProxy4RMsg );
-
+    int _createSN();
 };
 
 

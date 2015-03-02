@@ -3,7 +3,7 @@
 //
 struct CRRMsgMetaData;
 //
-void gfnSendFailedAck( const CRRMsgMetaData& rmsgMetaData, int nRMsgAckType, int nErrCode );
+void gfnSendFailedAck( const CRRMsgMetaData& rmsgMetaData, int nRMsgAckType, int nCmdSN, int nErrCode );
 
 
 

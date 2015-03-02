@@ -19,7 +19,7 @@ void CRTask4SendRMsg::Run() {
 	}
 	
 	// get strRMsg.
-	CRRMsgMaker::createRMsg( valParams, _getCmdType(), strRMsg );
+	CRRMsgMaker::createRMsg( valParams, _getCmdType(), _createSN(), strRMsg );
 	// get pCommProxy4RMsg
 	pCommProxy4RMsg = theApp.m_commDepot.getCommProxy( ECRCCOMMPROXY_ID_RMSG );
 	if ( !pCommProxy4RMsg ) {
@@ -63,3 +63,12 @@ bool CRTask4SendRMsg::_waitConnected( CRCCommProxyBase* pCommProxy4RMsg ) {
 
 	return false;
 }
+
+int CRTask4SendRMsg::_createSN() {
+	static int s_nSNBase = 0;
+	return s_nSNBase++;
+}
+
+
+
+

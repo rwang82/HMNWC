@@ -38,7 +38,7 @@ CRRMsgRaw::~CRRMsgRaw() {
 	m_uLenRawBuf = 0;
 }
 
-CRRMsgJson::CRRMsgJson(){
+CRRMsgJson::CRRMsgJson() {
 
 }
 

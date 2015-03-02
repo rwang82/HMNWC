@@ -82,15 +82,15 @@ void CRRMsgHandler4FetchAccountProduct::accept( const CRRMsgMetaData& rmsgMetaDa
 	Json::Value valAccountProductList;
 	//
 	if ( !_parseParams( pRMsgJson->m_jsonRoot, fapParam ) ) {
-	    _sendFailedAck( rmsgMetaData, CRERR_SRV_PARAM_INVALID );
+	    _sendFailedAck( pRMsgJson->m_nCmdSN, rmsgMetaData, CRERR_SRV_PARAM_INVALID );
 		return;
 	}
 	//
     if ( !_execute( fapParam, valAccountProductList, nErrCode ) ) {
-	    _sendFailedAck( rmsgMetaData, nErrCode );
+	    _sendFailedAck( pRMsgJson->m_nCmdSN, rmsgMetaData, nErrCode );
 	}
 	//
-	_sendSuccessAck( rmsgMetaData, valAccountProductList );
+	_sendSuccessAck( pRMsgJson->m_nCmdSN, rmsgMetaData, valAccountProductList );
 }
 
 bool CRRMsgHandler4FetchAccountProduct::_execute( const CRFetchAccountProductParam& fapParam, Json::Value& valAccountProductList, int& nErrCode ) {
@@ -117,18 +117,18 @@ bool CRRMsgHandler4FetchAccountProduct::_execute( const CRFetchAccountProductPar
 	return true;
 }
 
-void CRRMsgHandler4FetchAccountProduct::_sendFailedAck( const CRRMsgMetaData& rmsgMetaData, int nErrCode ) {
-	gfnSendFailedAck( rmsgMetaData, CRCMDTYPE_ACK_FETCH_ACCOUNT_PRODUCTS, nErrCode );
+void CRRMsgHandler4FetchAccountProduct::_sendFailedAck( int nCmdSN, const CRRMsgMetaData& rmsgMetaData, int nErrCode ) {
+	gfnSendFailedAck( rmsgMetaData, CRCMDTYPE_ACK_FETCH_ACCOUNT_PRODUCTS, nCmdSN, nErrCode );
 }
 
-void CRRMsgHandler4FetchAccountProduct::_sendSuccessAck( const CRRMsgMetaData& rmsgMetaData, Json::Value& valAccountProductList ) {
+void CRRMsgHandler4FetchAccountProduct::_sendSuccessAck( int nCmdSN, const CRRMsgMetaData& rmsgMetaData, Json::Value& valAccountProductList ) {
 	Json::Value valParams;
 	std::string strRMsg;
 
 	valParams[ "result" ] = 1;
 	valParams[ "account_products_list" ] = valAccountProductList;
 	
-	CRRMsgMaker::createRMsg( valParams, CRCMDTYPE_ACK_FETCH_ACCOUNT_PRODUCTS, strRMsg );
+	CRRMsgMaker::createRMsg( valParams, CRCMDTYPE_ACK_FETCH_ACCOUNT_PRODUCTS, nCmdSN, strRMsg );
 
 	//
 	g_CRSrvRoot.m_pNWPServer->send( rmsgMetaData.m_sConnect, (const unsigned char*)strRMsg.c_str(), strRMsg.length() + 1 );

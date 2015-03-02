@@ -27,20 +27,20 @@ void CRRMsgHandler4AddAttetion::accept( const CRRMsgMetaData& rmsgMetaData, cons
 	int nErrCode = CRERR_SRV_NONE;
 
 	if ( !parseParams( pRMsgJson->m_jsonRoot, paramAddAttetion ) ) {
-		sendFailedAck( rmsgMetaData, CRERR_SRV_PARAM_INVALID );
+		sendFailedAck( pRMsgJson->m_nCmdSN, rmsgMetaData, CRERR_SRV_PARAM_INVALID );
 		return;
 	}
 	if ( !checkParams( paramAddAttetion, nErrCode ) ) {
-		sendFailedAck( rmsgMetaData, nErrCode );
+		sendFailedAck( pRMsgJson->m_nCmdSN, rmsgMetaData, nErrCode );
 		return;
 	}
 
 	if ( !execute( paramAddAttetion, nErrCode ) ) {
-	    sendFailedAck( rmsgMetaData, nErrCode );
+	    sendFailedAck( pRMsgJson->m_nCmdSN, rmsgMetaData, nErrCode );
 		return;
 	}
 
-	sendSuccessAck( rmsgMetaData, paramAddAttetion );
+	sendSuccessAck( pRMsgJson->m_nCmdSN, rmsgMetaData, paramAddAttetion );
 }
 
 bool CRRMsgHandler4AddAttetion::checkParams( const CRAttetionRecord& paramAddAttetion, int& nErrCode ) {
@@ -86,19 +86,19 @@ bool CRRMsgHandler4AddAttetion::parseParams( const Json::Value& jsonRoot, CRAtte
 	return true;
 }
 
-void CRRMsgHandler4AddAttetion::sendFailedAck( const CRRMsgMetaData& rmsgMetaData, int nErrCode ) {
+void CRRMsgHandler4AddAttetion::sendFailedAck( int nCmdSN, const CRRMsgMetaData& rmsgMetaData, int nErrCode ) {
 	Json::Value valParams;
 	USES_CONVERSION;
 	std::string strRMsg;
 
 	valParams[ "result" ] = 0;
 	valParams[ "reason" ] = nErrCode;
-	CRRMsgMaker::createRMsg( valParams, CRCMDTYPE_ACK_ADD_ATTETION, strRMsg );
+	CRRMsgMaker::createRMsg( valParams, CRCMDTYPE_ACK_ADD_ATTETION, nCmdSN, strRMsg );
 	//
 	g_CRSrvRoot.m_pNWPServer->send( rmsgMetaData.m_sConnect, (const unsigned char*)strRMsg.c_str(), strRMsg.length() + 1 );
 }
 
-void CRRMsgHandler4AddAttetion::sendSuccessAck( const CRRMsgMetaData& rmsgMetaData, const CRAttetionRecord& paramAddAttetion ) {
+void CRRMsgHandler4AddAttetion::sendSuccessAck( int nCmdSN, const CRRMsgMetaData& rmsgMetaData, const CRAttetionRecord& paramAddAttetion ) {
 	Json::Value valParams;
 	USES_CONVERSION;
 	std::string strRMsg;
@@ -106,7 +106,7 @@ void CRRMsgHandler4AddAttetion::sendSuccessAck( const CRRMsgMetaData& rmsgMetaDa
 
 	valParams[ "result" ] = 1;
 	valParams[ "attetion" ] = paramAddAttetion.m_strUserNameTo;
-	CRRMsgMaker::createRMsg( valParams, CRCMDTYPE_ACK_ADD_ATTETION, strRMsg );
+	CRRMsgMaker::createRMsg( valParams, CRCMDTYPE_ACK_ADD_ATTETION, nCmdSN, strRMsg );
 	//
 	g_CRSrvRoot.m_pNWPServer->send( rmsgMetaData.m_sConnect, (const unsigned char*)strRMsg.c_str(), strRMsg.length() + 1 );
 }

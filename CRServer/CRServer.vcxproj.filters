@@ -219,6 +219,9 @@
     <ClCompile Include="data\CRAccountProducts.cpp">
       <Filter>data</Filter>
     </ClCompile>
+    <ClCompile Include="rmsghandler\CRRMsgHandler4FetchAttetionedList.cpp">
+      <Filter>rmsghandler</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -418,6 +421,9 @@
     </ClInclude>
     <ClInclude Include="data\CRAccountProducts.h">
       <Filter>data</Filter>
+    </ClInclude>
+    <ClInclude Include="rmsghandler\CRRMsgHandler4FetchAttetionedList.h">
+      <Filter>rmsghandler</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

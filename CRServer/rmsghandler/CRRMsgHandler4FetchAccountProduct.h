@@ -36,8 +36,8 @@ private:
 private:
 	bool _parseParams( const Json::Value& jsonRoot, CRFetchAccountProductParam& fapParam );
     bool _execute( const CRFetchAccountProductParam& fapParam, Json::Value& valAccountProductList, int& nErrCode );
-	void _sendSuccessAck( const CRRMsgMetaData& rmsgMetaData, Json::Value& valAccountProductList );
-	void _sendFailedAck( const CRRMsgMetaData& rmsgMetaData, int nErrCode );
+	void _sendSuccessAck( int nCmdSN, const CRRMsgMetaData& rmsgMetaData, Json::Value& valAccountProductList );
+	void _sendFailedAck( int nCmdSN, const CRRMsgMetaData& rmsgMetaData, int nErrCode );
 
 };
 

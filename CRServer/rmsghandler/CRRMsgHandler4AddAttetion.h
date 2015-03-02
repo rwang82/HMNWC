@@ -17,8 +17,8 @@ private:
 	bool parseParams( const Json::Value& jsonRoot, CRAttetionRecord& paramAddAttetion );
 	bool checkParams( const CRAttetionRecord& paramAddAttetion, int& nErrCode );
 	bool execute( const CRAttetionRecord& paramAddAttetion, int& nErrCode );
-	void sendFailedAck( const CRRMsgMetaData& rmsgMetaData, int nErrCode );
-	void sendSuccessAck( const CRRMsgMetaData& rmsgMetaData, const CRAttetionRecord& paramAddAttetion );
+	void sendFailedAck( int nCmdSN, const CRRMsgMetaData& rmsgMetaData, int nErrCode );
+	void sendSuccessAck( int nCmdSN, const CRRMsgMetaData& rmsgMetaData, const CRAttetionRecord& paramAddAttetion );
 };
 
 

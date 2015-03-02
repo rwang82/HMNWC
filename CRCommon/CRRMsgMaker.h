@@ -10,10 +10,8 @@ private:
 public:
 	~CRRMsgMaker(){};
 public:
-	static void createRMsg( const Json::Value& valParams, int nCmdType, std::string& strRMsg );
+	static void createRMsg( const Json::Value& valParams, int nCmdType, int nSN, std::string& strRMsg );
 
-private:
-	static int _createSN();
 };
 
 

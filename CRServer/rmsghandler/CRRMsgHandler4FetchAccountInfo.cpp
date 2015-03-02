@@ -29,7 +29,7 @@ void CRRMsgHandler4FetchAccountInfo::accept( const CRRMsgMetaData& rmsgMetaData,
 	CRAccountDepot::accountdata_container_type containerAccountData;
 	//
 	if ( !_parseParams( pRMsgJson->m_jsonRoot, fetchAccountInfoParam ) ) {
-	    _sendFailedAck( rmsgMetaData, CRERR_SRV_PARAM_INVALID );
+	    _sendFailedAck( pRMsgJson->m_nCmdSN, rmsgMetaData, CRERR_SRV_PARAM_INVALID );
 		return;
 	}
 	//
@@ -40,10 +40,10 @@ void CRRMsgHandler4FetchAccountInfo::accept( const CRRMsgMetaData& rmsgMetaData,
 	}
 	pModuleAccountMgr->getAccountsData( fetchAccountInfoParam.m_containerAccountName, containerAccountData );
 	//
-	_sendSuccessAck( rmsgMetaData, containerAccountData );
+	_sendSuccessAck( pRMsgJson->m_nCmdSN, rmsgMetaData, containerAccountData );
 }
 
-void CRRMsgHandler4FetchAccountInfo::_sendSuccessAck( const CRRMsgMetaData& rmsgMetaData, CRAccountDepot::accountdata_container_type containerAccountData ) {
+void CRRMsgHandler4FetchAccountInfo::_sendSuccessAck( int nCmdSN, const CRRMsgMetaData& rmsgMetaData, CRAccountDepot::accountdata_container_type containerAccountData ) {
     Json::Value valParams;
 	USES_CONVERSION;
 	std::string strRMsg;
@@ -68,14 +68,14 @@ void CRRMsgHandler4FetchAccountInfo::_sendSuccessAck( const CRRMsgMetaData& rmsg
 		valAccountInfoList.append( valItem );
 	}
 	//
-	CRRMsgMaker::createRMsg( valParams, CRCMDTYPE_ACK_FETCH_ACCOUNT_INFO, strRMsg );
+	CRRMsgMaker::createRMsg( valParams, CRCMDTYPE_ACK_FETCH_ACCOUNT_INFO, nCmdSN, strRMsg );
 	//
 	g_CRSrvRoot.m_pNWPServer->send( rmsgMetaData.m_sConnect, (const unsigned char*)strRMsg.c_str(), strRMsg.length() + 1 );
 
 }
 
-void CRRMsgHandler4FetchAccountInfo::_sendFailedAck( const CRRMsgMetaData& rmsgMetaData, int nErrCode ) {
-    gfnSendFailedAck( rmsgMetaData, CRCMDTYPE_ACK_FETCH_ACCOUNT_INFO, nErrCode );
+void CRRMsgHandler4FetchAccountInfo::_sendFailedAck( int nCmdSN, const CRRMsgMetaData& rmsgMetaData, int nErrCode ) {
+    gfnSendFailedAck( rmsgMetaData, CRCMDTYPE_ACK_FETCH_ACCOUNT_INFO, nCmdSN, nErrCode );
 }
 
 void CRRMsgHandler4FetchAccountInfo::accept( const CRRMsgMetaData& rmsgMetaData, const CRRMsgBinary* pRMsgBinary ) {

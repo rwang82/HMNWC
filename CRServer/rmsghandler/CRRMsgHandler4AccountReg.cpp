@@ -37,9 +37,9 @@ void CRRMsgHandler4AccountReg::accept( const CRRMsgMetaData& rmsgMetaData, const
 	    return;
 	}
 	if ( pModuleAccountMgr->doRegAccount( paramAccountReg, nErrCode ) ) {
-	    _sendSuccessAck( rmsgMetaData );
+	    _sendSuccessAck( pRMsgJson->m_nCmdSN, rmsgMetaData );
 	} else {
-	    _sendFailedAck( rmsgMetaData, nErrCode );
+	    _sendFailedAck( pRMsgJson->m_nCmdSN, rmsgMetaData, nErrCode );
 	}
 }
 
@@ -48,25 +48,25 @@ void CRRMsgHandler4AccountReg::accept( const CRRMsgMetaData& rmsgMetaData, const
 }
 
 
-void CRRMsgHandler4AccountReg::_sendSuccessAck( const CRRMsgMetaData& rmsgMetaData ) {
+void CRRMsgHandler4AccountReg::_sendSuccessAck( int nCmdSN, const CRRMsgMetaData& rmsgMetaData ) {
 	Json::Value valParams;
 	USES_CONVERSION;
 	std::string strRMsg;
 
 	valParams[ "result" ] = 1;
-	CRRMsgMaker::createRMsg( valParams, CRCMDTYPE_ACK_ACCOUNT_REG, strRMsg );
+	CRRMsgMaker::createRMsg( valParams, CRCMDTYPE_ACK_ACCOUNT_REG, nCmdSN, strRMsg );
     //
 	g_CRSrvRoot.m_pNWPServer->send( rmsgMetaData.m_sConnect, (const unsigned char*)strRMsg.c_str(), strRMsg.length() + 1 );
 }
 
-void CRRMsgHandler4AccountReg::_sendFailedAck( const CRRMsgMetaData& rmsgMetaData, int nErrCode ) {
+void CRRMsgHandler4AccountReg::_sendFailedAck( int nCmdSN, const CRRMsgMetaData& rmsgMetaData, int nErrCode ) {
 	Json::Value valParams;
 	USES_CONVERSION;
 	std::string strRMsg;
 
 	valParams[ "result" ] = 0;
 	valParams[ "reason" ] = nErrCode;
-	CRRMsgMaker::createRMsg( valParams, CRCMDTYPE_ACK_ACCOUNT_REG, strRMsg );
+	CRRMsgMaker::createRMsg( valParams, CRCMDTYPE_ACK_ACCOUNT_REG, nCmdSN, strRMsg );
 	//
 	g_CRSrvRoot.m_pNWPServer->send( rmsgMetaData.m_sConnect, (const unsigned char*)strRMsg.c_str(), strRMsg.length() + 1 );
 }

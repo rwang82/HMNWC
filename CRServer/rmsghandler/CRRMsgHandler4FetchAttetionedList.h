@@ -1,14 +1,14 @@
-#ifndef __CRRMSGHANDLER4FETCHATTETIONLIST_H__
-#define __CRRMSGHANDLER4FETCHATTETIONLIST_H__
+#ifndef __CRRMSGHANDLER4FETCHATTETIONEDLIST_H__
+#define __CRRMSGHANDLER4FETCHATTETIONEDLIST_H__
 #include "CRRmsgHandlerBase.h"
 #include "CRAttetionRecordList.h"
 #include "CRTypes.h"
 //
-class CRRMsgHandler4FetchAttetionList : public CRRMsgHandlerBase{
+class CRRMsgHandler4FetchAttetionedList : public CRRMsgHandlerBase{
 private:
 public:	
-	CRRMsgHandler4FetchAttetionList();
-	virtual ~CRRMsgHandler4FetchAttetionList();
+	CRRMsgHandler4FetchAttetionedList();
+	virtual ~CRRMsgHandler4FetchAttetionedList();
 	
 public:
 	virtual void accept( const CRRMsgMetaData& rmsgMetaData, const CRRMsgJson* pRMsgJson );
@@ -21,4 +21,4 @@ private:
 };
 
 
-#endif //__CRRMSGHANDLER4FETCHATTETIONLIST_H__
+#endif //__CRRMSGHANDLER4FETCHATTETIONEDLIST_H__

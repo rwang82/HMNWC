@@ -16,8 +16,8 @@ public:
 
 private:
     bool _parseParams( const Json::Value& jsonRoot, CRProductPublishParam& paramProduct );
-	void _sendSuccessAck( const CRProductPublishParam& rmsgMetaData );
-	void _sendFailedAck( const CRProductPublishParam& rmsgMetaData, int nErrCode );
+	void _sendSuccessAck( int nCmdSN, const CRProductPublishParam& rmsgMetaData );
+	void _sendFailedAck( int nCmdSN, const CRProductPublishParam& rmsgMetaData, int nErrCode );
 };
 
 

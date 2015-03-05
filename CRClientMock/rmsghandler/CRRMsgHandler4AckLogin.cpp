@@ -20,10 +20,6 @@ void CRRMsgHandler4AckLogin::accept( const CRRMsgMetaData& rmsgMetaData, const C
 	}
 }
 
-void CRRMsgHandler4AckLogin::accept( const CRRMsgMetaData& rmsgMetaData, const CRRMsgBinary* pRMsgBinary ) {
-
-}
-
 bool CRRMsgHandler4AckLogin::_isLoginSuccess( const CRRMsgJson* pRMsgJson ) {
     const Json::Value& valParams = pRMsgJson->m_jsonRoot[ "params" ];
 	if ( !valParams.isObject() )

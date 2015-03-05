@@ -1,0 +1,37 @@
+//////////////////////////////
+// 请配合CRFileServer/doc/初步设计来看。
+// request file download. 
+{
+    "cmd":{
+        "type":27,
+        "sn":34252,
+        "os":100,
+        "ver":"0.1"
+    },
+    "params":{
+        "from":"rom.wang",
+        "fid":"xxxxxxx-xxx-xxx-xx",
+        "start":0,
+        "segment":1024,
+        "totol":98377
+    }
+}
+//////////////////////////////
+// acknowledge of file download.
+{
+    "cmd":{
+        "type":28,
+        "sn":34252,
+        "os":100,
+        "ver":"0.1"
+    },
+    "params":{
+        "result":0,
+        "reason":1,
+        "owner":"rom.wang",
+        "fid":"xxxxxxx-xxx-xxx-xx",
+        "start":4096,
+        "segment":1024,
+        "totol":98377
+    }
+}

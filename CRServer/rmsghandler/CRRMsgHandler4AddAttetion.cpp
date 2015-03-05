@@ -61,10 +61,6 @@ bool CRRMsgHandler4AddAttetion::execute( const CRAttetionRecord& paramAddAttetio
     return g_CRSrvRoot.m_pSrvDBProxy->save2DB( &paramAddAttetion, nErrCode );
 }
 
-void CRRMsgHandler4AddAttetion::accept( const CRRMsgMetaData& rmsgMetaData, const CRRMsgBinary* pRMsgBinary ) {
-
-}
-
 bool CRRMsgHandler4AddAttetion::parseParams( const Json::Value& jsonRoot, CRAttetionRecord& paramAddAttetion ) {
 	const Json::Value& valParams = jsonRoot[ "params" ];
 	std::string strUtf8;

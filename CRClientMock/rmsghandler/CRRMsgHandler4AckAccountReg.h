@@ -10,7 +10,6 @@ public:
 	// interface of CRRMsgHandlerBase.
 private:
 	virtual void accept( const CRRMsgMetaData& rmsgMetaData, const CRRMsgJson* pRMsgJson );
-	virtual void accept( const CRRMsgMetaData& rmsgMetaData, const CRRMsgBinary* pRMsgBinary );
 
 private:
 	bool _isAccountRegSuccess( const CRRMsgJson* pRMsgJson );

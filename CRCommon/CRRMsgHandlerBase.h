@@ -3,21 +3,18 @@
 #include "CRTypes.h"
 #include "json/json.h"
 //
-struct CRRMsgJson;
-struct CRRMsgBinary;
 struct CRRMsgMetaData;
+struct CRRMsgJson;
+class CRRMsgFT;
 //
 class CRRMsgHandlerBase {
-	friend struct CRRMsgJson;
-	friend struct CRRMsgBinary;
 public:
 	CRRMsgHandlerBase() {};
 	virtual ~CRRMsgHandlerBase() {};
 
-private:
-	virtual void accept( const CRRMsgMetaData& rmsgMetaData, const CRRMsgJson* pRMsgJson ) = 0;
-	virtual void accept( const CRRMsgMetaData& rmsgMetaData, const CRRMsgBinary* pRMsgBinary ) = 0;
-
+public:
+	virtual void accept( const CRRMsgMetaData& rmsgMetaData, const CRRMsgJson* pRMsgJson ) {};
+	virtual void accept( const CRRMsgMetaData& rmsgMetaData, const CRRMsgFT* pRMsgFT ) {};
 };
 
 

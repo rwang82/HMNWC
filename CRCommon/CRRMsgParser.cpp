@@ -9,12 +9,6 @@
 // CRRMsgJson.
 static bool isMatchCRRMsgJson( const unsigned char* pRawBuf, unsigned int uLenRawBuf );
 static CRRMsgJson* createCRRMsgJson( const unsigned char* pRawBuf, unsigned int uLenRawBuf );
-////////////////////////////////////////////////////////////
-// CRRMsgXML.
-////////////////////////////////////////////////////////////
-// CRRMsgBinary.
-static bool isMatchCRRMsgBinary( const unsigned char* pRawBuf, unsigned int uLenRawBuf );
-static CRRMsgBinary* createCRRMsgBinary( const unsigned char* pRawBuf, unsigned int uLenRawBuf );
 
 CRRMsgParser::CRRMsgParser() {
 
@@ -35,25 +29,10 @@ CRRMsgBase* CRRMsgParser::createRMsg( const unsigned char* pRawBuf, unsigned int
 		pRMsgNew = createCRRMsgJson( pRawBuf, uLenRawBuf );
 	    if ( pRMsgNew ) {
 			return pRMsgNew;
-		} else {
-		    goto check_CRRMsgBinary;
-		}
+		} 
 		assert( false );
 		return false;
 	} 
-
-	// check if it match CRRMsgXML.
-
-
-	
-check_CRRMsgBinary:
-	// check if it match CRRMsgBinary.
-	if ( isMatchCRRMsgBinary( pRawBuf, uLenRawBuf ) ) {
-	    pRMsgNew = createCRRMsgBinary( pRawBuf, uLenRawBuf );
-		assert( pRMsgNew );
-		return pRMsgNew;
-	}
-
 
 	//
 	assert( false );
@@ -101,13 +80,4 @@ CRRMsgJson* createCRRMsgJson( const unsigned char* pRawBuf, unsigned int uLenRaw
 	//
 	fpkRMsgJson.Cancel();
 	return pRMsgJson;
-}
-
-
-bool isMatchCRRMsgBinary( const unsigned char* pRawBuf, unsigned int uLenRawBuf ) {
-    return false;
-}
-
-CRRMsgBinary* createCRRMsgBinary( const unsigned char* pRawBuf, unsigned int uLenRawBuf ) {
-    return NULL;
 }

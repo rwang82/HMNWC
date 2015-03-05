@@ -51,10 +51,6 @@ void CRRMsgHandler4Logoff::accept( const CRRMsgMetaData& rmsgMetaData, const CRR
 	}
 }
 
-void CRRMsgHandler4Logoff::accept( const CRRMsgMetaData& rmsgMetaData, const CRRMsgBinary* pRMsgBinary ) {
-
-}
-
 bool CRRMsgHandler4Logoff::_fillLogoffParam( const CRRMsgMetaData& rmsgMetaData, const CRRMsgJson* pRMsgJson, CRLogoffParam& logoffParam ) {
     if ( !pRMsgJson )
 		return false;
@@ -102,11 +98,6 @@ void CRRMsgHandler4Logoff::_sendResultAck( const CRRMsgMetaData& rmsgMetaData, c
 	g_CRSrvRoot.m_pNWPServer->send( rmsgMetaData.m_sConnect, (const unsigned char*)strRMsgAck.c_str(), strRMsgAck.length() + 1 );
 	
 }
-
-void CRRMsgHandler4Logoff::_sendResultAck( const CRRMsgMetaData& rmsgMetaData, const CRRMsgBinary* pRMsgJson, const utf8_type& strUserName, bool bSuccess, int nErrCode ) {
-
-}
-
 
 
 

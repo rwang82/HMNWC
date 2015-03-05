@@ -103,6 +103,7 @@
     <ClCompile Include="..\CRCommon\CRRMsgJsonHelper.cpp" />
     <ClCompile Include="..\CRCommon\CRRMsgMaker.cpp" />
     <ClCompile Include="..\CRCommon\CRRMsgParser.cpp" />
+    <ClCompile Include="..\CRCommon\CRRMsgRaw.cpp" />
     <ClCompile Include="accounts\CRAccountAdmin.cpp" />
     <ClCompile Include="accounts\CRAccountCreator.cpp" />
     <ClCompile Include="accounts\CRAccountLogoff.cpp" />
@@ -165,6 +166,7 @@
     <ClInclude Include="..\CRCommon\CRRMsgJsonHelper.h" />
     <ClInclude Include="..\CRCommon\CRRMsgMaker.h" />
     <ClInclude Include="..\CRCommon\CRRMsgParser.h" />
+    <ClInclude Include="..\CRCommon\CRRMsgRaw.h" />
     <ClInclude Include="..\CRCommon\CRTypes.h" />
     <ClInclude Include="accounts\CRAccountAdmin.h" />
     <ClInclude Include="accounts\CRAccountCreator.h" />

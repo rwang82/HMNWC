@@ -52,11 +52,12 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>.\;.\frame;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\;.\frame;..\HMNWP\inc;..\CRSrvBase\inc;..\common;..\crcommon;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(OutDir);$(OutDir)\lib;</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -68,29 +69,40 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>.\;.\frame;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\;.\frame;..\HMNWP\inc;..\CRSrvBase\inc;..\common;..\crcommon;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(OutDir);$(OutDir)\lib;</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\common\HMEndianConv.h" />
+    <ClInclude Include="..\CRCommon\CRRCmdDefs.h" />
+    <ClInclude Include="..\CRCommon\CRRMsgBase.h" />
+    <ClInclude Include="..\CRCommon\CRRMsgFT.h" />
     <ClInclude Include="frame\CRFileSrvApp.h" />
-    <ClInclude Include="frame\CRFileSrvRoot.h" />
+    <ClInclude Include="frame\CRFSClientStub.h" />
+    <ClInclude Include="frame\CRFSClientStubFactory.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\common\HMEndianConv.cpp" />
+    <ClCompile Include="..\CRCommon\CRRCmdDefs.cpp" />
+    <ClCompile Include="..\CRCommon\CRRMsgBase.cpp" />
+    <ClCompile Include="..\CRCommon\CRRMsgFT.cpp" />
     <ClCompile Include="CRFileServer.cpp" />
     <ClCompile Include="frame\CRFileSrvApp.cpp" />
-    <ClCompile Include="frame\CRFileSrvRoot.cpp" />
+    <ClCompile Include="frame\CRFSClientStub.cpp" />
+    <ClCompile Include="frame\CRFSClientStubFactory.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

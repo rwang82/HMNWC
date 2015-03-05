@@ -68,10 +68,6 @@ void CRRMsgHandler4ProductPublish::_sendFailedAck( int nCmdSN, const CRProductPu
 
 }
 
-void CRRMsgHandler4ProductPublish::accept( const CRRMsgMetaData& rmsgMetaData, const CRRMsgBinary* pRMsgBinary ) {
-
-}
-
 bool CRRMsgHandler4ProductPublish::_parseParams( const Json::Value& jsonRoot, CRProductPublishParam& paramPublishProduct ) {
 	USES_CONVERSION;
 	std::string strUtf8Tmp;

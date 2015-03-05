@@ -43,11 +43,6 @@ void CRRMsgHandler4AccountReg::accept( const CRRMsgMetaData& rmsgMetaData, const
 	}
 }
 
-void CRRMsgHandler4AccountReg::accept( const CRRMsgMetaData& rmsgMetaData, const CRRMsgBinary* pRMsgBinary ) {
-
-}
-
-
 void CRRMsgHandler4AccountReg::_sendSuccessAck( int nCmdSN, const CRRMsgMetaData& rmsgMetaData ) {
 	Json::Value valParams;
 	USES_CONVERSION;

@@ -134,6 +134,3 @@ void CRRMsgHandler4FetchAccountProduct::_sendSuccessAck( int nCmdSN, const CRRMs
 	g_CRSrvRoot.m_pNWPServer->send( rmsgMetaData.m_sConnect, (const unsigned char*)strRMsg.c_str(), strRMsg.length() + 1 );
 }
 
-void CRRMsgHandler4FetchAccountProduct::accept( const CRRMsgMetaData& rmsgMetaData, const CRRMsgBinary* pRMsgBinary ) {
-
-}

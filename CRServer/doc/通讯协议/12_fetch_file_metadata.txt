@@ -1,0 +1,34 @@
+//////////////////////////////
+// 请配合CRFileServer/doc初步设计来看。
+// request fetch file metadata. 
+{
+    "cmd":{
+        "type":25,
+        "sn":34252,
+        "os":100,
+        "ver":"0.1"
+    },
+    "params":{
+        "from":"rom.wang",
+        "fid":"xxxxxxx-xxx-xxx-xx",
+        "is_need_owner":0
+    }
+}
+//////////////////////////////
+// acknowledge of fetch file metadata.
+{
+    "cmd":{
+        "type":26,
+        "sn":34252,
+        "os":100,
+        "ver":"0.1"
+    },
+    "params":{
+        "result":0,
+        "reason":1,
+        "from":"rom.wang",
+        "fid":"xxxxxxx-xxx-xxx-xx",
+        "owner":"wyf",
+        "totol":98377
+    }
+}

@@ -20,10 +20,6 @@ void CRRMsgHandler4AckLogoff::accept( const CRRMsgMetaData& rmsgMetaData, const 
 	}
 }
 
-void CRRMsgHandler4AckLogoff::accept( const CRRMsgMetaData& rmsgMetaData, const CRRMsgBinary* pRMsgBinary ) {
-
-}
-
 bool CRRMsgHandler4AckLogoff::_getLogoffResult( const CRRMsgJson* pRMsgJson ) {
     const Json::Value& valParams = pRMsgJson->m_jsonRoot[ "params" ];
     if ( !valParams.isObject() )

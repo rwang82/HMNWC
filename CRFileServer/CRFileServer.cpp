@@ -3,11 +3,13 @@
 
 #include "stdafx.h"
 #include "CRFileServer.h"
-#include "CRFileSrvRoot.h"
+#include "CRSrvRoot.h"
 #include "CRFileSrvApp.h"
+#include "CRFSClientStubFactory.h"
 
 //
-CRFileSrvRoot g_srvRoot;
+CRFSClientStubFactory g_fsCSF;
+CRSrvRoot g_srvRoot( &g_fsCSF );
 CRFileSrvApp g_srvApp;
 //
 int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
@@ -15,6 +17,8 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
                      _In_ LPTSTR    lpCmdLine,
                      _In_ int       nCmdShow)
 {
+	g_srvRoot.m_nwpServer.listen( 7890 );
+
 	g_srvApp.run();
 }
 

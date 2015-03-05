@@ -222,6 +222,9 @@
     <ClCompile Include="rmsghandler\CRRMsgHandler4FetchAttetionedList.cpp">
       <Filter>rmsghandler</Filter>
     </ClCompile>
+    <ClCompile Include="..\CRCommon\CRRMsgRaw.cpp">
+      <Filter>crcommon</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -424,6 +427,9 @@
     </ClInclude>
     <ClInclude Include="rmsghandler\CRRMsgHandler4FetchAttetionedList.h">
       <Filter>rmsghandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CRCommon\CRRMsgRaw.h">
+      <Filter>crcommon</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -55,10 +55,6 @@ void CRRMsgHandler4Login::accept( const CRRMsgMetaData& rmsgMetaData, const CRRM
 	}
 }
 
-void CRRMsgHandler4Login::accept( const CRRMsgMetaData& rmsgMetaData, const CRRMsgBinary* pRMsgBinary ) {
-
-}
-
 bool CRRMsgHandler4Login::_doLogin( const CRLoginParam& loginParam, int& nErrCode ) {
     CRModuleAccountMgr* pModuleAccountMgr = NULL;
 	nErrCode = CRLOGIN_ERR_UNKNOWN;
@@ -96,18 +92,6 @@ bool CRRMsgHandler4Login::_fillLoginParam( const CRRMsgMetaData& rmsgMetaData, c
 
 	return true;
 }
-
-bool CRRMsgHandler4Login::_fillLoginParam( const CRRMsgMetaData& rmsgMetaData, const CRRMsgBinary* pRMsgBinary, CRLoginParam& loginParam ) {
-	if ( !pRMsgBinary )
-		return false;
-
-	// need more code here.
-	return false;
-	
-
-	return true;
-}
-
 
 void CRRMsgHandler4Login::_sendSuccessAck( const CRLoginParam& loginParam, const CRRMsgMetaData& rmsgMetaData, const CRRMsgJson* pRMsgJson ) {
 	USES_CONVERSION;
@@ -162,13 +146,6 @@ void CRRMsgHandler4Login::_sendFailedAck( const CRLoginParam& loginParam, const 
 	g_CRSrvRoot.m_pNWPServer->send( rmsgMetaData.m_sConnect, (const unsigned char*)strRMsgAck.c_str(), strRMsgAck.length() + 1 );
 }
 
-void CRRMsgHandler4Login::_sendSuccessAck( const CRLoginParam& loginParam, const CRRMsgMetaData& rmsgMetaData, const CRRMsgBinary* pRMsgJson ) {
-
-}
-
-void CRRMsgHandler4Login::_sendFailedAck( const CRLoginParam& loginParam, const CRRMsgMetaData& rmsgMetaData, const CRRMsgBinary* pRMsgJson, int nErrCode ) {
-
-}
 
 
 

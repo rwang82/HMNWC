@@ -117,6 +117,7 @@
     <ClInclude Include="..\CRCommon\CRRMsgHandlerDepot.h" />
     <ClInclude Include="..\CRCommon\CRRMsgMaker.h" />
     <ClInclude Include="..\CRCommon\CRRMsgParser.h" />
+    <ClInclude Include="..\CRCommon\CRRMsgRaw.h" />
     <ClInclude Include="..\CRCommon\CRTypes.h" />
     <ClInclude Include="commproxy\CRCCommDefs.h" />
     <ClInclude Include="commproxy\CRCCommDepot.h" />
@@ -158,6 +159,7 @@
     <ClCompile Include="..\CRCommon\CRRMsgHandlerDepot.cpp" />
     <ClCompile Include="..\CRCommon\CRRMsgMaker.cpp" />
     <ClCompile Include="..\CRCommon\CRRMsgParser.cpp" />
+    <ClCompile Include="..\CRCommon\CRRMsgRaw.cpp" />
     <ClCompile Include="commproxy\CRCCommDepot.cpp" />
     <ClCompile Include="commproxy\CRCCommProxyBase.cpp" />
     <ClCompile Include="commproxy\CRCCommProxyHMNWC.cpp" />

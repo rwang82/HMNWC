@@ -5,6 +5,7 @@
 #include "CRCCommProxyHMNWC.h"
 #include "CRClientMock.h"
 #include "CRCCommDefs.h"
+#include "CRRMsgRaw.h"
 #include "FuncPack.h"
 
 CRTaskRMsgDispatch::CRTaskRMsgDispatch( const unsigned char* pRawBuf, unsigned int uLenRawBuf )

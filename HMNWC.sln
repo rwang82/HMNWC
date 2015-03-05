@@ -36,6 +36,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HMNWEDemoServer", "HMNWEDem
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CRFileServer", "CRFileServer\CRFileServer.vcxproj", "{EBC914FB-91E7-4365-A655-0F160AB8A1D3}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CRSrvBase", "CRSrvBase\CRSrvBase.vcxproj", "{B3FDA0F5-64C9-4131-B2B6-FAE3F5ECF735}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -78,6 +80,10 @@ Global
 		{EBC914FB-91E7-4365-A655-0F160AB8A1D3}.Debug|Win32.Build.0 = Debug|Win32
 		{EBC914FB-91E7-4365-A655-0F160AB8A1D3}.Release|Win32.ActiveCfg = Release|Win32
 		{EBC914FB-91E7-4365-A655-0F160AB8A1D3}.Release|Win32.Build.0 = Release|Win32
+		{B3FDA0F5-64C9-4131-B2B6-FAE3F5ECF735}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B3FDA0F5-64C9-4131-B2B6-FAE3F5ECF735}.Debug|Win32.Build.0 = Debug|Win32
+		{B3FDA0F5-64C9-4131-B2B6-FAE3F5ECF735}.Release|Win32.ActiveCfg = Release|Win32
+		{B3FDA0F5-64C9-4131-B2B6-FAE3F5ECF735}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

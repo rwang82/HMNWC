@@ -78,10 +78,6 @@ void CRRMsgHandler4FetchAccountInfo::_sendFailedAck( int nCmdSN, const CRRMsgMet
     gfnSendFailedAck( rmsgMetaData, CRCMDTYPE_ACK_FETCH_ACCOUNT_INFO, nCmdSN, nErrCode );
 }
 
-void CRRMsgHandler4FetchAccountInfo::accept( const CRRMsgMetaData& rmsgMetaData, const CRRMsgBinary* pRMsgBinary ) {
-
-}
-
 bool CRRMsgHandler4FetchAccountInfo::_parseParams( Json::Value jsonRoot, CRFetchAccountInfoParam& param ) {
     utf8_type strAccountName;
 	

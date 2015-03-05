@@ -16,6 +16,12 @@
     <Filter Include="frame">
       <UniqueIdentifier>{086561f0-4aa4-4879-9446-fa5d9cf9a7cf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="crcommon">
+      <UniqueIdentifier>{5d2785c8-ad0a-4ce1-871c-2f6014bd3f60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{21bc34c0-bff7-4b7a-9cd5-4a16950223a1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -30,11 +36,26 @@
     <ClInclude Include="Resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="frame\CRFileSrvRoot.h">
-      <Filter>frame</Filter>
-    </ClInclude>
     <ClInclude Include="frame\CRFileSrvApp.h">
       <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="frame\CRFSClientStubFactory.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="frame\CRFSClientStub.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CRCommon\CRRMsgFT.h">
+      <Filter>crcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\HMEndianConv.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CRCommon\CRRMsgBase.h">
+      <Filter>crcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CRCommon\CRRCmdDefs.h">
+      <Filter>crcommon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -44,11 +65,26 @@
     <ClCompile Include="CRFileServer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="frame\CRFileSrvRoot.cpp">
-      <Filter>frame</Filter>
-    </ClCompile>
     <ClCompile Include="frame\CRFileSrvApp.cpp">
       <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="frame\CRFSClientStubFactory.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="frame\CRFSClientStub.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CRCommon\CRRMsgFT.cpp">
+      <Filter>crcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\HMEndianConv.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CRCommon\CRRMsgBase.cpp">
+      <Filter>crcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CRCommon\CRRCmdDefs.cpp">
+      <Filter>crcommon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

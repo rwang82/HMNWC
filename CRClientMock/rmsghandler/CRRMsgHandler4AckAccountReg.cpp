@@ -19,10 +19,6 @@ void CRRMsgHandler4AckAccountReg::accept( const CRRMsgMetaData& rmsgMetaData, co
 
 }
 
-void CRRMsgHandler4AckAccountReg::accept( const CRRMsgMetaData& rmsgMetaData, const CRRMsgBinary* pRMsgBinary ) {
-
-}
-
 bool CRRMsgHandler4AckAccountReg::_isAccountRegSuccess( const CRRMsgJson* pRMsgJson ) {
     const Json::Value& valParams = pRMsgJson->m_jsonRoot[ "params" ];
 	if ( !valParams.isObject() )

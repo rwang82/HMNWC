@@ -1,7 +1,7 @@
 #ifndef __CRTASKRMsgDISPATCH_H__
 #define __CRTASKRMsgDISPATCH_H__
 #include "HMTaskEngine.h"
-#include "CRRMsg.h"
+#include "CRRMsgRaw.h"
 //
 class CRTaskRMsgDispatch : public HMTaskBase {
 public:
@@ -11,8 +11,8 @@ public:
 public:
 	virtual void Run();
 
-private:
-	CRRMsgRaw* m_pRawRMsg;
+public:
+	CRRMsgRaw m_rawRMsg;
 };
 
 

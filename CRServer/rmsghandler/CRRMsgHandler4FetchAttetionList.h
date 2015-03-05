@@ -12,7 +12,6 @@ public:
 	
 public:
 	virtual void accept( const CRRMsgMetaData& rmsgMetaData, const CRRMsgJson* pRMsgJson );
-	virtual void accept( const CRRMsgMetaData& rmsgMetaData, const CRRMsgBinary* pRMsgBinary );
 
 private:
 	bool _parseParams( const Json::Value& jsonRoot, CRFetchAttetionRecordListParam& param );

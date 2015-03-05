@@ -49,10 +49,6 @@ void CRRMsgHandler4FetchAttetionedList::accept( const CRRMsgMetaData& rmsgMetaDa
 	_sendSuccessAck( pRMsgJson->m_nCmdSN, rmsgMetaData, paramFARL.m_strAccountName, listRecords );
 }
 
-void CRRMsgHandler4FetchAttetionedList::accept( const CRRMsgMetaData& rmsgMetaData, const CRRMsgBinary* pRMsgBinary ) {
-
-}
-
 bool CRRMsgHandler4FetchAttetionedList::_parseParams( const Json::Value& jsonRoot, CRFetchAttetionRecordListParam& param ) {
     const Json::Value& valParams = jsonRoot[ "params" ];
 	std::string strUtf8;

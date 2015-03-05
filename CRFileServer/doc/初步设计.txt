@@ -1,0 +1,21 @@
+/////////////////////////////////////////////
+// 快速出原形的设计
+// 
+1. 定义发送图片数据包格式。
+#####################################
+1byte| version
+2byte| length of metadata.(n byte)
+nbyte| metadata.
+4byte| length of payload.(m byte)
+mbyte| payload.
+#####################################
+metadata is a json string with a '\0' as ending.
+
+
+
+
+/////////////////////////////////////////////
+// 比较完善的设计
+1. FUS(file upload server)
+2. FDS(file download server)
+3. FSS(file storage server)

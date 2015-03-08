@@ -45,7 +45,7 @@ void CRRMsgDispatcher::_onClientAccept( void* pParam1, void* pParam2 ) {
     const sockaddr_in* pAddr = (const sockaddr_in*)pParam2;
 	HMTaskEngine::task_id_type taskId;
 
-	m_taskEngine4CmdDispatch.pushbackTask( new CRTaskOnAccept( sConnect, pAddr, &m_pSrvRoot->m_clientStubDepot ), taskId );
+	m_taskEngine4CmdDispatch.pushbackTask( new CRTaskOnAccept( sConnect, pAddr, m_pSrvRoot ), taskId );
 }
 
 void CRRMsgDispatcher::_onClientDisConnect( void* pParam1, void* pParam2 ) {
@@ -54,7 +54,7 @@ void CRRMsgDispatcher::_onClientDisConnect( void* pParam1, void* pParam2 ) {
 	HMTaskEngine::task_id_type taskId;
 
 	//
-	m_taskEngine4CmdDispatch.pushbackTask( new CRTaskOnDisConnect( sConnect, pAddr, &m_pSrvRoot->m_clientStubDepot ), taskId );
+	m_taskEngine4CmdDispatch.pushbackTask( new CRTaskOnDisConnect( sConnect, pAddr, m_pSrvRoot ), taskId );
 }
 
 void CRRMsgDispatcher::_onClientRequest( void* pParam1, void* pParam2, void* pParam3, void* pParam4 ) {
@@ -69,7 +69,7 @@ void CRRMsgDispatcher::_onClientRequest( void* pParam1, void* pParam2, void* pPa
 		return;
 	}
 	//
-	m_taskEngine4CmdDispatch.pushbackTask( new CRTaskRMsgDispatch( sConnect, *pAddr, pRawBuf, uLenRawBuf, &m_pSrvRoot->m_clientStubDepot ), taskId );
+	m_taskEngine4CmdDispatch.pushbackTask( new CRTaskRMsgDispatch( sConnect, *pAddr, pRawBuf, uLenRawBuf, m_pSrvRoot ), taskId );
 }
 
 

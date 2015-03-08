@@ -1,21 +1,17 @@
 #include "stdafx.h"
 #include "CRTaskRMsgDispatch.h"
 //
-CRTaskRMsgDispatch::CRTaskRMsgDispatch( SOCKET sConnect, const sockaddr_in& sAddr, const unsigned char* pRawBuf, unsigned int uLenRawBuf, CRClientStubDepot* pClientStubDepot )
+CRTaskRMsgDispatch::CRTaskRMsgDispatch( SOCKET sConnect, const sockaddr_in& sAddr, const unsigned char* pRawBuf, unsigned int uLenRawBuf, CRSrvRoot* pSrvRoot )
 : m_rmsgRaw( sConnect, sAddr, pRawBuf, uLenRawBuf )
-, m_pClientStubDepot( pClientStubDepot ) {
+, m_pSrvRoot( pSrvRoot ) {
 }
 
 CRTaskRMsgDispatch::~CRTaskRMsgDispatch() {
 }
 
 void CRTaskRMsgDispatch::Run() {
-	if ( !m_pClientStubDepot )
+	if ( !m_pSrvRoot || !m_pSrvRoot->m_pRMsgListener )
 		return;
 
-	CRClientStub* pClientStub = m_pClientStubDepot->getClientStub( m_rmsgRaw.m_metaData.m_sConnect );
-	if ( !pClientStub )
-		return;
-
-	pClientStub->onRMsg( m_rmsgRaw );
+	m_pSrvRoot->m_pRMsgListener->onRMsg( m_pSrvRoot, m_rmsgRaw );
 }

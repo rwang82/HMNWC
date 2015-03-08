@@ -17,7 +17,7 @@
       <UniqueIdentifier>{2e691768-a165-4867-8154-d51ff6b25378}</UniqueIdentifier>
     </Filter>
     <Filter Include="crcommon">
-      <UniqueIdentifier>{764597a4-35db-40d7-ac2c-45b982020cd6}</UniqueIdentifier>
+      <UniqueIdentifier>{2b81ffb2-fc08-4cc3-a512-b6a46efc80bc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -51,12 +51,6 @@
     <ClInclude Include="inc\CRSrvEventHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="inc\CRClientStubDepot.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="inc\CRClientStub.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="inc\CRSrvEvtDefs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -75,13 +69,16 @@
     <ClInclude Include="inc\CRTaskOnDisConnect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\CRCommon\CRRMsgRaw.h">
-      <Filter>crcommon</Filter>
-    </ClInclude>
     <ClInclude Include="..\common\HMEndianConv.h">
       <Filter>common</Filter>
     </ClInclude>
-    <ClInclude Include="inc\CRClientStubFactoryBase.h">
+    <ClInclude Include="..\CRCommon\CRRMsgHandlerDepot.h">
+      <Filter>crcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CRCommon\CRRMsgRaw.h">
+      <Filter>crcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\CRRMsgListener.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -110,12 +107,6 @@
     <ClCompile Include="src\CRSrvEventHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\CRClientStub.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\CRClientStubDepot.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\CREventDepot.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -131,11 +122,14 @@
     <ClCompile Include="src\CRTaskOnDisConnect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\CRCommon\CRRMsgRaw.cpp">
-      <Filter>crcommon</Filter>
-    </ClCompile>
     <ClCompile Include="..\common\HMEndianConv.cpp">
       <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CRCommon\CRRMsgHandlerDepot.cpp">
+      <Filter>crcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CRCommon\CRRMsgRaw.cpp">
+      <Filter>crcommon</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

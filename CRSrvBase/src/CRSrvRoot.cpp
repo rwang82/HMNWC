@@ -2,9 +2,8 @@
 #include "CRSrvRoot.h"
 #include "CRSrvEventHandler.h"
 
-CRSrvRoot::CRSrvRoot( CRClientStubFactoryBase* pCSF )
-: m_pCSF( pCSF )
-, m_clientStubDepot( this )
+CRSrvRoot::CRSrvRoot( const CRRMsgListener* pRMsgListener )
+: m_pRMsgListener( pRMsgListener )
 , m_nwpServer( new CRSrvEventHandler( &m_eventDepot ) ){
 	_init();
 }

@@ -2,12 +2,12 @@
 #define __CRTASKRMSGDISPATCH_H__
 #include "HMTaskEngine.h"
 #include "CRRMsgRaw.h"
-#include "CRClientStubDepot.h"
+#include "CRSrvRoot.h"
 
 class CRTaskRMsgDispatch : public HMTaskBase {
 
 public:
-	CRTaskRMsgDispatch( SOCKET sConnect, const sockaddr_in& sAddr, const unsigned char* pRawBuf, unsigned int uLenRawBuf, CRClientStubDepot* pClientStubDepot );
+	CRTaskRMsgDispatch( SOCKET sConnect, const sockaddr_in& sAddr, const unsigned char* pRawBuf, unsigned int uLenRawBuf, CRSrvRoot* pSrvRoot );
 	virtual ~CRTaskRMsgDispatch();
 
 public:
@@ -15,7 +15,7 @@ public:
 	
 private:
 	CRRMsgRaw m_rmsgRaw;
-	CRClientStubDepot* m_pClientStubDepot;
+	CRSrvRoot* m_pSrvRoot;
 };
 
 

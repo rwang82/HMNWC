@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "CRRMsgHandlerDepot.h"
+#include <assert.h>
 
 CRRMsgHandlerDepot::CRRMsgHandlerDepot() {
 

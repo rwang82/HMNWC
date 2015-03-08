@@ -5,11 +5,11 @@
 #include "CRFileServer.h"
 #include "CRSrvRoot.h"
 #include "CRFileSrvApp.h"
-#include "CRFSClientStubFactory.h"
+#include "CRFSRMsgListener.h"
 
 //
-CRFSClientStubFactory g_fsCSF;
-CRSrvRoot g_srvRoot( &g_fsCSF );
+CRFSRMsgListener g_fsrmsgListener;
+CRSrvRoot g_srvRoot( &g_fsrmsgListener );
 CRFileSrvApp g_srvApp;
 //
 int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,

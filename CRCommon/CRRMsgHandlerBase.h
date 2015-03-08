@@ -6,6 +6,7 @@
 struct CRRMsgMetaData;
 struct CRRMsgJson;
 class CRRMsgFT;
+class CRClientStub;
 //
 class CRRMsgHandlerBase {
 public:

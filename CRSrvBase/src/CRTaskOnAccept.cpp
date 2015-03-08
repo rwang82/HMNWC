@@ -1,10 +1,11 @@
 #include "stdafx.h"
 #include "CRTaskOnAccept.h"
+#include "CRSrvRoot.h"
+#include "CRRMsgListener.h"
 
-CRTaskOnAccept::CRTaskOnAccept( SOCKET sConnect, const sockaddr_in* pAddr, CRClientStubDepot* pClientStubDepot )
-: m_sConnect( sConnect )
-, m_sAddr( *pAddr )
-, m_pClientStubDepot( pClientStubDepot ) {
+CRTaskOnAccept::CRTaskOnAccept( SOCKET sConnect, const sockaddr_in* pAddr, CRSrvRoot* pSrvRoot )
+: m_rmsgMetaData( sConnect, *pAddr )
+, m_pSrvRoot( pSrvRoot ) {
 
 }
 
@@ -13,7 +14,7 @@ CRTaskOnAccept::~CRTaskOnAccept() {
 }
 
 void CRTaskOnAccept::Run() {
-	if ( !m_pClientStubDepot )
+	if ( !m_pSrvRoot && !m_pSrvRoot->m_pRMsgListener )
 		return;
-	m_pClientStubDepot->regClientStub( m_sConnect, m_sAddr );
+	m_pSrvRoot->m_pRMsgListener->onAccept( m_pSrvRoot, m_rmsgMetaData );
 }

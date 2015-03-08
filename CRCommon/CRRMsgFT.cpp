@@ -14,20 +14,18 @@
 CRRMsgFT::CRRMsgFT( unsigned char ucVer, const unsigned char* pBufMetaData, __int16 lenMetaData, 
 		const unsigned char* pBufPayload, __int32 lenPayload )
 : m_ucVer( ucVer )
-, m_lenMetaData( lenMetaData )
-, m_pBufMetaData( pBufMetaData )
 , m_lenPayload( lenPayload )
 , m_pBufPayload( pBufPayload ) {
 	Json::Reader reader;
-	if ( m_pBufMetaData ) {
-	    if ( reader.parse( (char*)m_pBufMetaData, m_jsonRoot ) ) {
+	if ( pBufMetaData && lenMetaData > 0 ) {
+	    if ( reader.parse( (char*)pBufMetaData, m_jsonRoot ) ) {
 		    _parseMetaData( m_jsonRoot );
 		}
 	}
 }
 
 CRRMsgFT::~CRRMsgFT() {
-	// m_pBufMetaData, m_pBufMetaData don't delete these.
+	// m_pBufPayload don't delete these.
 }
 
 bool CRRMsgFT::_parseMetaData( const Json::Value& jsonRoot ) {

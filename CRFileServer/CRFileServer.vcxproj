@@ -52,7 +52,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>.\;.\frame;..\HMNWP\inc;..\CRSrvBase\inc;..\common;..\crcommon;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\;.\frame;..\HMNWP\inc;..\CRSrvBase\inc;..\common;..\crcommon;.\rmsghandler;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -69,7 +69,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>.\;.\frame;..\HMNWP\inc;..\CRSrvBase\inc;..\common;..\crcommon;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\;.\frame;..\HMNWP\inc;..\CRSrvBase\inc;..\common;..\crcommon;.\rmsghandler;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -84,25 +84,41 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\common\HMEndianConv.h" />
+    <ClInclude Include="..\common\HMTSHelper.h" />
     <ClInclude Include="..\CRCommon\CRRCmdDefs.h" />
     <ClInclude Include="..\CRCommon\CRRMsgBase.h" />
     <ClInclude Include="..\CRCommon\CRRMsgFT.h" />
+    <ClInclude Include="..\CRCommon\CRRMsgHandlerBase.h" />
+    <ClInclude Include="..\CRCommon\CRRMsgHandlerDepot.h" />
+    <ClInclude Include="frame\CRClientStub.h" />
+    <ClInclude Include="frame\CRClientStubDepot.h" />
     <ClInclude Include="frame\CRFileSrvApp.h" />
     <ClInclude Include="frame\CRFSClientStub.h" />
-    <ClInclude Include="frame\CRFSClientStubFactory.h" />
+    <ClInclude Include="frame\CRFSRMsgListener.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="rmsghandler\CRRMsgHandler4FetchFileMetaData.h" />
+    <ClInclude Include="rmsghandler\CRRMsgHandler4FileDownload.h" />
+    <ClInclude Include="rmsghandler\CRRMsgHandler4FileUpload.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\common\HMEndianConv.cpp" />
+    <ClCompile Include="..\common\HMTSHelper.cpp" />
     <ClCompile Include="..\CRCommon\CRRCmdDefs.cpp" />
     <ClCompile Include="..\CRCommon\CRRMsgBase.cpp" />
     <ClCompile Include="..\CRCommon\CRRMsgFT.cpp" />
+    <ClCompile Include="..\CRCommon\CRRMsgHandlerBase.cpp" />
+    <ClCompile Include="..\CRCommon\CRRMsgHandlerDepot.cpp" />
     <ClCompile Include="CRFileServer.cpp" />
+    <ClCompile Include="frame\CRClientStub.cpp" />
+    <ClCompile Include="frame\CRClientStubDepot.cpp" />
     <ClCompile Include="frame\CRFileSrvApp.cpp" />
     <ClCompile Include="frame\CRFSClientStub.cpp" />
-    <ClCompile Include="frame\CRFSClientStubFactory.cpp" />
+    <ClCompile Include="frame\CRFSRMsgListener.cpp" />
+    <ClCompile Include="rmsghandler\CRRMsgHandler4FetchFileMetaData.cpp" />
+    <ClCompile Include="rmsghandler\CRRMsgHandler4FileDownload.cpp" />
+    <ClCompile Include="rmsghandler\CRRMsgHandler4FileUpload.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

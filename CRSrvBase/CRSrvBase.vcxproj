@@ -86,14 +86,13 @@
     <ClInclude Include="..\common\HMEndianConv.h" />
     <ClInclude Include="..\common\HMTaskEngine.h" />
     <ClInclude Include="..\common\HMTSHelper.h" />
+    <ClInclude Include="..\CRCommon\CRRMsgHandlerDepot.h" />
     <ClInclude Include="..\CRCommon\CRRMsgRaw.h" />
-    <ClInclude Include="inc\CRClientStub.h" />
-    <ClInclude Include="inc\CRClientStubDepot.h" />
-    <ClInclude Include="inc\CRClientStubFactoryBase.h" />
     <ClInclude Include="inc\CREventDepot.h" />
     <ClInclude Include="inc\CRModuleBase.h" />
     <ClInclude Include="inc\CRModuleDepot.h" />
     <ClInclude Include="inc\CRRMsgDispatcher.h" />
+    <ClInclude Include="inc\CRRMsgListener.h" />
     <ClInclude Include="inc\CRSrvEnvCfg.h" />
     <ClInclude Include="inc\CRSrvEventHandler.h" />
     <ClInclude Include="inc\CRSrvEvtDefs.h" />
@@ -108,6 +107,7 @@
     <ClCompile Include="..\common\HMEndianConv.cpp" />
     <ClCompile Include="..\common\HMTaskEngine.cpp" />
     <ClCompile Include="..\common\HMTSHelper.cpp" />
+    <ClCompile Include="..\CRCommon\CRRMsgHandlerDepot.cpp" />
     <ClCompile Include="..\CRCommon\CRRMsgRaw.cpp" />
     <ClCompile Include="CRSrvBase.cpp" />
     <ClCompile Include="dllmain.cpp">
@@ -118,8 +118,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\CRClientStub.cpp" />
-    <ClCompile Include="src\CRClientStubDepot.cpp" />
     <ClCompile Include="src\CREventDepot.cpp" />
     <ClCompile Include="src\CRModuleDepot.cpp" />
     <ClCompile Include="src\CRRMsgDispatcher.cpp" />

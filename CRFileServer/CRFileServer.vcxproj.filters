@@ -22,6 +22,9 @@
     <Filter Include="common">
       <UniqueIdentifier>{21bc34c0-bff7-4b7a-9cd5-4a16950223a1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="rmsghandler">
+      <UniqueIdentifier>{295d2ae7-768a-42be-9832-226e1b7fbd93}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -39,9 +42,6 @@
     <ClInclude Include="frame\CRFileSrvApp.h">
       <Filter>frame</Filter>
     </ClInclude>
-    <ClInclude Include="frame\CRFSClientStubFactory.h">
-      <Filter>frame</Filter>
-    </ClInclude>
     <ClInclude Include="frame\CRFSClientStub.h">
       <Filter>frame</Filter>
     </ClInclude>
@@ -57,6 +57,33 @@
     <ClInclude Include="..\CRCommon\CRRCmdDefs.h">
       <Filter>crcommon</Filter>
     </ClInclude>
+    <ClInclude Include="frame\CRFSRMsgListener.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="frame\CRClientStub.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="frame\CRClientStubDepot.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\HMTSHelper.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="rmsghandler\CRRMsgHandler4FileUpload.h">
+      <Filter>rmsghandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CRCommon\CRRMsgHandlerBase.h">
+      <Filter>crcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CRCommon\CRRMsgHandlerDepot.h">
+      <Filter>crcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="rmsghandler\CRRMsgHandler4FetchFileMetaData.h">
+      <Filter>rmsghandler</Filter>
+    </ClInclude>
+    <ClInclude Include="rmsghandler\CRRMsgHandler4FileDownload.h">
+      <Filter>rmsghandler</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -66,9 +93,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="frame\CRFileSrvApp.cpp">
-      <Filter>frame</Filter>
-    </ClCompile>
-    <ClCompile Include="frame\CRFSClientStubFactory.cpp">
       <Filter>frame</Filter>
     </ClCompile>
     <ClCompile Include="frame\CRFSClientStub.cpp">
@@ -85,6 +109,33 @@
     </ClCompile>
     <ClCompile Include="..\CRCommon\CRRCmdDefs.cpp">
       <Filter>crcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="frame\CRFSRMsgListener.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="frame\CRClientStub.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="frame\CRClientStubDepot.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\HMTSHelper.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="rmsghandler\CRRMsgHandler4FileUpload.cpp">
+      <Filter>rmsghandler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CRCommon\CRRMsgHandlerBase.cpp">
+      <Filter>crcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CRCommon\CRRMsgHandlerDepot.cpp">
+      <Filter>crcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="rmsghandler\CRRMsgHandler4FetchFileMetaData.cpp">
+      <Filter>rmsghandler</Filter>
+    </ClCompile>
+    <ClCompile Include="rmsghandler\CRRMsgHandler4FileDownload.cpp">
+      <Filter>rmsghandler</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

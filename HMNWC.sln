@@ -33,8 +33,14 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CRServer", "CRServer\CRServ
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HMNWEDemoServer", "HMNWEDemoServer\HMNWEDemoServer.vcxproj", "{A8B644F6-3962-4D65-AF5E-A299DDF4C8B5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FCD10E8A-3BF9-44AA-8748-BB98CCEC4996} = {FCD10E8A-3BF9-44AA-8748-BB98CCEC4996}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CRFileServer", "CRFileServer\CRFileServer.vcxproj", "{EBC914FB-91E7-4365-A655-0F160AB8A1D3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B3FDA0F5-64C9-4131-B2B6-FAE3F5ECF735} = {B3FDA0F5-64C9-4131-B2B6-FAE3F5ECF735}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CRSrvBase", "CRSrvBase\CRSrvBase.vcxproj", "{B3FDA0F5-64C9-4131-B2B6-FAE3F5ECF735}"
 EndProject

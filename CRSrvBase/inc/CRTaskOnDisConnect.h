@@ -1,21 +1,22 @@
 #ifndef __CRTASKONDISCONNECT_H__
 #define __CRTASKONDISCONNECT_H__
 #include "HMTaskEngine.h"
-#include "CRClientStubDepot.h"
-
+#include "CRRMsgRaw.h"
+//
+class CRSrvRoot;
+//
 class CRTaskOnDisConnect : public HMTaskBase {
 
 public:
-	CRTaskOnDisConnect( SOCKET sConnect, const sockaddr_in* pAddr, CRClientStubDepot* pClientStubDepot );
+	CRTaskOnDisConnect( SOCKET sConnect, const sockaddr_in* pAddr, CRSrvRoot* pSrvRoot );
 	virtual ~CRTaskOnDisConnect();
 
 public:
 	virtual void Run();
 	
 private:
-	SOCKET m_sConnect;
-	sockaddr_in m_sAddr;
-	CRClientStubDepot* m_pClientStubDepot;
+	CRRMsgMetaData m_rmsgMetaData;
+	CRSrvRoot* m_pSrvRoot;
 };
 
 

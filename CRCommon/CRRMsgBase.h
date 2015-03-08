@@ -4,6 +4,7 @@
 //
 class CRRMsgHandlerBase;
 struct CRRMsgMetaData;
+class CRClientStub;
 //
 struct CRRMsgBase {
 public:

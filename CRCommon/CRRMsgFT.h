@@ -6,7 +6,9 @@
 #include "CRRMsgBase.h"
 #include "json/json.h"
 #include <string>
-
+//
+class CRClientStub;
+//
 class CRRMsgFT : public CRRMsgBase{
 public:
 	CRRMsgFT( unsigned char ucVer, const unsigned char* pBufMetaData, __int16 lenMetaData, 
@@ -21,11 +23,9 @@ private:
 
 public:
     unsigned char m_ucVer;
-	__int16 m_lenMetaData;
-	const unsigned char* m_pBufMetaData;
+	Json::Value m_jsonRoot;
 	__int32 m_lenPayload;
 	const unsigned char* m_pBufPayload;
-	Json::Value m_jsonRoot;
 };
 
 

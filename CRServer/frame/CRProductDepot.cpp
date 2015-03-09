@@ -53,8 +53,10 @@ bool CRProductDepot::fillAccountProducts2Json( const CRFetchAccountProducts& fap
 	    return false;
 	//
 	itName2PL = m_mapName2ProductListCache.find( fapParam.m_strAccountName );
-	if ( itName2PL == m_mapName2ProductListCache.end() )
-	    return false;
+	if ( itName2PL == m_mapName2ProductListCache.end() ) {
+		valProducts.resize(0);
+	    return true; // means no product published.
+	}
 
 	// save cache version, not finish.
 	//itName2PL = m_mapName2ProductListCache.find( fapParam.m_strAccountName );

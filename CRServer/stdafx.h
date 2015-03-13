@@ -20,7 +20,9 @@
 #ifdef _DEBUG
 #pragma comment (lib, "json_vc71_libmtd.lib")
 #pragma comment (lib, "libmysql.lib")
+#pragma comment (lib, "log4cpp.lib")
 #else
 #pragma comment (lib, "json_vc71_libmt.lib")
 #pragma comment (lib, "libmysql.lib")
+#pragma comment (lib, "log4cpp.lib")
 #endif //

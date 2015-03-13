@@ -5,6 +5,7 @@
 #include "CRRMsgHandlerDepot.h"
 #include "CRClientStubDepot.h"
 #include "CRRMsgBase.h"
+#include "CRLog.h"
 #include "json/json.h"
 #include "FuncPack.h"
 
@@ -30,7 +31,8 @@ void CRTaskRMsgDispatch::Run() {
 	if ( !pRMsgHandler )
 		return;
 	// get pClientStub.
-	pClientStub = g_CRSrvRoot.m_pClientStubDepot->getClientStub( m_rawRMsg.m_metaData.m_sConnect );
+	//pClientStub = g_CRSrvRoot.m_pClientStubDepot->getClientStub( m_rawRMsg.m_metaData.m_sConnect );
+	CRLOG_ERROR( "RecvRMsg: type:%d, os:%d, sn:%d", pRMsg->m_nCmdType, pRMsg->m_eOSType, pRMsg->m_nCmdSN );
 	//
 	pRMsg->execute( m_rawRMsg.m_metaData, pRMsgHandler );
 }

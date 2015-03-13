@@ -3,7 +3,7 @@
 //
 namespace hmnwp {
 	class HMNWPServer;
-};
+}
 namespace hmcmn {
     class hmcmn_event_depot;
 }

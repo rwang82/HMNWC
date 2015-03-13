@@ -43,6 +43,9 @@
     <Filter Include="data">
       <UniqueIdentifier>{d24b48f9-48f6-4ea8-babc-aff6cd462818}</UniqueIdentifier>
     </Filter>
+    <Filter Include="log">
+      <UniqueIdentifier>{4d88922f-2e54-4c28-bc58-c95d36223990}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CRServer.cpp">
@@ -224,6 +227,9 @@
     </ClCompile>
     <ClCompile Include="..\CRCommon\CRRMsgRaw.cpp">
       <Filter>crcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="log\CRLog.cpp">
+      <Filter>log</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -430,6 +436,9 @@
     </ClInclude>
     <ClInclude Include="..\CRCommon\CRRMsgRaw.h">
       <Filter>crcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="log\CRLog.h">
+      <Filter>log</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

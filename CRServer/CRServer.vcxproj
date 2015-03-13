@@ -53,7 +53,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\common;.\frame;.\helper;.\data;.\;..\HMNWP\inc;.\rmsghandler;.\tasks;.\modules;.\accounts;..\CRCommon;.\db</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\common;.\frame;.\helper;.\data;.\;..\HMNWP\inc;.\rmsghandler;.\tasks;.\modules;.\accounts;..\CRCommon;.\db;.\log</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -73,7 +73,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\common;.\frame;.\helper;.\data;.\;..\HMNWP\inc;.\rmsghandler;.\tasks;.\modules;.\accounts;..\CRCommon;.\db</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\common;.\frame;.\helper;.\data;.\;..\HMNWP\inc;.\rmsghandler;.\tasks;.\modules;.\accounts;..\CRCommon;.\db;.\log</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -132,6 +132,7 @@
     <ClCompile Include="helper\CRSrvMisc.cpp" />
     <ClCompile Include="helper\HMIniHelper.cpp" />
     <ClCompile Include="helper\HMMisc.cpp" />
+    <ClCompile Include="log\CRLog.cpp" />
     <ClCompile Include="modules\CRModuleAccountMgr.cpp" />
     <ClCompile Include="modules\CRModuleAttetionRecord.cpp" />
     <ClCompile Include="modules\CRModuleCmdDispatch.cpp" />
@@ -200,6 +201,7 @@
     <ClInclude Include="helper\CRSrvMisc.h" />
     <ClInclude Include="helper\HMIniHelper.h" />
     <ClInclude Include="helper\HMMisc.h" />
+    <ClInclude Include="log\CRLog.h" />
     <ClInclude Include="modules\CRModuleAccountMgr.h" />
     <ClInclude Include="modules\CRModuleAttetionRecord.h" />
     <ClInclude Include="modules\CRModuleCmdDispatch.h" />

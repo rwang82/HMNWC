@@ -7,6 +7,7 @@
 #include "CRAccountCreator.h"
 #include "CRErrCode.h"
 #include "CRSrvEvtDefs.h"
+#include "CRLog.h"
 #include "MemFuncPack.h"
 #include "FuncPack.h"
 
@@ -51,12 +52,16 @@ const CRAccountBase* CRModuleAccountMgr::getAccount( const utf8_type& strAccount
 }
 
 bool CRModuleAccountMgr::doLogin( const CRLoginParam& loginParam, int& nErrCode ) {
-	if ( !m_tsAccess.safeEnterFunc() )
+	if ( !m_tsAccess.safeEnterFunc() ) {
+	    CRLOG_INFO( "cann't safe enter." );
 		return false;
+	}
 	CMemFuncPack mfpkSafeExit( &m_tsAccess, &HMTSHelper::safeExitFunc );
 	//
-	if ( !m_accountDepot.refreshAccountData( loginParam.m_strUserName, nErrCode ) )
+	if ( !m_accountDepot.refreshAccountData( loginParam.m_strUserName, nErrCode ) ) {
+        CRLOG_ERROR( "refreshAccountData failed." );	
 		return false;
+	}
 	//
 	CRAccountBase* pAccount = (CRAccountBase*)m_accountDepot.getAccount( loginParam.m_strUserName, nErrCode );
 	if ( !pAccount ) {

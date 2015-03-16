@@ -4,11 +4,6 @@
 #include "CRRMsgBase.h"
 #include "CRAccountBase.h"
 //
-extern const int CRLOGIN_ERR_UNKNOWN;
-extern const int CRLOGIN_ERR_NONE;
-extern const int CRLOGIN_ERR_LOGINED;
-extern const int CRLOGIN_ERR_INVALIDPARAMS;
-//
 class CRRMsgHandler4Login : public CRRMsgHandlerBase {
 public:
 	CRRMsgHandler4Login();

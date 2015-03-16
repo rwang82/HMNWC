@@ -39,7 +39,6 @@ private:
 	log4cpp::Category& m_LogRoot;
 };
 
-
 #define CRLOG_FATALERROR( fmt, ... ) do{ \
 	std::string strLocationInfo; \
 	CRLog::getLocationInfo( __FILE__, __LINE__, __FUNCTION__, strLocationInfo ); \
@@ -85,7 +84,7 @@ private:
 	const char* pFileName = NULL; \
 	dwLastError = ::GetLastError(); \
 	pFileName = strrchr( __FILE__, '\\' ); \
-	CRLog::getInstance()->fatalf_a( "%s(%d)%s[exception error code:%d]: " fmt, (pFileName ? pFileName + 1 : __FILE__), __LINE__, __FUNCTION__, dwLastError, ##__VA_ARGS__ ); \
+	CRLog::getInstance()->fatalf( "%s(%d)%s[exception error code:%d]: " fmt, (pFileName ? pFileName + 1 : __FILE__), __LINE__, __FUNCTION__, dwLastError, ##__VA_ARGS__ ); \
 	} while(0)
 
 

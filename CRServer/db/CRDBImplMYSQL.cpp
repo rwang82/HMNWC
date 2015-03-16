@@ -9,6 +9,7 @@
 #include "CRAccountProducts.h"
 #include "CRMisc.h"
 #include "CRErrCode.h"
+#include "CRLog.h"
 #include "HMCharConv.h"
 #include "FuncPack.h"
 #include <string>
@@ -73,7 +74,12 @@ CRDBImplMYSQL::~CRDBImplMYSQL() {
 }
 
 bool CRDBImplMYSQL::_isReady() {
-    return m_uFlag & CRDBMYSQL_FLAG_CONNECTED2DB;
+	bool bReady = m_uFlag & CRDBMYSQL_FLAG_CONNECTED2DB;
+
+	if ( !bReady ) {
+	    CRLOG_ERROR( "mysql not ready." );
+	}
+    return bReady;
 }
 
 bool CRDBImplMYSQL::_connect2DB() {
@@ -84,6 +90,7 @@ bool CRDBImplMYSQL::_connect2DB() {
     unsigned int port = 3396; //server port
 
     if( !mysql_real_connect(&m_inst,szHost,szUser,szPswd,szDBName,port,NULL,0) ) {
+		CRLOG_ERROR( "connect mysql failed." );
 	    return false;
 	}
 
@@ -121,7 +128,7 @@ bool CRDBImplMYSQL::doSave( const CRAccountUser* pAccount, int& nErrCode ) {
 	strSQLMsg += ",";
 	_itoa_s( (int)pAccount->m_data.m_nCountPublished, szBufTmp, 10 );
 	strSQLMsg += szBufTmp;
-	strSQLMsg += ")";
+	strSQLMsg += ");";
 	//
 	return 0 == mysql_query( &m_inst, strSQLMsg.c_str() );
 }
@@ -147,7 +154,7 @@ bool CRDBImplMYSQL::doSave( const CRAccountAdmin* pAccount, int& nErrCode ) {
 	strSQLMsg += "\",";
 	_itoa_s( (int)pAccount->m_data.m_eSortType, szBufTmp, 10 );
 	strSQLMsg += szBufTmp;
-	strSQLMsg +=",0,0)";
+	strSQLMsg +=",0,0);";
 	//
 	return 0 == mysql_query( &m_inst, strSQLMsg.c_str() );
 }
@@ -189,14 +196,14 @@ bool CRDBImplMYSQL::doSave( const CRProduct* pProduct, int& nErrCode ) {
 	strSQLMsg += "\",";
 	_itoa_s( (int)CRPRODUCT_STATUS_PENDING, szBufTmp, 10 );
 	strSQLMsg += szBufTmp;
-	strSQLMsg +=")";
+	strSQLMsg +=");";
 	if ( 0 != mysql_query( &m_inst, strSQLMsg.c_str() ) )
 		return false;
 	
 	// update published count
 	strSQLMsg = "update accountuser set published=published+1 where username in('";
 	strSQLMsg += pProduct->m_strPublisher;
-	strSQLMsg += "')";
+	strSQLMsg += "');";
 
 	return 0 == mysql_query( &m_inst, strSQLMsg.c_str() );
 }
@@ -219,7 +226,7 @@ bool CRDBImplMYSQL::doLoad( void* pParamKey, CRAccountUser& destObj, int& nErrCo
 
 	strCmd = "select * from accountuser where username='";
 	strCmd += *pstrAccountName;
-	strCmd += "'";
+	strCmd += "';";
 	if ( 0 != mysql_query( &m_inst, strCmd.c_str() ) ) {
 	    return false;
 	}
@@ -275,22 +282,26 @@ bool CRDBImplMYSQL::doLoad( void* pParamKey, CRAccountAdmin& destObj, int& nErrC
 
 	strCmd = "select * from accountadmin where username='";
 	strCmd += *pstrAccountName;
-	strCmd += "'";
+	strCmd += "';";
 	if ( 0 != mysql_query( &m_inst, strCmd.c_str() ) ) {
 	    return false;
 	}
 	pMYSQLRes = mysql_store_result( &m_inst );
 	if ( !pMYSQLRes ) {
+		CRLOG_INFO( "pMYSQLRes is NULL." );
 	    return false;
 	}
 	uNumFields = mysql_num_fields( pMYSQLRes );
     if ( uNumFields != CRDBMYSQL_ACCOUNTADMIN_FIELD_COUNT ) {
 	    assert( false );
+		CRLOG_ERROR( "uNumFields != CRDBMYSQL_ACCOUNTADMIN_FIELD_COUNT" );
 		return false;
 	}
 	mysqlRow = mysql_fetch_row( pMYSQLRes );
-	if ( mysqlRow == 0 )
+	if ( mysqlRow == 0 ) {
+	    CRLOG_INFO( "mysqlRow == 0" );
 		return false;
+	}
 
 	pFieldData = mysqlRow[ CRDBMYSQL_ACCOUNTADMIN_FIELD_USERNAME ];
 	destObj.m_data.m_strUserName = pFieldData ? pFieldData : "";
@@ -337,12 +348,14 @@ bool CRDBImplMYSQL::doLoad( void* pParamKey, CRAccountList& destObj, int& nErrCo
             strCmd += "','";
 		}
 	}
-	strCmd += "')";
+	strCmd += "');";
 	if ( 0 != mysql_query( &m_inst, strCmd.c_str() ) ) {
+		CRLOG_INFO( "mysql_query failed. strCmd:%s", strCmd.c_str() );
 	    return false;
 	}
 	pMYSQLRes = mysql_store_result( &m_inst );
 	if ( !pMYSQLRes ) {
+		CRLOG_INFO( "mysql_store_result no result. strCmd:%s", strCmd.c_str() );
 	    return false;
 	}
 	
@@ -389,7 +402,7 @@ bool CRDBImplMYSQL::doSave( const CRAttetionRecord* pAddAttetion, int& nErrCode 
 	strSQLMsg += pAddAttetion->m_strUserNameFrom;
 	strSQLMsg += "\",\"";
 	strSQLMsg += pAddAttetion->m_strUserNameTo;
-	strSQLMsg += "\")";
+	strSQLMsg += "\");";
 	
 	//
 	if ( 0 != mysql_query( &m_inst, strSQLMsg.c_str() ) )
@@ -398,14 +411,14 @@ bool CRDBImplMYSQL::doSave( const CRAttetionRecord* pAddAttetion, int& nErrCode 
 	// update attetion count
 	strSQLMsg = "update accountuser set attetion=attetion+1 where username in('";
 	strSQLMsg += pAddAttetion->m_strUserNameFrom;
-	strSQLMsg += "')";
+	strSQLMsg += "');";
 	if ( 0 != mysql_query( &m_inst, strSQLMsg.c_str() ) )
 		return false;
 
 	// update attetioned count
 	strSQLMsg = "update accountuser set attetioned=attetioned+1 where username in('";
 	strSQLMsg += pAddAttetion->m_strUserNameTo;
-	strSQLMsg += "')";
+	strSQLMsg += "');";
 
 	return 0 == mysql_query( &m_inst, strSQLMsg.c_str() );
 }

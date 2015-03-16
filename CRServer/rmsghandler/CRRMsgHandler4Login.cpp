@@ -7,15 +7,17 @@
 #include "CRModuleDepot.h"
 #include "CRRMsgJsonHelper.h"
 #include "CRRCmdDefs.h"
+#include "CRErrCode.h"
+#include "CRLog.h"
 #include "HMNWPServer.h"
 #include "HMCharConv.h"
 #include "json/json.h"
 #include <atlconv.h>
 //
-const int CRLOGIN_ERR_UNKNOWN = -1;
-const int CRLOGIN_ERR_NONE = 0;
-const int CRLOGIN_ERR_LOGINED = 1;
-const int CRLOGIN_ERR_INVALIDPARAMS = 2;
+//const int CRLOGIN_ERR_UNKNOWN = -1;
+//const int CRLOGIN_ERR_NONE = 0;
+//const int CRLOGIN_ERR_LOGINED = 1;
+//const int CRLOGIN_ERR_INVALIDPARAMS = 2;
 //
 const int CRLOGIN_RESULT_FAILED = 0;
 const int CRLOGIN_RESULT_SUCCESS = 1;
@@ -40,10 +42,10 @@ CRRMsgHandler4Login::~CRRMsgHandler4Login() {
 
 void CRRMsgHandler4Login::accept( const CRRMsgMetaData& rmsgMetaData, const CRRMsgJson* pRMsgJson ) {
     CRLoginParam loginParam;
-	int nErrCode = CRLOGIN_ERR_NONE;
+	int nErrCode = CRERR_SRV_NONE;
 	
 	if ( !_fillLoginParam( rmsgMetaData, pRMsgJson, loginParam ) ) {
-		nErrCode = CRLOGIN_ERR_INVALIDPARAMS;
+		nErrCode = CRERR_SRV_PARAM_INVALID;
 		_sendFailedAck( loginParam, rmsgMetaData, pRMsgJson, nErrCode );
 		return;
 	}
@@ -57,11 +59,13 @@ void CRRMsgHandler4Login::accept( const CRRMsgMetaData& rmsgMetaData, const CRRM
 
 bool CRRMsgHandler4Login::_doLogin( const CRLoginParam& loginParam, int& nErrCode ) {
     CRModuleAccountMgr* pModuleAccountMgr = NULL;
-	nErrCode = CRLOGIN_ERR_UNKNOWN;
+	nErrCode = CRERR_SRV_NONE;
 		
 	pModuleAccountMgr = dynamic_cast< CRModuleAccountMgr* >( g_CRSrvRoot.m_pModuleDepot->getModule( ECRMODULE_ID_ACCOUNTMGR ) );
-	if ( !pModuleAccountMgr )
+	if ( !pModuleAccountMgr ) {
+		CRLOG_FATALERROR( "%s", "pModuleAccountMgr == NULL." );
 		return false;
+	}
 
 	return pModuleAccountMgr->doLogin( loginParam, nErrCode );
 }

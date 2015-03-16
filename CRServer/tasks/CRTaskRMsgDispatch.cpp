@@ -32,7 +32,7 @@ void CRTaskRMsgDispatch::Run() {
 		return;
 	// get pClientStub.
 	//pClientStub = g_CRSrvRoot.m_pClientStubDepot->getClientStub( m_rawRMsg.m_metaData.m_sConnect );
-	CRLOG_ERROR( "RecvRMsg: type:%d, os:%d, sn:%d", pRMsg->m_nCmdType, pRMsg->m_eOSType, pRMsg->m_nCmdSN );
+	CRLOG_INFO( "RecvRMsg: type:%d, os:%d, sn:%d", pRMsg->m_nCmdType, pRMsg->m_eOSType, pRMsg->m_nCmdSN );
 	//
 	pRMsg->execute( m_rawRMsg.m_metaData, pRMsgHandler );
 }

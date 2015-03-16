@@ -5,6 +5,7 @@
 #include "CRAccountCreator.h"
 #include "CRAccountList.h"
 #include "CRErrCode.h"
+#include "CRLog.h"
 #include "MemFuncPack.h"
 
 CRAccountDepot::CRAccountDepot() {
@@ -111,8 +112,9 @@ bool CRAccountDepot::_loadAccountFromDB( const utf8_container_type& containerAcc
 	name2obj_map_type::iterator itName2Obj, iendName2Obj;
 	CRAccountBase* pAccountObjNew = NULL;
 
-	if ( !g_CRSrvRoot.m_pSrvDBProxy->loadFromDB( (void*)&containerAccountName, &accountList, nErrCode ) )
+	if ( !g_CRSrvRoot.m_pSrvDBProxy->loadFromDB( (void*)&containerAccountName, &accountList, nErrCode ) ) {
 	    return false;
+	}
 	//
 	iendAccount = accountList.m_containerAccount.end();
 	for ( itAccount = accountList.m_containerAccount.begin(); itAccount!=iendAccount; ++itAccount ) {

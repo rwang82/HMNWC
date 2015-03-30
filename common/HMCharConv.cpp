@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "HMCharConv.h"
 #include "Windows.h"
 #include <assert.h>

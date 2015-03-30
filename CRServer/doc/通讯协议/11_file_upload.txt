@@ -13,7 +13,7 @@
         "fid":"xxxxxxx-xxx-xxx-xx",
         "start":4096,
         "segment":1024,
-        "totol":98377
+        "total":98377
     }
 }
 //////////////////////////////
@@ -32,6 +32,6 @@
         "fid":"xxxxxxx-xxx-xxx-xx",
         "start":4096,
         "segment":1024,
-        "totol":98377
+        "total":98377
     }
 }

@@ -37,18 +37,18 @@ CRSrvSettings::~CRSrvSettings() {
 }
 
 bool CRSrvSettings::_load() {
-	utf8_type strCfgFilePath;
+	tstring_type tstrCfgFilePath;
 	//
 	m_uFlag &= ~CRSRVSETTINGS_FLAG_LOAD_SUCCESS;
 	//
-	if (!getProcessDirPath( strCfgFilePath )) {
+	if (!getProcessDirPath( tstrCfgFilePath )) {
 		assert( false );
 		return false;
 	}
-	strCfgFilePath += _T( '\\' );
-	strCfgFilePath += CRSRVSETTINGS_FILENAME;
+	tstrCfgFilePath += _T( '\\' );
+	tstrCfgFilePath += CRSRVSETTINGS_FILENAME;
 	//
-	HMIniHelper iniHelper( strCfgFilePath.c_str() );
+	HMIniHelper iniHelper( tstrCfgFilePath.c_str() );
 	CSSRVSETTING_READ_INT( CRSRVSETTINGS_SEC_ROOT, CRSRVSETTINGS_KEY_LISTEN_PORT, m_nListenPort );
 
 

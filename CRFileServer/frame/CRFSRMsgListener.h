@@ -15,7 +15,7 @@ public:
 	virtual void onRMsg( CRSrvRoot* pSrvRoot, const CRRMsgRaw& rmsgRaw ) const;
 
 private:
-	static CRRMsgFT* _createRMsgFT( const unsigned char* pRawBuf, unsigned int uLenRawBuf );
+	static CRRMsgFT* _parseRMsgFT( const unsigned char* pRawBuf, unsigned int uLenRawBuf );
 	void _initRMHD();
 	
 private:

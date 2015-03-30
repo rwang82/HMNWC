@@ -13,7 +13,7 @@ private:
 	virtual void onRMsg( const CRRMsgRaw& rmsgRaw );
 
 private:
-    //CRRMsgFT* _createRMsgFT( const unsigned char* pRawBuf, unsigned int uLenRawBuf );
+    //CRRMsgFT* _parseRMsgFT( const unsigned char* pRawBuf, unsigned int uLenRawBuf );
     //bool _parseFTMetaData(  )
 };
 

@@ -5,7 +5,7 @@
 
 class CRSrvSettings {
 public:
-	typedef std::basic_string< TCHAR > utf8_type;
+	typedef std::basic_string< TCHAR > tstring_type;
 public:
 	CRSrvSettings();
 	~CRSrvSettings();

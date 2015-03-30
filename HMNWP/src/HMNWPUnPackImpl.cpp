@@ -260,6 +260,11 @@ bool HMNWPUnPackImpl::_checkCRC16( unsigned __int16 uCRC16 ) {
 
 	uCRC16Calc = GetCRC16( m_pBufPayload, m_uLenBufPayload );
 
+	if ( uCRC16 != uCRC16Calc ) {
+	    int a = 0;
+	}
+
+	//
 	m_uFlag |= ( ( uCRC16Calc == uCRC16 ) ? ENWPUP_STATE_WHOLE_PACKAGE_READY : ENWPUP_STATE_PACKAGE_INCOMPLETE );
 	return ( uCRC16Calc == uCRC16 );
 }

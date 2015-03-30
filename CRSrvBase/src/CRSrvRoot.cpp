@@ -4,6 +4,7 @@
 
 CRSrvRoot::CRSrvRoot( const CRRMsgListener* pRMsgListener )
 : m_pRMsgListener( pRMsgListener )
+, m_pRMsgDispatcher( new CRRMsgDispatcher( this ) )
 , m_nwpServer( new CRSrvEventHandler( &m_eventDepot ) ){
 	_init();
 }

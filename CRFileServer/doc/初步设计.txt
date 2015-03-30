@@ -4,7 +4,7 @@
 1. 定义发送图片数据包格式。
 #####################################
 1byte| version
-2byte| length of metadata.(n byte)
+4byte| length of metadata.(n byte)
 nbyte| metadata.
 4byte| length of payload.(m byte)
 mbyte| payload.

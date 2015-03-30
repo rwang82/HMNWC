@@ -16,7 +16,7 @@ CRFSClientStub::~CRFSClientStub() {
 }
 	
 void CRFSClientStub::onRMsg( const CRRMsgRaw& rmsgRaw ) {
-	//CRRMsgFT* pRMsgFT = _createRMsgFT( rmsgRaw.m_pRawBuf, rmsgRaw.m_uLenRawBuf );
+	//CRRMsgFT* pRMsgFT = _parseRMsgFT( rmsgRaw.m_pRawBuf, rmsgRaw.m_uLenRawBuf );
 	//if ( !pRMsgFT )
 	//	return;
 	//CRRMsgHandlerBase* pRMsgHandler = m_pSrvRoot->m_rmsgHandlerDepot.getRMsgHandler( pRMsgFT->m_nCmdType );
@@ -25,7 +25,7 @@ void CRFSClientStub::onRMsg( const CRRMsgRaw& rmsgRaw ) {
 	//pRMsgFT->execute( rmsgRaw.m_metaData, pRMsgHandler, this );
 }
 //
-//CRRMsgFT* CRFSClientStub::_createRMsgFT( const unsigned char* pRawBuf, unsigned int uLenRawBuf ) {
+//CRRMsgFT* CRFSClientStub::_parseRMsgFT( const unsigned char* pRawBuf, unsigned int uLenRawBuf ) {
 //    if ( uLenRawBuf < MINSIZE_RMSGFT || !pRawBuf )
 //		return NULL;
 //	bool bLE = isLittleEndian();

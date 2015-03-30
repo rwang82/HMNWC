@@ -4,6 +4,7 @@
 #include "CRModuleDepot.h"
 #include "CREventDepot.h"
 #include "CRRMsgListener.h"
+#include "CRRMsgDispatcher.h"
 #include "HMNWPServer.h"
 
 class CRSRV_API CRSrvRoot {
@@ -19,6 +20,8 @@ public:
 	CREventDepot m_eventDepot;
 	CRModuleDepot m_moduleDepot;
 	const CRRMsgListener* m_pRMsgListener;
+	//
+	CRRMsgDispatcher* m_pRMsgDispatcher;
 	//
 	hmnwp::HMNWPServer m_nwpServer;
 	//

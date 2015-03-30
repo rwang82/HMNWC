@@ -60,12 +60,6 @@
     <ClCompile Include="frame\CRSrvSettings.cpp">
       <Filter>frame</Filter>
     </ClCompile>
-    <ClCompile Include="helper\HMIniHelper.cpp">
-      <Filter>helper</Filter>
-    </ClCompile>
-    <ClCompile Include="helper\HMMisc.cpp">
-      <Filter>helper</Filter>
-    </ClCompile>
     <ClCompile Include="..\common\HMTaskEngine.cpp">
       <Filter>common</Filter>
     </ClCompile>
@@ -228,6 +222,12 @@
     <ClCompile Include="..\CRCommon\CRLog.cpp">
       <Filter>crcommon</Filter>
     </ClCompile>
+    <ClCompile Include="..\common\HMIniHelper.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\HMMisc.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -244,12 +244,6 @@
     </ClInclude>
     <ClInclude Include="frame\CRSrvSettings.h">
       <Filter>frame</Filter>
-    </ClInclude>
-    <ClInclude Include="helper\HMIniHelper.h">
-      <Filter>helper</Filter>
-    </ClInclude>
-    <ClInclude Include="helper\HMMisc.h">
-      <Filter>helper</Filter>
     </ClInclude>
     <ClInclude Include="..\common\HMTaskEngine.h">
       <Filter>common</Filter>
@@ -436,6 +430,12 @@
     </ClInclude>
     <ClInclude Include="..\CRCommon\CRLog.h">
       <Filter>crcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\HMIniHelper.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\HMMisc.h">
+      <Filter>common</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

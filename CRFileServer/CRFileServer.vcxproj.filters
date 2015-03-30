@@ -84,6 +84,33 @@
     <ClInclude Include="rmsghandler\CRRMsgHandler4FileDownload.h">
       <Filter>rmsghandler</Filter>
     </ClInclude>
+    <ClInclude Include="frame\CRFSSettings.h">
+      <Filter>frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\HMIniHelper.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\HMMisc.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CRCommon\CRTypes.h">
+      <Filter>crcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\HMCharConv.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CRCommon\CRFTMsgMaker.h">
+      <Filter>crcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CRCommon\CRFTMsgParser.h">
+      <Filter>crcommon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\HMDataAccess.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CRCommon\CRRMsgMaker.h">
+      <Filter>crcommon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -136,6 +163,30 @@
     </ClCompile>
     <ClCompile Include="rmsghandler\CRRMsgHandler4FileDownload.cpp">
       <Filter>rmsghandler</Filter>
+    </ClCompile>
+    <ClCompile Include="frame\CRFSSettings.cpp">
+      <Filter>frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\HMIniHelper.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\HMMisc.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\HMCharConv.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CRCommon\CRFTMsgMaker.cpp">
+      <Filter>crcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CRCommon\CRFTMsgParser.cpp">
+      <Filter>crcommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\HMDataAccess.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CRCommon\CRRMsgMaker.cpp">
+      <Filter>crcommon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

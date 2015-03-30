@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "HMIniHelper.h"
+#include <assert.h>
 //
 #define DEFAULT_INI_VAL (0xEEFFEEFF)
 //
@@ -38,23 +39,31 @@ bool HMIniHelper::getStr( const tstring_type& tstrSectionName, const tstring_typ
 		return false;
 	}
 	DWORD dwDestStrLen;
-	DWORD dwTmp;
 	TCHAR* pDestStr = NULL;
+	const unsigned int uSizeTmpBuf = 512;
+	TCHAR szBufTmp[ uSizeTmpBuf + 1];
 
-	dwDestStrLen = ::GetPrivateProfileString( tstrSectionName.c_str( ), tstrKey.c_str( ), NULL, NULL, 0, m_tstrIniFilePath.c_str( ) );
-	if (dwDestStrLen == 0) {
-		assert( false );
+	dwDestStrLen = ::GetPrivateProfileString( tstrSectionName.c_str( ), tstrKey.c_str( ), NULL, szBufTmp, uSizeTmpBuf, m_tstrIniFilePath.c_str( ) );
+	if ( dwDestStrLen == 0 ) {
+	    assert( false );
 		return false;
+	} else if (dwDestStrLen < uSizeTmpBuf ) {
+		szBufTmp[ dwDestStrLen ] = 0;
+		tstrVal = szBufTmp;
+	    return true;
 	}
-	pDestStr = new TCHAR[dwDestStrLen + 2];
-	dwTmp = ::GetPrivateProfileString( tstrSectionName.c_str(), tstrKey.c_str(), NULL, pDestStr, dwDestStrLen + 2, m_tstrIniFilePath.c_str() );
-	assert( dwTmp < dwDestStrLen );
-	pDestStr[dwTmp + 1] = 0;
-	//
-	tstrVal = pDestStr;
-	delete[]pDestStr;
-	pDestStr = NULL;
-	return true;
+
+	assert( false );
+	return false;
+	//pDestStr = new TCHAR[dwDestStrLen + 2];
+	//dwTmp = ::GetPrivateProfileString( tstrSectionName.c_str(), tstrKey.c_str(), NULL, pDestStr, dwDestStrLen + 2, m_tstrIniFilePath.c_str() );
+	//assert( dwTmp < dwDestStrLen );
+	//pDestStr[dwTmp + 1] = 0;
+	////
+	//tstrVal = pDestStr;
+	//delete[]pDestStr;
+	//pDestStr = NULL;
+	//return true;
 }
 
 bool HMIniHelper::_isReady() {

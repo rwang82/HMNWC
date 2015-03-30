@@ -90,6 +90,8 @@
   <ItemGroup>
     <ClCompile Include="..\common\HMCharConv.cpp" />
     <ClCompile Include="..\common\hmcmn_event_depot.cpp" />
+    <ClCompile Include="..\common\HMIniHelper.cpp" />
+    <ClCompile Include="..\common\HMMisc.cpp" />
     <ClCompile Include="..\common\HMTaskEngine.cpp" />
     <ClCompile Include="..\common\HMTSHelper.cpp" />
     <ClCompile Include="..\CRCommon\CRErrCode.cpp" />
@@ -131,8 +133,6 @@
     <ClCompile Include="frame\CRSrvEventHandler.cpp" />
     <ClCompile Include="frame\CRSrvSettings.cpp" />
     <ClCompile Include="helper\CRSrvMisc.cpp" />
-    <ClCompile Include="helper\HMIniHelper.cpp" />
-    <ClCompile Include="helper\HMMisc.cpp" />
     <ClCompile Include="modules\CRModuleAccountMgr.cpp" />
     <ClCompile Include="modules\CRModuleAttetionRecord.cpp" />
     <ClCompile Include="modules\CRModuleCmdDispatch.cpp" />
@@ -154,6 +154,8 @@
     <ClInclude Include="..\common\HMCharConv.h" />
     <ClInclude Include="..\common\hmcmn_event_depot.h" />
     <ClInclude Include="..\common\hmcmn_event_ex.h" />
+    <ClInclude Include="..\common\HMIniHelper.h" />
+    <ClInclude Include="..\common\HMMisc.h" />
     <ClInclude Include="..\common\HMTaskEngine.h" />
     <ClInclude Include="..\common\HMTSHelper.h" />
     <ClInclude Include="..\CRCommon\CRErrCode.h" />
@@ -200,8 +202,6 @@
     <ClInclude Include="frame\CRSrvEvtDefs.h" />
     <ClInclude Include="frame\CRSrvSettings.h" />
     <ClInclude Include="helper\CRSrvMisc.h" />
-    <ClInclude Include="helper\HMIniHelper.h" />
-    <ClInclude Include="helper\HMMisc.h" />
     <ClInclude Include="modules\CRModuleAccountMgr.h" />
     <ClInclude Include="modules\CRModuleAttetionRecord.h" />
     <ClInclude Include="modules\CRModuleCmdDispatch.h" />

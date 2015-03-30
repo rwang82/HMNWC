@@ -34,10 +34,10 @@ void LE2BE( __int32& i32Val ) {
 
 bool isBigEndian() {
     __int16 i16Val = 0x1122;
-	return *((unsigned char*)i16Val) == 0x11;
+	return *((unsigned char*)&i16Val) == 0x11;
 }
 
 bool isLittleEndian() {
     __int16 i16Val = 0x1122;
-	return *((unsigned char*)i16Val) == 0x22;
+	return *((unsigned char*)&i16Val) == 0x22;
 }
